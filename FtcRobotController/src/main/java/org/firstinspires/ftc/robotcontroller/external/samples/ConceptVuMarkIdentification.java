@@ -29,7 +29,6 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -57,16 +56,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * @see VuforiaLocalizer
  * @see VuforiaTrackableDefaultListener
  * see  ftc_app/doc/tutorial/FTC_FieldCoordinateSystemDefinition.pdf
- *
+ * <p>
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
- *
+ * <p>
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name="Concept: VuMark Id", group ="Concept")
-@Disabled
+@Autonomous(name = "Concept: VuMark Id", group = "Concept")
 public class ConceptVuMarkIdentification extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
@@ -79,17 +77,18 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
      */
     VuforiaLocalizer vuforia;
 
-    @Override public void runOpMode() {
+    @Override
+    public void runOpMode() {
 
         /*
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
          * If no camera monitor is desired, use the parameterless constructor instead (commented out below).
          */
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+        //int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        //VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
         // OR...  Do Not Activate the Camera Monitor View, to save power
-        // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         /*
          * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
@@ -103,7 +102,11 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
          * Once you've obtained a license key, copy the string from the Vuforia web site
          * and paste it in to your code onthe next line, between the double quotes.
          */
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "AVCgnev/////AAAAGf7IKNhdQUcHpgHfiW0F0vgq22eZn7vIEsbBU4hn913gv" +
+                "PfChboZW1P1UvSco1ML3LtyAJwhzDxPdnc1Q+6v7P0fePe3yARyzcy6dm4pH038lj48SAzW2+I+9tXwQ3R0wpG" +
+                "eiF2DRPAFedHFWLMGscCMZdrEhacBYDgfNDgOEUvnr96wMIFT8ds+3/Lxeg9S47ATqjV2G7+yBzB80rs1oDxm5Jt" +
+                "469AR6SAZ6Z/1MHALq9NFB9jEXjw5mC7YVInIF/Xhr3rBLof+NgEh3RMnthx4IzBaQvxkJ+1Gwxm3JRwSkCosM" +
+                "tO12Cy+PY5SCTeE+3tDnY9DUgWJ/8GT3NNiBL3dEAk6vJKZ5LYMFSfFyFSd";
 
         /*
          * We also indicate which camera on the RC that we wish to use.
@@ -148,7 +151,7 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
-                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
+                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
                 telemetry.addData("Pose", format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
@@ -167,8 +170,7 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
                     double rY = rot.secondAngle;
                     double rZ = rot.thirdAngle;
                 }
-            }
-            else {
+            } else {
                 telemetry.addData("VuMark", "not visible");
             }
 
