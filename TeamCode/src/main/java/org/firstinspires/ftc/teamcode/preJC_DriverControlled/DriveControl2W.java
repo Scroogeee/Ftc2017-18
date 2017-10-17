@@ -15,7 +15,10 @@ public class DriveControl2W {
      */
     DcMotor right_drive;
     DcMotor left_drive;
-
+    /**
+     * Used for slow driving mode
+     */
+    private boolean isSlow = false;
     /**
      * OpMode reference
      */
@@ -44,6 +47,9 @@ public class DriveControl2W {
      * for the drive engines.
      */
     public void updateMotorData() {
+        if (mainRef.gamepad1.a) {
+            isSlow = !isSlow;
+        }
         calcDriveValues();
         left_drive.setPower(l_value);
         right_drive.setPower(r_value);
@@ -53,10 +59,16 @@ public class DriveControl2W {
      * This method computes the power values for the drive engines.
      */
     private void calcDriveValues() {
-        l_value = (double) -mainRef.gamepad1.right_stick_x;
-        r_value = (double) -mainRef.gamepad1.right_stick_x;
-        l_value -= (double) mainRef.gamepad1.right_stick_y;
-        r_value += (double) mainRef.gamepad1.right_stick_y;
+        double scaleFactor = 0;
+        if (isSlow) {
+            scaleFactor = Constants.SLOW_SCALE;
+        } else {
+            scaleFactor = Constants.FAST_SCALE;
+        }
+        l_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
+        r_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
+        l_value -= (double) mainRef.gamepad1.right_stick_y * scaleFactor;
+        r_value += (double) mainRef.gamepad1.right_stick_y * scaleFactor;
 
     }
 
