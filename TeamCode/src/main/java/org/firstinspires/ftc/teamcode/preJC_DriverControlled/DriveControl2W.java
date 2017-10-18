@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -49,6 +50,11 @@ public class DriveControl2W {
     public void updateMotorData() {
         if (mainRef.gamepad1.a) {
             isSlow = !isSlow;
+            try {
+                TimeUnit.SECONDS.sleep((long) 0.5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         calcDriveValues();
         left_drive.setPower(l_value);
@@ -65,10 +71,16 @@ public class DriveControl2W {
         } else {
             scaleFactor = Constants.FAST_SCALE;
         }
+        //TODO multiply the values with the scale factor
         l_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
         r_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
         l_value -= (double) mainRef.gamepad1.right_stick_y * scaleFactor;
         r_value += (double) mainRef.gamepad1.right_stick_y * scaleFactor;
+        //TODO remove Debugging
+        mainRef.telemetry.addData("left:", l_value);
+        mainRef.telemetry.addData("right:", r_value);
+        mainRef.telemetry.addData("Slow:", isSlow);
+        mainRef.telemetry.update();
 
     }
 
