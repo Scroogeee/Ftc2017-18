@@ -72,8 +72,8 @@ public class DriveControl2W {
             scaleFactor = Constants.FAST_SCALE;
         }
         //TODO multiply the values with the scale factor
-        l_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
-        r_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
+        l_value = (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
+        r_value = (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
         l_value -= (double) mainRef.gamepad1.right_stick_y * scaleFactor;
         r_value += (double) mainRef.gamepad1.right_stick_y * scaleFactor;
         //TODO remove Debugging
