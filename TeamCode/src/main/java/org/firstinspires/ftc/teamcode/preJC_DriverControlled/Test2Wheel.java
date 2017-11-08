@@ -21,7 +21,7 @@ public class Test2Wheel extends OpMode {
     @Override
     public void init() {
         driveControl.init(this);
-        //glyphControl.init(this);
+        glyphControl.init(this);
     }
 
     /**
@@ -30,7 +30,7 @@ public class Test2Wheel extends OpMode {
     @Override
     public void loop() {
         driveControl.updateMotorData();
-        //glyphControl.updateGlyphArm();
+        glyphControl.updateGlyphArm();
     }
 
 

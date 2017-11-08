@@ -77,10 +77,10 @@ public class DriveControl2W {
         l_value -= (double) mainRef.gamepad1.right_stick_y * scaleFactor;
         r_value += (double) mainRef.gamepad1.right_stick_y * scaleFactor;
         //TODO remove Debugging
-        mainRef.telemetry.addData("left:", l_value);
-        mainRef.telemetry.addData("right:", r_value);
-        mainRef.telemetry.addData("Slow:", isSlow);
-        mainRef.telemetry.update();
+        //mainRef.telemetry.addData("left:", l_value);
+        //mainRef.telemetry.addData("right:", r_value);
+        //mainRef.telemetry.addData("Slow:", isSlow);
+        //mainRef.telemetry.update();
 
     }
 
