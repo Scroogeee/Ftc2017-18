@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -71,11 +72,24 @@ public class DriveControl2W {
         } else {
             scaleFactor = Constants.FAST_SCALE;
         }
-        //TODO multiply the values with the scale factor
+
+        /**left stick: full control*/
         l_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
         r_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
+        l_value += (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
+        r_value += (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
+
         l_value -= (double) mainRef.gamepad1.left_stick_y * scaleFactor;
         r_value += (double) mainRef.gamepad1.left_stick_y * scaleFactor;
+
+        /**make sure the value is not more than 1*/
+        l_value = Math.min(l_value, 1);
+        r_value = Math.min(r_value, 1);
+
+        /**...and not less than -1*/
+        l_value = Math.max(l_value, -1);
+        r_value = Math.max(r_value, -1);
+
         //TODO remove Debugging
         //mainRef.telemetry.addData("left:", l_value);
         //mainRef.telemetry.addData("right:", r_value);
