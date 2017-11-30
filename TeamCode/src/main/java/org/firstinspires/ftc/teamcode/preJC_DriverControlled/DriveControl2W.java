@@ -73,11 +73,12 @@ public class DriveControl2W {
             scaleFactor = Constants.FAST_SCALE;
         }
 
-        /**left stick: full control*/
+        /**right stick: full control*/
         l_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
         r_value = (double) -mainRef.gamepad1.right_stick_x * scaleFactor;
-        l_value += (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
-        r_value += (double) -mainRef.gamepad1.left_stick_x * scaleFactor;
+
+        l_value -= (double) mainRef.gamepad1.right_stick_y * scaleFactor;
+        r_value += (double) mainRef.gamepad1.right_stick_y * scaleFactor;
 
         l_value -= (double) mainRef.gamepad1.left_stick_y * scaleFactor;
         r_value += (double) mainRef.gamepad1.left_stick_y * scaleFactor;
