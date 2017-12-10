@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
+package org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -15,16 +15,17 @@ public class DriveControl2W {
     /**
      * Declaration of the robot components
      */
-    DcMotor right_drive;
-    DcMotor left_drive;
+    private DcMotor right_drive;
+    private DcMotor left_drive;
     /**
      * Used for slow driving mode
      */
     private boolean isSlow = false;
+
     /**
-     * OpMode reference
+     * CoreUnit reference
      */
-    private OpMode mainRef;
+    private CoreUnit mainRef;
 
     /**
      * drive values
@@ -38,10 +39,10 @@ public class DriveControl2W {
      * <li>right and left motor names</li>
      * </ul>
      */
-    public void init(Test2Wheel t2w) {
-        left_drive = t2w.hardwareMap.dcMotor.get(Constants.ld_name);
-        right_drive = t2w.hardwareMap.dcMotor.get(Constants.rd_name);
-        mainRef = t2w;
+    public void init(CoreUnit p_mainRef) {
+	    mainRef = p_mainRef;
+        left_drive = mainRef.hardwareMap.dcMotor.get(Constants.ld_name);
+        right_drive = mainRef.hardwareMap.dcMotor.get(Constants.rd_name);
     }
 
     /**

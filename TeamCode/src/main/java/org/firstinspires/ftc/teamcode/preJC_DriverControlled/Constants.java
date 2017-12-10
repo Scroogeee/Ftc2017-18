@@ -13,6 +13,11 @@ public class Constants {
     //drives
     public static final String rd_name = "right_drive";
     public static final String ld_name = "left_drive";
+    //drives for omnidrive
+    public static final String Drive_A = "Drive_A";
+    public static final String Drive_B = "Drive_B";
+    public static final String Drive_C = "Drive_C";
+    public static final String Drive_D = "Drive_D";
     //Glyph
     public static final String servoGlyph_name = "servo_glyph";
     public static final String Glyphlift_name = "glyph_lift";
