@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,7 +12,7 @@ public class GlyphControl {
     /**
      * OpMode reference
      */
-    private OpMode mainRef;
+    private CoreUnit mainRef;
 
 
     /**
@@ -27,18 +26,19 @@ public class GlyphControl {
      */
     private DcMotor glyphlift;
 
-    public void init(Test2Wheel t2w) {
+    public void init(CoreUnit p_mainRef) {
+        //init mainRef
+        mainRef = p_mainRef;
         //init tightloose
-        tightloose = t2w.hardwareMap.crservo.get(Constants.servoGlyph_name);
+        tightloose = mainRef.hardwareMap.crservo.get(Constants.servoGlyph_name);
         //Standstill at FORWARD and 0.05
         tightloose.setDirection(DcMotorSimple.Direction.FORWARD);
         tightloose.setPower(0.05);
         //Glyphlift
-        glyphlift = t2w.hardwareMap.dcMotor.get(Constants.Glyphlift_name);
+        glyphlift = mainRef.hardwareMap.dcMotor.get(Constants.Glyphlift_name);
         glyphlift.setDirection(DcMotorSimple.Direction.REVERSE);
         glyphlift.setPower(0);
-        //init mainRef
-        mainRef = t2w;
+
     }
 
     public void updateGlyphArm() {
