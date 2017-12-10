@@ -7,6 +7,11 @@ package org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving;
 public class DriveControl4W {
 
 	/**
+	 * Desired setpoints of the motors
+	 */
+	private double rr, rl, fr, fl;
+
+	/**
 	 * CoreUnit reference
 	 */
 	private CoreUnit mainRef;
@@ -85,14 +90,50 @@ public class DriveControl4W {
 	 * for the drive engines.
 	 */
 	public void updateMotorData() {
+		computeDriveValues();
+		front_left.setPower(fl);
+		rear_right.setPower(rr);
+		front_right.setPower(fr);
+		rear_left.setPower(rl);
 
 	}
 
 	/**
-	 * This method computes the power values for the drive engines.
+	 * This method computes the desired power values
+	 * for the drive engines.
 	 */
-	private void calcDriveValues() {
+	private void computeDriveValues() {
+		Gamepad gamepad1 = mainRef.gamepad1;
 
+		/** Drive values for the four straight directions */
+		fl = gamepad1.right_stick_x + gamepad1.right_stick_y;
+		rr = -gamepad1.right_stick_x - gamepad1.right_stick_y;
+		fr = gamepad1.right_stick_x - gamepad1.right_stick_y;
+		rl = -gamepad1.right_stick_x + gamepad1.right_stick_y;
+
+		/** Turning */
+		fl += gamepad1.left_stick_x;
+		fr += gamepad1.left_stick_x;
+		rl += gamepad1.left_stick_x;
+		rr += gamepad1.left_stick_x;
+
+		scaleDownValues();
+
+	}
+
+	/**
+	 * Scales down all values so that none exceeds 1 or -1
+	 */
+	private void scaleDownValues() {
+		//TODO scale the values instead of clamping them
+		fl = Math.min(fl,1);
+		rr = Math.min(rr,1);
+		fr = Math.min(fr,1);
+		rl = Math.min(rl,1);
+		fl = Math.max(fl,-1);
+		rr = Math.max(rr,-1);
+		fr = Math.max(fr,-1);
+		rl = Math.max(rl,-1);
 	}
 
 }
