@@ -41,13 +41,17 @@ public class GlyphControl {
 
 	}
 
+	public void update(){
+		updateGlyphArm();
+	}
+
 	public void updateGlyphArm() {
 		updateHeight();
 		updateTLPos();
 	}
 
 	private void updateHeight() {
-		glyphlift.setPower(mainRef.gamepad2.right_stick_y);
+		glyphlift.setPower(-mainRef.gamepad2.right_stick_y);
 	}
 
 	private void updateTLPos() {

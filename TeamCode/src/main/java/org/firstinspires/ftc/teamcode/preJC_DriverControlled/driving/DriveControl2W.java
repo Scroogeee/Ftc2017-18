@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.preJC_DriverControlled.CoreUnit;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +45,10 @@ public class DriveControl2W {
 	    mainRef = p_mainRef;
         left_drive = mainRef.hardwareMap.dcMotor.get(Constants.ld_name);
         right_drive = mainRef.hardwareMap.dcMotor.get(Constants.rd_name);
+    }
+
+    public void update(){
+        updateMotorData();
     }
 
     /**

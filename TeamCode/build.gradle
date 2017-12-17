@@ -11,7 +11,13 @@
 // Include common definitions from above.
 apply from: '../build.common.gradle'
 android {
-    compileSdkVersion 25
+    compileSdkVersion 19
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildToolsVersion '26.0.2'
 }
 dependencies {
+    project(':FtcRobotController')
 }
