@@ -13,10 +13,10 @@ import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.Robo
 import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.WEST;
 
 /**
- * Created by FTC on 16.10.2017.
- * This class
+ * Created by FTC on 08.01.2018.
  */
-public class DriveControl4W {
+
+public class DriveStraight4W {
 
 	/**
 	 * Desired setpoints of the motors
@@ -138,7 +138,7 @@ public class DriveControl4W {
 		mainRef.telemetry.addLine(Double.toString(fr));
 		mainRef.telemetry.addLine(Double.toString(rr));
 		mainRef.telemetry.addLine(Double.toString(rl));*/
-		mainRef.telemetry.addLine(Drive_A.getDirection().toString());
+
 	}
 
 	/**
@@ -149,16 +149,18 @@ public class DriveControl4W {
 		Gamepad gamepad1 = mainRef.gamepad1;
 
 		/** Drive values for the four straight directions */
-		fl = gamepad1.right_stick_x - gamepad1.right_stick_y;
-		rl = -gamepad1.right_stick_x - gamepad1.right_stick_y;
-		rr = -gamepad1.right_stick_x + gamepad1.right_stick_y;
-		fr = gamepad1.right_stick_x + gamepad1.right_stick_y;
+		fl = gamepad1.right_stick_y;
+		fr = -(gamepad1.right_stick_y);
+		rr = -(gamepad1.right_stick_y);
+		rl = gamepad1.right_stick_y;
+		fl -= gamepad1.right_stick_x;
+		rr -= gamepad1.right_stick_x;
 
 		/** Turning */
-		fl -= gamepad1.left_stick_x;
-		fr -= gamepad1.left_stick_x;
-		rl -= gamepad1.left_stick_x;
-		rr -= gamepad1.left_stick_x;
+		fl += gamepad1.left_stick_x;
+		fr += gamepad1.left_stick_x;
+		rr += gamepad1.left_stick_x;
+		rl += gamepad1.left_stick_x;
 
 		scaleDownValues();
 
@@ -178,5 +180,6 @@ public class DriveControl4W {
 		fr = Math.max(fr, -1);
 		rl = Math.max(rl, -1);
 	}
+
 
 }

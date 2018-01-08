@@ -3,8 +3,7 @@ package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.DriveControl2W;
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.DriveControl4W;
+import org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.DriveStraight4W;
 
 /**
  * Created by FTC on 25.09.2017.
@@ -12,9 +11,10 @@ import org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.DriveContro
 @TeleOp(name = "FROG-DriverControlled")
 public class CoreUnit extends OpMode {
 
-	DriveControl2W driveControl = new DriveControl2W();
+	//DriveCross4W drive4 = new DriveCross4W();
+	//DriveControl2W driveControl = new DriveControl2W();
+	DriveStraight4W driveStraight4W = new DriveStraight4W();
 	GlyphControl glyphControl = new GlyphControl();
-	DriveControl4W drive4 = new DriveControl4W();
 	RelicControl relicControl = new RelicControl();
 
 	/**
@@ -25,10 +25,11 @@ public class CoreUnit extends OpMode {
 	 */
 	@Override
 	public void init() {
-		relicControl.init(this);
-		driveControl.init(this);
-		glyphControl.init(this);
+		//driveControl.init(this);
 		//drive4.init(this);
+		driveStraight4W.init(this);
+		glyphControl.init(this);
+		relicControl.init(this);
 	}
 
 	/**
@@ -36,10 +37,12 @@ public class CoreUnit extends OpMode {
 	 */
 	@Override
 	public void loop() {
-		driveControl.update();
+		//drive4.update();
+		//driveControl.update();
+		driveStraight4W.update();
 		glyphControl.update();
 		relicControl.update();
-		//drive4.update();
+
 	}
 
 

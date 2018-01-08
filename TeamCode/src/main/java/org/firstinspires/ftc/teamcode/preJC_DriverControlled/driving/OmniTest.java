@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
 /**
  * Created by FTC on 11.12.2017.
  */
-@TeleOp(name = "OmniTest")
+@TeleOp(name = "OmniSetupTest")
 public class OmniTest extends OpMode {
 
 	private DcMotor a;

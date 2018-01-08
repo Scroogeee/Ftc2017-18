@@ -10,10 +10,10 @@ public class Constants {
 	/**
 	 * motor names
 	 */
-	//drives
+	//drives for tank-drive
 	public static final String rd_name = "right_drive";
 	public static final String ld_name = "left_drive";
-	//drives for omnidrive
+	//drives for omni-drive
 	public static final String Drive_A = "Drive_A";
 	public static final String Drive_B = "Drive_B";
 	public static final String Drive_C = "Drive_C";
