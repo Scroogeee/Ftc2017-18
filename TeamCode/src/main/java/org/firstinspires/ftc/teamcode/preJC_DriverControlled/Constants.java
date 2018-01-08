@@ -27,6 +27,6 @@ public class Constants {
 	//scales
 	public static final double FAST_SCALE = 1;
 	public static final double SLOW_SCALE = 0.25;
-	public static final double RELIC_EXTEND_SCALE = 1;
+	public static final double RELIC_HEIGHT_SCALE = 0.1;
 
 }
