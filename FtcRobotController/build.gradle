@@ -10,7 +10,7 @@ android {
         targetSdkVersion 19
     }
 
-    compileSdkVersion 19
+    compileSdkVersion 23
     buildToolsVersion '26.0.2'
 
     compileOptions {
@@ -26,6 +26,3 @@ repositories {
 }
 
 apply from: 'build.release.gradle'
-dependencies {
-}
-
