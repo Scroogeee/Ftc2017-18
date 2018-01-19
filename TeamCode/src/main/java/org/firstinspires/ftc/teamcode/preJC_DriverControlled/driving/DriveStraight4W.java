@@ -4,13 +4,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
 import org.firstinspires.ftc.teamcode.preJC_DriverControlled.CoreUnit;
 
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.EAST;
 import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.SOUTH;
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.WEST;
 
 /**
  * Created by FTC on 08.01.2018.
@@ -21,7 +20,7 @@ public class DriveStraight4W {
 	/**
 	 * Desired setpoints of the motors
 	 */
-	private double rr, rl, fr, fl;
+	private double rearr, rearl, frontr, frontl;
 
 	/**
 	 * CoreUnit reference
@@ -37,14 +36,6 @@ public class DriveStraight4W {
 	private DcMotor Drive_B;
 	private DcMotor Drive_C;
 	private DcMotor Drive_D;
-
-	/**
-	 * Declaration of the motor references
-	 */
-	private DcMotor front_left;
-	private DcMotor front_right;
-	private DcMotor rear_right;
-	private DcMotor rear_left;
 
 	/**
 	 * Initializes the Drive Control class
@@ -72,55 +63,17 @@ public class DriveStraight4W {
 	 */
 	public void update() {
 		getDirectionFromGamepad();
-		updateDirection();
+		//TODO update direction
 		updateMotorData();
 	}
 
 	private void getDirectionFromGamepad() {
 		if (mainRef.gamepad1.y) {
 			currentDir = NORTH;
-		} else if (mainRef.gamepad1.b) {
-			currentDir = EAST;
 		} else if (mainRef.gamepad1.a) {
 			currentDir = SOUTH;
-		} else if (mainRef.gamepad1.x) {
-			currentDir = WEST;
 		} else {
 			//Direction unchanged
-		}
-	}
-
-	/**
-	 * This method updates the Drives definition for a new Direction.
-	 */
-	private void updateDirection() {
-		switch (currentDir) {
-			case NORTH:
-				front_left = Drive_A;
-				front_right = Drive_B;
-				rear_right = Drive_C;
-				rear_left = Drive_D;
-				break;
-			case EAST:
-				front_left = Drive_D;
-				front_right = Drive_A;
-				rear_right = Drive_B;
-				rear_left = Drive_C;
-				break;
-			case SOUTH:
-				front_left = Drive_C;
-				front_right = Drive_D;
-				rear_right = Drive_A;
-				rear_left = Drive_B;
-				break;
-			case WEST:
-				front_left = Drive_B;
-				front_right = Drive_C;
-				rear_right = Drive_D;
-				rear_left = Drive_A;
-				break;
-			default:
-				System.out.println("An internal Error occurred: BAD DIRECTION");
 		}
 	}
 
@@ -130,14 +83,14 @@ public class DriveStraight4W {
 	 */
 	private void updateMotorData() {
 		computeDriveValues();
-		front_left.setPower(fl);
-		rear_right.setPower(rr);
-		front_right.setPower(fr);
-		rear_left.setPower(rl);
-		/*mainRef.telemetry.addLine(Double.toString(fl));
-		mainRef.telemetry.addLine(Double.toString(fr));
-		mainRef.telemetry.addLine(Double.toString(rr));
-		mainRef.telemetry.addLine(Double.toString(rl));*/
+		Drive_A.setPower(frontl);
+		Drive_C.setPower(rearr);
+		Drive_B.setPower(frontr);
+		Drive_D.setPower(rearl);
+		mainRef.telemetry.addLine(Double.toString(frontl));
+		mainRef.telemetry.addLine(Double.toString(frontr));
+		mainRef.telemetry.addLine(Double.toString(rearr));
+		mainRef.telemetry.addLine(Double.toString(rearl));
 
 	}
 
@@ -149,18 +102,22 @@ public class DriveStraight4W {
 		Gamepad gamepad1 = mainRef.gamepad1;
 
 		/** Drive values for the four straight directions */
-		fl = gamepad1.right_stick_y;
-		fr = -(gamepad1.right_stick_y);
-		rr = -(gamepad1.right_stick_y);
-		rl = gamepad1.right_stick_y;
-		fl -= gamepad1.right_stick_x;
-		rr -= gamepad1.right_stick_x;
+		frontl = gamepad1.right_stick_y;
+		rearl = gamepad1.right_stick_y;
+		frontr = -gamepad1.right_stick_y;
+		rearr = -gamepad1.right_stick_y;
+
+		/** Drive values for cross driving */
+		frontl += gamepad1.right_stick_x;
+		frontr += gamepad1.right_stick_x;
+		rearr -= gamepad1.right_stick_x;
+		rearl -= gamepad1.right_stick_x;
 
 		/** Turning */
-		fl += gamepad1.left_stick_x;
-		fr += gamepad1.left_stick_x;
-		rr += gamepad1.left_stick_x;
-		rl += gamepad1.left_stick_x;
+		frontl -= gamepad1.left_stick_x;
+		frontr -= gamepad1.left_stick_x;
+		rearr -= gamepad1.left_stick_x;
+		rearl -= gamepad1.left_stick_x;
 
 		scaleDownValues();
 
@@ -171,14 +128,15 @@ public class DriveStraight4W {
 	 */
 	private void scaleDownValues() {
 		//TODO scale the values instead of clamping them
-		fl = Math.min(fl, 1);
-		rr = Math.min(rr, 1);
-		fr = Math.min(fr, 1);
-		rl = Math.min(rl, 1);
-		fl = Math.max(fl, -1);
-		rr = Math.max(rr, -1);
-		fr = Math.max(fr, -1);
-		rl = Math.max(rl, -1);
+
+		frontl = Math.min(frontl, 1);
+		rearr = Math.min(rearr, 1);
+		frontr = Math.min(frontr, 1);
+		rearl = Math.min(rearl, 1);
+		frontl = Math.max(frontl, -1);
+		rearr = Math.max(rearr, -1);
+		frontr = Math.max(frontr, -1);
+		rearl = Math.max(rearl, -1);
 	}
 
 

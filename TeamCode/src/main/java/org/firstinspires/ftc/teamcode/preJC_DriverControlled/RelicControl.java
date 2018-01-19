@@ -14,6 +14,7 @@ public class RelicControl {
 	/**
 	 * Relic height and Grab arm
 	 */
+
 	DcMotor height_motor;
 	DcMotor extending_motor;
 
