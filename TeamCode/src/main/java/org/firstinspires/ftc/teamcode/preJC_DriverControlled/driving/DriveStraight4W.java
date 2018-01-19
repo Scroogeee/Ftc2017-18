@@ -4,13 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
 import org.firstinspires.ftc.teamcode.preJC_DriverControlled.CoreUnit;
 
 import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.SOUTH;
-
 /**
  * Created by FTC on 08.01.2018.
  */
@@ -72,7 +70,7 @@ public class DriveStraight4W {
 			currentDir = NORTH;
 		} else if (mainRef.gamepad1.a) {
 			currentDir = SOUTH;
-		} else {
+	 	} else {
 			//Direction unchanged
 		}
 	}
@@ -91,7 +89,6 @@ public class DriveStraight4W {
 		mainRef.telemetry.addLine(Double.toString(frontr));
 		mainRef.telemetry.addLine(Double.toString(rearr));
 		mainRef.telemetry.addLine(Double.toString(rearl));
-
 	}
 
 	/**
@@ -102,6 +99,7 @@ public class DriveStraight4W {
 		Gamepad gamepad1 = mainRef.gamepad1;
 
 		/** Drive values for the four straight directions */
+<<<<<<< HEAD
 		frontl = gamepad1.right_stick_y;
 		rearl = gamepad1.right_stick_y;
 		frontr = -gamepad1.right_stick_y;
@@ -127,6 +125,7 @@ public class DriveStraight4W {
 	 * Scales down all values so that none exceeds 1 or -1
 	 */
 	private void scaleDownValues() {
+
 		//TODO scale the values instead of clamping them
 
 		frontl = Math.min(frontl, 1);
