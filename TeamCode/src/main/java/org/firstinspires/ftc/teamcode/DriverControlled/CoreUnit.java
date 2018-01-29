@@ -31,8 +31,7 @@ public class CoreUnit extends OpMode {
 		driveStraight4W.init(this);
 		//TODO  reactivate
 		//relicControl.init(this);
-		glyphControl.init(this);
-	}
+		glyphControl.init(this);	}
 
 	/**
 	 * This is the main loop which executes every tick.
@@ -45,7 +44,6 @@ public class CoreUnit extends OpMode {
 		glyphControl.update();
 		//TODO reactivate
 		//relicControl.update();
-
 	}
 
 

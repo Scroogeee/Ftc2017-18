@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.DriverControlled;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 /**
  * Created by FTC on 16.10.2017. <br>
  * Variables for the names of the components
@@ -29,7 +31,17 @@ public class Constants {
 	//scales
 	public static final double FAST_SCALE = 1;
 	public static final double SLOW_SCALE = 0.25;
-	public static final double RELIC_EXTEND_SCALE = 1;
+	public static final double RELIC_HEIGHT_SCALE = 0.1;
+
+	public static double getHighestNumber(ArrayList<Double> list) {
+		double Highest = 1;
+		for (double x : list) {
+			if (x > 0){
+
+			}
+		}
+		return Highest;
+	}
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;
