@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
+package org.firstinspires.ftc.teamcode.DriverControlled;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.DriveStraight4W;
+import org.firstinspires.ftc.teamcode.DriverControlled.driving.DriveStraight4W;
 
 /**
  * Created by FTC on 25.09.2017.
@@ -15,7 +15,8 @@ public class CoreUnit extends OpMode {
 	//DriveControl2W driveControl = new DriveControl2W();
 	DriveStraight4W driveStraight4W = new DriveStraight4W();
 	GlyphControl glyphControl = new GlyphControl();
-	RelicControl relicControl = new RelicControl();
+	//TODO reactivate
+	//RelicControl relicControl = new RelicControl();
 
 	/**
 	 * Initializes the Robot and its sub-components such as:
@@ -29,8 +30,8 @@ public class CoreUnit extends OpMode {
 		//drive4.init(this);
 		driveStraight4W.init(this);
 		//TODO  reactivate
-		//glyphControl.init(this);
 		//relicControl.init(this);
+		glyphControl.init(this);
 	}
 
 	/**
@@ -41,8 +42,8 @@ public class CoreUnit extends OpMode {
 		//drive4.update();
 		//driveControl.update();
 		driveStraight4W.update();
+		glyphControl.update();
 		//TODO reactivate
-		//glyphControl.update();
 		//relicControl.update();
 
 	}

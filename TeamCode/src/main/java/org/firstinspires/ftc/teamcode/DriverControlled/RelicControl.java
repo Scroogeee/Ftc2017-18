@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.preJC_DriverControlled;
+package org.firstinspires.ftc.teamcode.DriverControlled;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants.RELIC_EXTEND_SCALE;
+import static org.firstinspires.ftc.teamcode.DriverControlled.Constants.RELIC_EXTEND_SCALE;
 
 public class RelicControl {
 
@@ -14,6 +14,7 @@ public class RelicControl {
 	/**
 	 * Relic height and Grab arm
 	 */
+
 	DcMotor height_motor;
 	DcMotor extending_motor;
 

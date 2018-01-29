@@ -1,22 +1,22 @@
-package org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving;
+package org.firstinspires.ftc.teamcode.DriverControlled.driving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.CoreUnit;
+import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.DriverControlled.CoreUnit;
 
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.EAST;
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.NORTH;
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.SOUTH;
-import static org.firstinspires.ftc.teamcode.preJC_DriverControlled.driving.RobotDirection.WEST;
+import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.EAST;
+import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.NORTH;
+import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.SOUTH;
+import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.WEST;
 
 /**
- * Created by FTC on 08.01.2018.
+ * Created by FTC on 16.10.2017.
+ * This class is a basic implementation for 4-wheeled omni-drive
  */
-
-public class DriveStraight4W {
+public class DriveCross4W {
 
 	/**
 	 * Desired setpoints of the motors
@@ -138,7 +138,7 @@ public class DriveStraight4W {
 		mainRef.telemetry.addLine(Double.toString(fr));
 		mainRef.telemetry.addLine(Double.toString(rr));
 		mainRef.telemetry.addLine(Double.toString(rl));*/
-
+		mainRef.telemetry.addLine(Drive_A.getDirection().toString());
 	}
 
 	/**
@@ -149,18 +149,16 @@ public class DriveStraight4W {
 		Gamepad gamepad1 = mainRef.gamepad1;
 
 		/** Drive values for the four straight directions */
-		fl = gamepad1.right_stick_y;
-		fr = -(gamepad1.right_stick_y);
-		rr = -(gamepad1.right_stick_y);
-		rl = gamepad1.right_stick_y;
-		fl -= gamepad1.right_stick_x;
-		rr -= gamepad1.right_stick_x;
+		fl = gamepad1.right_stick_x - gamepad1.right_stick_y;
+		rl = -gamepad1.right_stick_x - gamepad1.right_stick_y;
+		rr = -gamepad1.right_stick_x + gamepad1.right_stick_y;
+		fr = gamepad1.right_stick_x + gamepad1.right_stick_y;
 
 		/** Turning */
-		fl += gamepad1.left_stick_x;
-		fr += gamepad1.left_stick_x;
-		rr += gamepad1.left_stick_x;
-		rl += gamepad1.left_stick_x;
+		fl -= gamepad1.left_stick_x;
+		fr -= gamepad1.left_stick_x;
+		rl -= gamepad1.left_stick_x;
+		rr -= gamepad1.left_stick_x;
 
 		scaleDownValues();
 
@@ -180,6 +178,5 @@ public class DriveStraight4W {
 		fr = Math.max(fr, -1);
 		rl = Math.max(rl, -1);
 	}
-
 
 }
