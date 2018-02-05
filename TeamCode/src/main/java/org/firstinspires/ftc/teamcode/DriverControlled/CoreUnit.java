@@ -15,8 +15,7 @@ public class CoreUnit extends OpMode {
 	//DriveControl2W driveControl = new DriveControl2W();
 	DriveStraight4W driveStraight4W = new DriveStraight4W();
 	GlyphControl glyphControl = new GlyphControl();
-	//TODO reactivate
-	//RelicControl relicControl = new RelicControl();
+	RelicControl relicControl = new RelicControl();
 
 	/**
 	 * Initializes the Robot and its sub-components such as:
@@ -30,7 +29,7 @@ public class CoreUnit extends OpMode {
 		//drive4.init(this);
 		driveStraight4W.init(this);
 		//TODO  reactivate
-		//relicControl.init(this);
+		relicControl.init(this);
 		glyphControl.init(this);
 	}
 
@@ -44,7 +43,7 @@ public class CoreUnit extends OpMode {
 		driveStraight4W.update();
 		glyphControl.update();
 		//TODO reactivate
-		//relicControl.update();
+		relicControl.update();
 
 	}
 

@@ -20,16 +20,28 @@ public class Constants {
 	public static final String Drive_B = "Drive_B";
 	public static final String Drive_C = "Drive_C";
 	public static final String Drive_D = "Drive_D";
-	//Relic
-	public static final String Vertical_Relic_Motor = "RelicHeight";
-	public static final String Lateral_Relic_Motor = "RelicLateral";
-	//Glyph
-	public static final String servoGlyph_name = "servo_glyph";
-	public static final String Glyphlift_name = "glyph_lift";
-	//scales
+
+	//Motor scales
+	public static final double A_Scale = 1;
+	public static final double B_Scale = 1;
+	public static final double C_Scale = 0.9;
+	public static final double D_Scale = 0.9;
+
+	//drive mode scales
 	public static final double FAST_SCALE = 1;
 	public static final double SLOW_SCALE = 0.25;
 	public static final double RELIC_EXTEND_SCALE = 1;
+
+	//Relic
+	public static final String Vertical_Relic_Motor = "RelicHeight";
+	public static final String Lateral_Relic_Motor = "RelicLateral";
+	public static final String Servo_Relic = "RelicGrip";
+	public static final double RELIC_HEIGHT_SCALE = 1;
+
+	//Glyph
+	public static final String servoGlyph_name = "servo_glyph";
+	public static final String Glyphlift_name = "glyph_lift";
+
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;

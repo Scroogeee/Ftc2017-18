@@ -84,10 +84,10 @@ public class DriveStraight4W {
 	 */
 	private void updateMotorData() {
 		computeDriveValues();
-		Drive_A.setPower(frontl);
-		Drive_C.setPower(rearr);
-		Drive_B.setPower(frontr);
-		Drive_D.setPower(rearl);
+		Drive_A.setPower(frontl * Constants.A_Scale);
+		Drive_C.setPower(rearr * Constants.B_Scale);
+		Drive_B.setPower(frontr * Constants.C_Scale);
+		Drive_D.setPower(rearl * Constants.D_Scale);
 		/** Println debugging */
 		mainRef.telemetry.addLine(Double.toString(frontl));
 		mainRef.telemetry.addLine(Double.toString(frontr));

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.instructions;
+package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.CRServo;
