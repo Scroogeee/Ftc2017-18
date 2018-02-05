@@ -15,6 +15,7 @@ public class Constants {
 	//drives for tank-drive
 	public static final String rd_name = "right_drive";
 	public static final String ld_name = "left_drive";
+
 	//drives for omni-drive
 	public static final String Drive_A = "Drive_A";
 	public static final String Drive_B = "Drive_B";
@@ -30,18 +31,18 @@ public class Constants {
 	//drive mode scales
 	public static final double FAST_SCALE = 1;
 	public static final double SLOW_SCALE = 0.25;
-	public static final double RELIC_EXTEND_SCALE = 1;
-
+	
 	//Relic
 	public static final String Vertical_Relic_Motor = "RelicHeight";
 	public static final String Lateral_Relic_Motor = "RelicLateral";
 	public static final String Servo_Relic = "RelicGrip";
 	public static final double RELIC_HEIGHT_SCALE = 1;
+	public static final double RELIC_EXTEND_SCALE = 1;
+
 
 	//Glyph
 	public static final String servoGlyph_name = "servo_glyph";
 	public static final String Glyphlift_name = "glyph_lift";
-
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;
