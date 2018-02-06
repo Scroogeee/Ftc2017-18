@@ -47,7 +47,7 @@ See https://developer.android.com/guide/topics/ui/settings.html
     android:title="@string/prefcat_configure_robot">
 
     <EditTextPreference
-        android:defaultValue="Frog"
+        android:defaultValue=""
         android:key="@string/pref_device_name"
         android:summary="@string/prefedit_device_name_summary_rc"
         android:title="@string/prefedit_device_name_rc"
