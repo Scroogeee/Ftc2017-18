@@ -35,7 +35,7 @@ public class Constants {
 	//Relic
 	public static final String Vertical_Relic_Motor = "RelicHeight";
 	public static final String Lateral_Relic_Motor = "RelicLateral";
-	public static final String Servo_Relic = "RelicGrip";
+	public static final String Servo_Relic = "servo_relic";
 	public static final double RELIC_HEIGHT_SCALE = 1;
 	public static final double RELIC_EXTEND_SCALE = 1;
 

@@ -56,7 +56,10 @@ public class RelicControl {
 	 * Updates the rotaion of the CRServo for the relic grip
 	 */
 	private void updateRelicGrip() {
-
+		double temp_power = 0;
+		temp_power += mainRef.gamepad2.left_trigger;
+		temp_power -= mainRef.gamepad2.right_trigger;
+		relic_grip.setPower(temp_power);
 	}
 
 	/**
@@ -64,6 +67,7 @@ public class RelicControl {
 	 */
 	private void updateHeight() {
 		height_motor.setPower(-mainRef.gamepad2.left_stick_y * Constants.RELIC_HEIGHT_SCALE);
+		mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
 	}
 
 	/**

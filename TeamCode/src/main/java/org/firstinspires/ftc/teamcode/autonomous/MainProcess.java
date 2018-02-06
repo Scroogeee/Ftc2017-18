@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.preJC_DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+
 
 /**
  * Created by FTC on 20.11.2017.
