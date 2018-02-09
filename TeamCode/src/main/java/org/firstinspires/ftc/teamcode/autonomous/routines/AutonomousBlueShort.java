@@ -27,10 +27,10 @@ public class AutonomousBlueShort extends AutonomousCore {
 		//VOR,LINKS,VOR
 
 		//VOR
-		drive.driveByPulses(3200, -1, 1, 1, -1);
+		drive.driveByPulses(3100, -1, 1, 1, -1);
 		sleep(1000);
 		//LINKS
-		drive.driveByPulses(1300, 1, 1, 1, 1);
+		drive.driveByPulses(1500, 1, 1, 1, 1);
 		sleep(1000);
 		//VOR
 		drive.driveByPulses(1300, -1, 1, 1, -1);

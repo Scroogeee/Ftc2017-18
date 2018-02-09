@@ -28,8 +28,8 @@ public class CoreUnit extends OpMode {
 		//driveControl.init(this);
 		//drive4.init(this);
 		driveStraight4W.init(this);
-		relicControl.init(this);
 		glyphControl.init(this);
+		relicControl.init(this);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class CoreUnit extends OpMode {
 		//drive4.update();
 		//driveControl.update();
 		driveStraight4W.update();
-		glyphControl.update();
+		glyphControl.updateGlyphArm();
 		relicControl.update();
 	}
 

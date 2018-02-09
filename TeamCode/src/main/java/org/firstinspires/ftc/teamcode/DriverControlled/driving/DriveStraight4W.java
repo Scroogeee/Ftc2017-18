@@ -88,12 +88,11 @@ public class DriveStraight4W {
 		Drive_C.setPower(rearr * Constants.B_Scale);
 		Drive_B.setPower(frontr * Constants.C_Scale);
 		Drive_D.setPower(rearl * Constants.D_Scale);
-		/** Println debugging */
-		mainRef.telemetry.addLine(Double.toString(frontl));
-		mainRef.telemetry.addLine(Double.toString(frontr));
-		mainRef.telemetry.addLine(Double.toString(rearr));
-		mainRef.telemetry.addLine(Double.toString(rearl));
-		mainRef.telemetry.update();
+		//TODO remove debugging
+		//mainRef.telemetry.addLine(Double.toString(frontl));
+		//mainRef.telemetry.addLine(Double.toString(frontr));
+		//mainRef.telemetry.addLine(Double.toString(rearr));
+		//mainRef.telemetry.addLine(Double.toString(rearl));
 
 	}
 
@@ -104,23 +103,32 @@ public class DriveStraight4W {
 	private void computeDriveValues() {
 		Gamepad gamepad1 = mainRef.gamepad1;
 
+		double frontvector = gamepad1.right_stick_y;
+		double sidevector = gamepad1.right_stick_x;
+		double turnrate = gamepad1.left_stick_x;
+
+		if (currentDir == SOUTH) {
+			frontvector *= -1;
+			sidevector *= -1;
+		}
+
 		/** Drive values for the forward/backwards*/
-		frontl = gamepad1.right_stick_y;
-		rearl = gamepad1.right_stick_y;
-		frontr = -gamepad1.right_stick_y;
-		rearr = -gamepad1.right_stick_y;
+		frontl = frontvector;
+		rearl = frontvector;
+		frontr = -frontvector;
+		rearr = -frontvector;
 
 		/** Drive values for cross driving */
-		frontl += gamepad1.right_stick_x;
-		frontr += gamepad1.right_stick_x;
-		rearr -= gamepad1.right_stick_x;
-		rearl -= gamepad1.right_stick_x;
+		frontl += sidevector;
+		frontr += sidevector;
+		rearr -= sidevector;
+		rearl -= sidevector;
 
 		/** Turning */
-		frontl -= gamepad1.left_stick_x;
-		frontr -= gamepad1.left_stick_x;
-		rearr -= gamepad1.left_stick_x;
-		rearl -= gamepad1.left_stick_x;
+		frontl -= turnrate;
+		frontr -= turnrate;
+		rearr -= turnrate;
+		rearl -= turnrate;
 
 		scaleDownValues();
 
@@ -130,13 +138,13 @@ public class DriveStraight4W {
 	 * Scales down all values so that none exceeds 1 or -1
 	 */
 	private void scaleDownValues() {
-		//TODO scale the values instead of clamping them
 		ArrayList<Double> list = new ArrayList<Double>();
 		list.add(frontl);
 		list.add(frontr);
 		list.add(rearr);
 		list.add(rearl);
 		Double highestNumber = Constants.getHighestNumber(list);
+		//TODO remove debugging
 		mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
 		if (highestNumber >= 1) {
 			frontl = frontl / highestNumber;
