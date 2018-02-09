@@ -41,10 +41,6 @@ public class GlyphControl {
 
 	}
 
-	public void update(){
-		updateGlyphArm();
-	}
-
 	public void updateGlyphArm() {
 		updateHeight();
 		updateTLPos();
@@ -65,10 +61,10 @@ public class GlyphControl {
 			tightloose.setDirection(DcMotorSimple.Direction.FORWARD);
 			tightloose_power = 0.05;
 		}
-	    /* Just for security */
+		/** Just for security */
 		tightloose_power = Math.min(tightloose_power, 1);
 		tightloose_power = Math.max(tightloose_power, 0);
-        /* Set the power */
+		/** Set the power */
 		tightloose.setPower(tightloose_power);
 
 		//mainRef.telemetry.addLine(Double.toString(tightloose_power));

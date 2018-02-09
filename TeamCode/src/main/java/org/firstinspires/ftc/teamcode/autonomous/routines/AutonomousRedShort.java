@@ -27,13 +27,13 @@ public class AutonomousRedShort extends AutonomousCore {
 		//VOR,RECHTS,VOR
 
 		//VOR
-		drive.driveByPulses(3200, -1, 1, 1, -1);
+		drive.driveByPulses(3100, -1, 1, 1, -1);
 		sleep(1000);
 		//RECHTS
 		drive.driveByPulses(1300, -1, -1, -1, -1);
 		sleep(1000);
 		//VOR
-		drive.driveByPulses(1300, -1, 1, 1, -1);
+		drive.driveByPulses(1500, -1, 1, 1, -1);
 		sleep(1000);
 		glyph_servo.setPower(-1);
 		sleep(1000);
