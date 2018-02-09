@@ -79,9 +79,8 @@ public class SensorMRGyro extends LinearOpMode {
     modernRoboticsI2cGyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
 	  gyro = modernRoboticsI2cGyro;
 	  // If you're only interested int the IntegratingGyroscope interface, the following will suffice.
-	  // gyro = hardwareMap.get(IntegratingGyroscope.class, "gyro");
-	  // A similar approach will work for the Gyroscope interface, if that's all you need.
-
+    // gyro = hardwareMap.get(IntegratingGyroscope.class, "gyro");
+    // A similar approach will work for the Gyroscope interface, if that's all you need.
     // Start calibrating the gyro. This takes a few seconds and is worth performing
     // during the initialization phase at the start of each opMode.
     telemetry.log().add("Gyro Calibrating. Do Not Move!");

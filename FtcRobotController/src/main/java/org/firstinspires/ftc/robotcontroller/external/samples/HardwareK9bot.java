@@ -68,7 +68,6 @@ public class HardwareK9bot
 	/* Local OpMode members. */
 	HardwareMap hwMap = null;
 	private ElapsedTime period = new ElapsedTime();
-
     /* Constructor */
     public HardwareK9bot() {
     }

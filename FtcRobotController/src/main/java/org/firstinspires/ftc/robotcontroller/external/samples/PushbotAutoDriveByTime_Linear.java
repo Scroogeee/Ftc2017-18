@@ -64,7 +64,6 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
 	/* Declare OpMode members. */
 	HardwarePushbot robot = new HardwarePushbot();   // Use a Pushbot's hardware
 	private ElapsedTime runtime = new ElapsedTime();
-
     @Override
     public void runOpMode() {
 

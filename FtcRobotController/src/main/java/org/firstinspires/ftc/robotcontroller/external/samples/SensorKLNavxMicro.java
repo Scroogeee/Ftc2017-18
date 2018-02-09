@@ -74,7 +74,6 @@ public class SensorKLNavxMicro extends LinearOpMode {
 	    gyro = navxMicro;
 	    // If you're only interested int the IntegratingGyroscope interface, the following will suffice.
 	    // gyro = hardwareMap.get(IntegratingGyroscope.class, "navx");
-
         // The gyro automatically starts calibrating. This takes a few seconds.
         telemetry.log().add("Gyro Calibrating. Do Not Move!");
 

@@ -58,7 +58,6 @@ public class PushbotTeleopTank_Iterative extends OpMode{
 	HardwarePushbot robot = new HardwarePushbot(); // use the class created to define a Pushbot's hardware
 	// could also use HardwarePushbotMatrix class.
 	double          clawOffset  = 0.0 ;                  // Servo mid position
-
     /*
      * Code to run ONCE when the driver hits INIT
      */
