@@ -27,9 +27,9 @@ public class GlyphControl {
 	private DcMotor glyphlift;
 
 	public void init(CoreUnit p_mainRef) {
-		//init mainRef
+		//initialize mainRef
 		mainRef = p_mainRef;
-		//init tightloose
+		//initialize tightloose
 		tightloose = mainRef.hardwareMap.crservo.get(Constants.servoGlyph_name);
 		//Standstill at FORWARD and 0.05
 		tightloose.setDirection(DcMotorSimple.Direction.FORWARD);

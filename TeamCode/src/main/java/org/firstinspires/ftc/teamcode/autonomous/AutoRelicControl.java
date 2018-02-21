@@ -1,14 +1,16 @@
-package org.firstinspires.ftc.teamcode.DriverControlled;
+package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class RelicControl {
+import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+
+public class AutoRelicControl {
 
 	/**
 	 * Main reference
 	 */
-	private CoreUnit mainRef;
+	private AutonomousCore mainRef;
 
 	/**
 	 * Relic height and Grab arm
@@ -26,7 +28,7 @@ public class RelicControl {
 	/**
 	 * Initializes the relic control class
 	 */
-	public void init(CoreUnit p_mainRef) {
+	public void initialize(AutonomousCore p_mainRef) {
 		mainRef = p_mainRef;
 		height_motor = mainRef.hardwareMap.dcMotor.get(Constants.Vertical_Relic_Motor);
 		extending_motor = mainRef.hardwareMap.dcMotor.get(Constants.Lateral_Relic_Motor);
@@ -46,35 +48,38 @@ public class RelicControl {
 	/**
 	 * Updates the motor values for the relic arm
 	 */
-	public void update() {
-		updateHeight();
-		updateExtend();
-		updateRelicGrip();
+	public void update(double height, double extend, double grip) {
+		updateHeight(height);
+		updateExtend(extend);
+		updateRelicGrip(grip);
 	}
 
 	/**
 	 * Updates the rotaion of the CRServo for the relic grip
 	 */
-	private void updateRelicGrip() {
-		double temp_power = 0;
-		temp_power += mainRef.gamepad2.left_trigger;
-		temp_power -= mainRef.gamepad2.right_trigger;
-		relic_grip.setPower(temp_power);
+	private void updateRelicGrip(double grip) {
+		Math.min(grip, 1);
+		Math.max(grip, -1);
+		relic_grip.setPower(grip);
 	}
 
 	/**
 	 * Updates the height of the relic claw arm
 	 */
-	private void updateHeight() {
-		height_motor.setPower(-mainRef.gamepad2.left_stick_y * Constants.RELIC_HEIGHT_SCALE);
+	private void updateHeight(double height) {
+		Math.min(height, 1);
+		Math.max(height, -1);
+		height_motor.setPower(height * Constants.RELIC_HEIGHT_SCALE);
 		mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
 	}
 
 	/**
 	 * Updates the extend of the relic claw arm
 	 */
-	private void updateExtend() {
-		extending_motor.setPower(mainRef.gamepad2.left_stick_x * Constants.RELIC_EXTEND_SCALE);
+	private void updateExtend(double extend) {
+		Math.min(extend, 1);
+		Math.max(extend, -1);
+		extending_motor.setPower(extend * Constants.RELIC_EXTEND_SCALE);
 	}
 
 }

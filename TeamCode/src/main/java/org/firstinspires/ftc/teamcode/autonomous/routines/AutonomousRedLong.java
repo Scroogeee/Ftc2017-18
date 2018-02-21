@@ -1,28 +1,26 @@
 package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.CRServo;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 
 /**
  * Created by FTC on 25.01.2018.
  */
 
-@Autonomous(name = "autoRL", group = "test")
+@Autonomous(name = "autoRL", group = "drive")
 public class AutonomousRedLong extends AutonomousCore {
-
-	/**
-	 * Glyph Servo
-	 */
-	CRServo glyph_servo;
 
 	@Override
 	public void runOpMode() throws InterruptedException {
 		initialize();
 		glyph_servo.setPower(1);
 		waitForStart();
+
+		//Relic ein Stück hochfahren
+		relicControl.update(1, 0, 0);
+		sleep(300);
+		relicControl.update(0, 0, 0);
 
 		//VOR,LINKS,VOR,RECHTS,VOR
 
@@ -49,6 +47,5 @@ public class AutonomousRedLong extends AutonomousCore {
 
 	protected void initialize() {
 		super.initialize();
-		glyph_servo = hardwareMap.crservo.get(Constants.servoGlyph_name);
 	}
 }
