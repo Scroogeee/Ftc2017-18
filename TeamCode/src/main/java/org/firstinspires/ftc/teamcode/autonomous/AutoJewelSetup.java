@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 /**
  * Created by FTC on 21.02.2018.
  */
-@TeleOp(name = "JewelTest", group = "test")
+@Autonomous(name = "JewelTest", group = "test")
 public class AutoJewelSetup extends AutonomousCore {
 
 	private AutoJewelControl jewelcontrol = new AutoJewelControl();
