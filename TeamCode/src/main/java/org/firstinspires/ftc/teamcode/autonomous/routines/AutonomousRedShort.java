@@ -27,6 +27,7 @@ public class AutonomousRedShort extends AutonomousCore {
 		jewelControl.updateArm(1);
 		sleep(1000);
 		jewelControl.updateArm(0);
+		currentJewelColor = jewelControl.getColor();
 		switch (currentJewelColor) {
 			case RED:
 				drive.driveByPulses(300, 1, -1, -1, 1);
