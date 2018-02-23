@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.DriverControlled;
+package org.firstinspires.ftc.teamcode.driverControlled;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;

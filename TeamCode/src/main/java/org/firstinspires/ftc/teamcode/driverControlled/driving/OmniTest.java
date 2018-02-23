@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.DriverControlled.driving;
+package org.firstinspires.ftc.teamcode.driverControlled.driving;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 
 /**
  * Created by FTC on 11.12.2017.

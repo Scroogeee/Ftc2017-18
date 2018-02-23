@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.DriverControlled.driving;
+package org.firstinspires.ftc.teamcode.driverControlled.driving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
-import org.firstinspires.ftc.teamcode.DriverControlled.CoreUnit;
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.CoreUnit;
 
 import java.util.concurrent.TimeUnit;
 

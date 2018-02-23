@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.DriverControlled;
+package org.firstinspires.ftc.teamcode.driverControlled;
 
 import java.util.ArrayList;
 
@@ -47,6 +47,7 @@ public class Constants {
 	public static final String jewelArm_name = "jewel_servo";
 	public static final String jewelSensor_name = "jewel_sensor";
 	public static final int minimum_ConfidenceLevel = 8;
+	public static final double jewel_SCALE = 1;
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;

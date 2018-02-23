@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.DriverControlled;
+package org.firstinspires.ftc.teamcode.driverControlled;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.driving.DriveStraight4W;
+import org.firstinspires.ftc.teamcode.driverControlled.driving.DriveStraight4W;
 
 /**
  * Created by FTC on 25.09.2017.

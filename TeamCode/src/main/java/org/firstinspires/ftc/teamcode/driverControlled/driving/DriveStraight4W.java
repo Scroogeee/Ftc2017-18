@@ -1,16 +1,16 @@
-package org.firstinspires.ftc.teamcode.DriverControlled.driving;
+package org.firstinspires.ftc.teamcode.driverControlled.driving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
-import org.firstinspires.ftc.teamcode.DriverControlled.CoreUnit;
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.CoreUnit;
 
 import java.util.ArrayList;
 
-import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.NORTH;
-import static org.firstinspires.ftc.teamcode.DriverControlled.driving.RobotDirection.SOUTH;
+import static org.firstinspires.ftc.teamcode.driverControlled.driving.RobotDirection.NORTH;
+import static org.firstinspires.ftc.teamcode.driverControlled.driving.RobotDirection.SOUTH;
 
 /**
  * Created by FTC on 08.01.2018.

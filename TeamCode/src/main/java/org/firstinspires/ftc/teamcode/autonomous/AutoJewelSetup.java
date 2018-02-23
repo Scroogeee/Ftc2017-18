@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
  * Created by FTC on 21.02.2018.
  */
-@TeleOp(name = "JewelTest", group = "test")
+@Autonomous(name = "JewelTest", group = "test")
 public class AutoJewelSetup extends AutonomousCore {
 
 	private AutoJewelControl jewelcontrol = new AutoJewelControl();

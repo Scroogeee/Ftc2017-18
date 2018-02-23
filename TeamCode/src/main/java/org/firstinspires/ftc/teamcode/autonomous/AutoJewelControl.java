@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 
 /**
  * Created by FTC on 21.02.2018.
@@ -25,6 +25,16 @@ public class AutoJewelControl {
 		jewel_arm = coreRef.hardwareMap.crservo.get(Constants.jewelArm_name);
 		jewel_sensor = coreRef.hardwareMap.colorSensor.get(Constants.jewelSensor_name);
 		jewel_arm.setPower(0);
+	}
+
+	/**
+	 * Updates the CRServo position to the given values
+	 */
+	public void updateArm(double power) {
+		double temp = power * Constants.jewel_SCALE;
+		Math.min(temp, 1);
+		Math.max(temp, -1);
+		jewel_arm.setPower(temp);
 	}
 
 	public JewelColor getColor() {

@@ -21,17 +21,17 @@ gen/
 local.properties
 
 
-# Windows thumbnail
- db
+# Windows thumbnail 
+db
 Thumbs.db
 
 
 # OSX files
 
-.DS_Store
+*.DS_Store
 
-# 
-Android Studio
+
+# Android Studio
 
 *.iml
 .idea

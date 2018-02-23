@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.DriverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 
 public class AutoRelicControl {
 
