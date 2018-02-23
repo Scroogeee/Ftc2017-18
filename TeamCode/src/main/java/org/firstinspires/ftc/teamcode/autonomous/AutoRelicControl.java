@@ -70,7 +70,7 @@ public class AutoRelicControl {
 		Math.min(height, 1);
 		Math.max(height, -1);
 		height_motor.setPower(height * Constants.RELIC_HEIGHT_SCALE);
-		mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
+		//mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
 	}
 
 	/**
