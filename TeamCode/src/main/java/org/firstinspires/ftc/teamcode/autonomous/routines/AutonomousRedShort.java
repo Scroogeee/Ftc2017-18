@@ -24,8 +24,6 @@ public class AutonomousRedShort extends AutonomousCore {
 		relicControl.update(0, 0, 0);
 
 		//Jewels herunter kicken
-		jewelControl.updateArm(-1);
-		sleep(1000);
 		jewelControl.updateArm(0);
 		currentJewelColor = jewelControl.getColor();
 		telemetry.addLine(currentJewelColor.toString());
@@ -36,7 +34,6 @@ public class AutonomousRedShort extends AutonomousCore {
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				drive.driveByPulses(350, 1, 1, 1, 1);
 				break;
 			case BLUE:
@@ -44,13 +41,11 @@ public class AutonomousRedShort extends AutonomousCore {
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				drive.driveByPulses(350, -1, -1, -1, -1);
 				break;
 			case NONE:
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				break;
 		}
 
@@ -62,7 +57,7 @@ public class AutonomousRedShort extends AutonomousCore {
 		drive.driveByPulses(3200, -1, 1, 1, -1);
 		sleep(1000);
 		//RECHTS
-		drive.driveByPulses(1700, -1, -1, -1, -1);
+		drive.driveByPulses(1900, -1, -1, -1, -1);
 		sleep(1000);
 		//VOR
 		drive.driveByPulses(1500, -1, 1, 1, -1);

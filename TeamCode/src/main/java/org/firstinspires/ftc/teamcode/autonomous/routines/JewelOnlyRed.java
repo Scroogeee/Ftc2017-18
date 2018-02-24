@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 public class JewelOnlyRed extends AutonomousCore {
 	@Override
 	public void runOpMode() throws InterruptedException {
+		initialize();
 		//Jewels herunter kicken
 		jewelControl.updateArm(-1);
 		sleep(1000);

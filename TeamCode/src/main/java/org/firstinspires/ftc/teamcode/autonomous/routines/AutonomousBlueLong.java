@@ -23,9 +23,8 @@ public class AutonomousBlueLong extends AutonomousCore {
 		relicControl.update(0, 0, 0);
 
 		//Jewels herunter kicken
-		jewelControl.updateArm(-1);
-		sleep(1000);
 		jewelControl.updateArm(0);
+		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		telemetry.addLine(currentJewelColor.toString());
 		sleep(1000);
@@ -35,7 +34,6 @@ public class AutonomousBlueLong extends AutonomousCore {
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				drive.driveByPulses(350, -1, -1, -1, -1);
 				break;
 			case BLUE:
@@ -43,27 +41,31 @@ public class AutonomousBlueLong extends AutonomousCore {
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				drive.driveByPulses(350, 1, 1, 1, 1);
 				break;
 			case NONE:
 				jewelControl.updateArm(1);
 				sleep(1000);
-				//jewelControl.updateArm(0);
 				break;
 		}
 		sleep(1000);
 
-		//VOR,RECHTS,VOR
+		//ZURÜCK,LINKS,VOR,LINKS,VOR
 
-		//VOR
-		drive.driveByPulses(3200, -1, 1, 1, -1);
+		//ZURÜCK
+		drive.driveByPulses(2500, 1, -1, -1, 1);
 		sleep(1000);
-		//RECHTS
-		drive.driveByPulses(1700, -1, -1, -1, -1);
+		//LINKS
+		drive.driveByPulses(1400, -1, -1, -1, -1);
 		sleep(1000);
 		//VOR
-		drive.driveByPulses(1500, -1, 1, 1, -1);
+		drive.driveByPulses(1250, -1, 1, 1, -1);
+		sleep(1000);
+		//LINKS
+		drive.driveByPulses(1700, 1, 1, 1, 1);
+		sleep(1000);
+		//VOR
+		drive.driveByPulses(1000, -1, 1, 1, -1);
 		sleep(1000);
 		glyph_servo.setPower(-1);
 		sleep(1200);

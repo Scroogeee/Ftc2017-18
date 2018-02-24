@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.driverControlled;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
 
@@ -11,9 +11,9 @@ import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
 
 public class JewelControl {
 
-	private ColorSensor jewel_sensor;
+	protected ColorSensor jewel_sensor;
 
-	private CRServo jewel_arm;
+	protected Servo jewel_arm;
 
 	private CoreUnit coreRef;
 
@@ -22,19 +22,18 @@ public class JewelControl {
 	 */
 	public void initialize(CoreUnit p_mainRef) {
 		coreRef = p_mainRef;
-		jewel_arm = coreRef.hardwareMap.crservo.get(Constants.jewelArm_name);
+		jewel_arm = coreRef.hardwareMap.servo.get(Constants.jewelArm_name);
 		jewel_sensor = coreRef.hardwareMap.colorSensor.get(Constants.jewelSensor_name);
-		jewel_arm.setPower(0);
+		jewel_arm.setPosition(0);
 	}
 
 	/**
-	 * Updates the CRServo position to the given values
+	 * Updates the Servo position to the given values
 	 */
-	public void updateArm(double power) {
-		double temp = power * Constants.jewel_SCALE;
-		Math.min(temp, 1);
-		Math.max(temp, -1);
-		jewel_arm.setPower(temp);
+	public void updateArm(double position) {
+		Math.min(position, 1);
+		Math.max(position, 0);
+		jewel_arm.setPosition(position);
 	}
 
 	public JewelColor getColor() {
