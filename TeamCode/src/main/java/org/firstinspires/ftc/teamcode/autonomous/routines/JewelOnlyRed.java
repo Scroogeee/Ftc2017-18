@@ -12,9 +12,8 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 public class JewelOnlyRed extends AutonomousCore {
 	@Override
 	public void runOpMode() throws InterruptedException {
+		initialize();
 		//Jewels herunter kicken
-		jewelControl.updateArm(-1);
-		sleep(1000);
 		jewelControl.updateArm(0);
 		currentJewelColor = jewelControl.getColor();
 		telemetry.addLine(currentJewelColor.toString());
