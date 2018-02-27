@@ -2,13 +2,11 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.JewelControl;
-
 /**
  * Created by FTC on 21.02.2018.
  */
 
 public class AutoJewelControl extends JewelControl {
-
 	private AutonomousCore coreRef;
 
 	/**
