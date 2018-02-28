@@ -1,4 +1,3 @@
-
 package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -47,6 +46,4 @@ public class JewelOnlyBlue extends AutonomousCore {
 	protected void initialize() {
 		super.initialize();
 	}
-
-
 }

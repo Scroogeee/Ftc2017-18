@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import org.firstinspires.ftc.teamcode.driverControlled.Constants;
@@ -22,4 +23,3 @@ public class AutoJewelControl extends JewelControl {
 	}
 
 }
-
