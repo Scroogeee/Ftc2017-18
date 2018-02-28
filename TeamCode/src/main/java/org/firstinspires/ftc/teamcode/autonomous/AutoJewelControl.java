@@ -22,3 +22,4 @@ public class AutoJewelControl extends JewelControl {
 	}
 
 }
+

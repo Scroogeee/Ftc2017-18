@@ -24,6 +24,7 @@ public class AutonomousBlueShort extends AutonomousCore {
 
 		//Jewels herunter kicken
 		jewelControl.updateArm(0);
+
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		telemetry.addLine(currentJewelColor.toString());
@@ -48,6 +49,7 @@ public class AutonomousBlueShort extends AutonomousCore {
 				sleep(1000);
 				break;
 		}
+
 		sleep(1000);
 
 		//ZURÜCK,RECHTS,VOR

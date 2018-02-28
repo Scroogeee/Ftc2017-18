@@ -67,6 +67,7 @@ public class AutonomousBlueLong extends AutonomousCore {
 		//VOR
 		drive.driveByPulses(800, -1, 1, 1, -1);
 		sleep(300);
+
 		glyph_servo.setPower(-1);
 		sleep(1200);
 		//ZURÜCK
