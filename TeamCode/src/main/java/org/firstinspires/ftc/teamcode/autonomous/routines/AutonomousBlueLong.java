@@ -23,7 +23,7 @@ public class AutonomousBlueLong extends AutonomousCore {
 		relicControl.update(0, 0, 0);
 
 		//Jewels herunter kicken
-		jewelControl.updateArm(0);
+		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		telemetry.addLine(currentJewelColor.toString());
@@ -49,7 +49,7 @@ public class AutonomousBlueLong extends AutonomousCore {
 				break;
 		}
 		sleep(1000);
-
+		jewelControl.updateArm(1);
 		//ZURÜCK,LINKS,VOR,LINKS,VOR
 
 		//ZURÜCK
@@ -69,6 +69,12 @@ public class AutonomousBlueLong extends AutonomousCore {
 		sleep(300);
 		glyph_servo.setPower(-1);
 		sleep(1200);
+		//ZURÜCK
+		drive.driveByPulses(300, 1, -1, -1, 1);
+		sleep(300);
+		//VOR
+		drive.driveByPulses(300, -1, 1, 1, -1);
+		sleep(300);
 		//ZURÜCK
 		drive.driveByPulses(300, 1, -1, -1, 1);
 	}

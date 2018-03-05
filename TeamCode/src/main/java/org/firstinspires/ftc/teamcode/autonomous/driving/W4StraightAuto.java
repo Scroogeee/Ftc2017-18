@@ -51,11 +51,11 @@ public class W4StraightAuto {
 		D.setPower(0.9);
 		while (autonomousCore.opModeIsActive()) {
 			if (A.isBusy() && B.isBusy() && C.isBusy() && D.isBusy()) {
-				autonomousCore.telemetry.addLine(String.valueOf(A.getCurrentPosition()));
+				/*autonomousCore.telemetry.addLine(String.valueOf(A.getCurrentPosition()));
 				autonomousCore.telemetry.addLine(String.valueOf(B.getCurrentPosition()));
 				autonomousCore.telemetry.addLine(String.valueOf(C.getCurrentPosition()));
 				autonomousCore.telemetry.addLine(String.valueOf(D.getCurrentPosition()));
-				autonomousCore.telemetry.update();
+				autonomousCore.telemetry.update();*/
 				//drive
 			} else {
 				break;
