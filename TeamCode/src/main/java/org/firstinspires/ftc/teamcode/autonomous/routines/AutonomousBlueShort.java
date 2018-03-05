@@ -48,6 +48,7 @@ public class AutonomousBlueShort extends AutonomousCore {
 				sleep(1000);
 				break;
 		}
+
 		sleep(1000);
 		jewelControl.updateArm(1);
 		//ZURÜCK,RECHTS,VOR

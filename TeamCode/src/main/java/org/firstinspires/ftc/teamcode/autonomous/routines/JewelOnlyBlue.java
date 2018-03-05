@@ -46,5 +46,4 @@ public class JewelOnlyBlue extends AutonomousCore {
 	protected void initialize() {
 		super.initialize();
 	}
-
 }
