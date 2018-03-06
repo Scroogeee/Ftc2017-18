@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.driverControlled.driving;
+package org.firstinspires.ftc.teamcode.driverControlled.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 /**
  * Created by FTC on 11.12.2017.
  */
-@TeleOp(name = "OmniSetupTest")
+@TeleOp(name = "OmniSetupTest", group = "Test")
 public class OmniTest extends OpMode {
 
 	private DcMotor a;

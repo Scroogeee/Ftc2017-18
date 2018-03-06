@@ -4,11 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.driverControlled.driving.DriveStraight4W;
+import org.firstinspires.ftc.teamcode.driverControlled.robotModules.GlyphControl;
+import org.firstinspires.ftc.teamcode.driverControlled.robotModules.JewelControl;
+import org.firstinspires.ftc.teamcode.driverControlled.robotModules.RelicControl;
 
 /**
  * Created by FTC on 25.09.2017.
  */
-@TeleOp(name = "FROG-DriverControlled")
+@TeleOp(name = "FROG-DriverControlled", group = "drive")
 public class CoreUnit extends OpMode {
 
 	//DriveCross4W drive4 = new DriveCross4W();

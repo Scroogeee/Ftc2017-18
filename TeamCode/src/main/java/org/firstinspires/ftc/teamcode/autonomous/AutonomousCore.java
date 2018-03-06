@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.autonomous.driving.W4StraightAuto;
+import org.firstinspires.ftc.teamcode.autonomous.jewels.AutoJewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.jewels.JewelColor;
 import org.firstinspires.ftc.teamcode.driverControlled.Constants;
 
 /**

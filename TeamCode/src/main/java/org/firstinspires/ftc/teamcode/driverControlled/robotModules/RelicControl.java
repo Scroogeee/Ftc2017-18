@@ -1,7 +1,10 @@
-package org.firstinspires.ftc.teamcode.driverControlled;
+package org.firstinspires.ftc.teamcode.driverControlled.robotModules;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.driverControlled.Constants;
+import org.firstinspires.ftc.teamcode.driverControlled.CoreUnit;
 
 public class RelicControl {
 
