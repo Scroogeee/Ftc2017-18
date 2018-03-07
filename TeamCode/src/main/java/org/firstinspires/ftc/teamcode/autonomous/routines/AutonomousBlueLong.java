@@ -22,11 +22,12 @@ public class AutonomousBlueLong extends AutonomousCore {
 		sleep(300);
 		relicControl.update(0, 0, 0);
 
+
 		//Jewels herunter kicken
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
-		telemetry.addLine(currentJewelColor.toString());
+
 		sleep(1000);
 		switch (currentJewelColor) {
 			case RED:
@@ -50,6 +51,7 @@ public class AutonomousBlueLong extends AutonomousCore {
 		}
 		sleep(1000);
 		jewelControl.updateArm(1);
+		telemetry.addLine(currentJewelColor.toString());
 		//ZURÜCK,LINKS,VOR,LINKS,VOR
 
 		//ZURÜCK

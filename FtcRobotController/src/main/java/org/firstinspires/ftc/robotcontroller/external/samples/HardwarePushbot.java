@@ -56,7 +56,7 @@ public class HardwarePushbot
 	public static final double ARM_UP_POWER = 0.45;
 	public static final double ARM_DOWN_POWER = -0.45;
 	/* Public OpMode members. */
-    public DcMotor  leftDrive   = null;
+	public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
     public DcMotor  leftArm     = null;
     public Servo    leftClaw    = null;

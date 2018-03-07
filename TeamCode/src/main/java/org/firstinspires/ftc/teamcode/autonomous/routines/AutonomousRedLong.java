@@ -50,7 +50,7 @@ public class AutonomousRedLong extends AutonomousCore {
 		}
 		sleep(1000);
 		jewelControl.updateArm(1);
-
+		telemetry.addLine(currentJewelColor.toString());
 		//VOR,LINKS,VOR,RECHTS,VOR
 
 		//VOR

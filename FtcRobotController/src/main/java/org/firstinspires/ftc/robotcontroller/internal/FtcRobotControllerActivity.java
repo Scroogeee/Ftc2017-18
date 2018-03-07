@@ -118,9 +118,7 @@ public class FtcRobotControllerActivity extends Activity
   public static final String TAG = "RCActivity";
   private static final int REQUEST_CONFIG_WIFI_CHANNEL = 1;
   private static final int NUM_GAMEPADS = 2;
-
-    protected final SharedPreferencesListener sharedPreferencesListener = new SharedPreferencesListener();
-
+	  protected final SharedPreferencesListener sharedPreferencesListener = new SharedPreferencesListener();
   protected WifiManager.WifiLock wifiLock;
   protected RobotConfigFileManager cfgFileMgr;
 
@@ -162,9 +160,9 @@ public class FtcRobotControllerActivity extends Activity
     }
   };
 
-    public String getTag() {
-      return TAG;
-    }
+	  public String getTag() {
+		  return TAG;
+	  }
 
   @Override
   protected void onNewIntent(Intent intent) {
@@ -604,14 +602,13 @@ public class FtcRobotControllerActivity extends Activity
     }
   }
 
-   
- protected class RobotRestarter implements Restarter {
+	  protected class RobotRestarter implements Restarter {
 
-      public void requestRestart() {
-        requestRobotRestart();
-      }
+		  public void requestRestart() {
+			  requestRobotRestart();
+		  }
 
-    }
+	  }
 
   protected class SharedPreferencesListener implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {

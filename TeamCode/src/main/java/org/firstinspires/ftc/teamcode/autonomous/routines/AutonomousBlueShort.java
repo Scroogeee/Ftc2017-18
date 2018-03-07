@@ -26,7 +26,6 @@ public class AutonomousBlueShort extends AutonomousCore {
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
-		telemetry.addLine(currentJewelColor.toString());
 		sleep(1000);
 		switch (currentJewelColor) {
 			case RED:
@@ -51,6 +50,7 @@ public class AutonomousBlueShort extends AutonomousCore {
 
 		sleep(1000);
 		jewelControl.updateArm(1);
+		telemetry.addLine(currentJewelColor.toString());
 		//ZURÜCK,RECHTS,VOR
 
 		//ZURÜCK

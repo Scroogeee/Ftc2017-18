@@ -65,6 +65,7 @@ public class PushbotAutoDriveToLine_Linear extends LinearOpMode {
 	HardwarePushbot robot = new HardwarePushbot();   // Use a Pushbot's hardware
 	// could also use HardwarePushbotMatrix class.
 	LightSensor lightSensor;      // Primary LEGO Light sensor,
+
     @Override
     public void runOpMode() {
 
