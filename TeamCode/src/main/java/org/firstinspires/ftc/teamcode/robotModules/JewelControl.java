@@ -26,7 +26,7 @@ public class JewelControl {
 		jewel_arm = hardwareMap.servo.get(Constants.jewelArm_name);
 		jewel_sensor = hardwareMap.colorSensor.get(Constants.jewelSensor_name);
 		jewel_arm.setDirection(Servo.Direction.FORWARD);
-		jewel_arm.setPosition(0);
+		jewel_arm.setPosition(1);
 	}
 
 	/**

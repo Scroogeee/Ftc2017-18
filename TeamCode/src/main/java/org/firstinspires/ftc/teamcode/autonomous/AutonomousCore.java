@@ -32,4 +32,31 @@ public class AutonomousCore extends LinearOpMode {
 		relicControl.initialize(this.hardwareMap);
 		jewelControl.initialize(this.hardwareMap);
 	}
+
+	protected void kickJewel(JewelColor toKick) {
+		//Jewels herunter kicken
+		jewelControl.updateArm(0.27);
+		sleep(1000);
+		currentJewelColor = jewelControl.getColor();
+		telemetry.update();
+		telemetry.addData("CurrentColor:", currentJewelColor.toString());
+		sleep(1000);
+		if (currentJewelColor != null) {
+			if (currentJewelColor.equals(toKick)) {
+				drive.driveByPulses(350, 1, 1, 1, 1);
+				sleep(200);
+				jewelControl.updateArm(1);
+				sleep(1000);
+				drive.driveByPulses(350, -1, -1, -1, -1);
+			} else {
+				drive.driveByPulses(350, -1, -1, -1, -1);
+				sleep(200);
+				jewelControl.updateArm(1);
+				sleep(1000);
+				drive.driveByPulses(350, 1, 1, 1, 1);
+			}
+		}
+		sleep(1000);
+		jewelControl.updateArm(1);
+	}
 }

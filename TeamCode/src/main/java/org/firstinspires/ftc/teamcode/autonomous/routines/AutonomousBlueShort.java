@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -23,34 +24,8 @@ public class AutonomousBlueShort extends AutonomousCore {
 		relicControl.update(0, 0, 0);
 
 		//Jewels herunter kicken
-		jewelControl.updateArm(0.27);
-		sleep(1000);
-		currentJewelColor = jewelControl.getColor();
-		sleep(1000);
-		switch (currentJewelColor) {
-			case RED:
-				drive.driveByPulses(350, 1, 1, 1, 1);
-				sleep(200);
-				jewelControl.updateArm(1);
-				sleep(1000);
-				drive.driveByPulses(350, -1, -1, -1, -1);
-				break;
-			case BLUE:
-				drive.driveByPulses(350, -1, -1, -1, -1);
-				sleep(200);
-				jewelControl.updateArm(1);
-				sleep(1000);
-				drive.driveByPulses(350, 1, 1, 1, 1);
-				break;
-			case NONE:
-				jewelControl.updateArm(1);
-				sleep(1000);
-				break;
-		}
+		kickJewel(JewelColor.RED);
 
-		sleep(1000);
-		jewelControl.updateArm(1);
-		telemetry.addLine(currentJewelColor.toString());
 		//ZURÜCK,RECHTS,VOR
 
 		//ZURÜCK

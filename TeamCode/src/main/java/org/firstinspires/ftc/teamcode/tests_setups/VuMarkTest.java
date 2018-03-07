@@ -29,7 +29,6 @@
 package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -45,6 +44,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
 
 /**
  * This OpMode illustrates the basics of using the Vuforia engine to determine
@@ -66,7 +67,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  */
 
 @Autonomous(name = "Concept: VuMark Id", group = "Test")
-public class VuMarkTest extends LinearOpMode {
+public class VuMarkTest extends AutonomousCore {
 
 	public static final String TAG = "Vuforia VuMark Sample";
 
@@ -77,6 +78,8 @@ public class VuMarkTest extends LinearOpMode {
 	 * localization engine.
 	 */
 	VuforiaLocalizer vuforia;
+
+	W4StraightAuto robot = new W4StraightAuto(this);
 
 	@Override
 	public void runOpMode() {
@@ -181,5 +184,6 @@ public class VuMarkTest extends LinearOpMode {
 
 	String format(OpenGLMatrix transformationMatrix) {
 		return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
+
 	}
 }

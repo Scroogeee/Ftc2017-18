@@ -13,12 +13,20 @@ import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.Robo
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.SOUTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.WEST;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.A_Scale;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.B_Scale;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.C_Scale;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.D_Scale;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.FAST_SCALE;
+import static org.firstinspires.ftc.teamcode.robotModules.Constants.SLOW_SCALE;
 
 /**
  * Created by FTC on 08.01.2018.
  */
 
 public class DriveStraight4W {
+
+	private boolean isSlow = false;
 
 	/**
 	 * Values for the driving (as from gamepad)
@@ -72,8 +80,19 @@ public class DriveStraight4W {
 	 * This method updates every tick
 	 */
 	public void update() {
+		getAndSetSlowMode();
 		getDirectionFromGamepad();
 		updateMotorData();
+	}
+
+	private void getAndSetSlowMode() {
+		if (mainRef.gamepad1.x) {
+			isSlow = true;
+		} else if (mainRef.gamepad1.y) {
+			isSlow = false;
+		} else {
+			//Slowmode status unchanged
+		}
 	}
 
 	private void getDirectionFromGamepad() {
@@ -96,10 +115,21 @@ public class DriveStraight4W {
 	 */
 	private void updateMotorData() {
 		computeDriveValues();
-		Drive_A.setPower(frontl * Constants.A_Scale);
-		Drive_C.setPower(rearr * Constants.B_Scale);
-		Drive_B.setPower(frontr * Constants.C_Scale);
-		Drive_D.setPower(rearl * Constants.D_Scale);
+		if (!isSlow) {
+			Drive_A.setPower(frontl * A_Scale * FAST_SCALE);
+			Drive_C.setPower(rearr * B_Scale * FAST_SCALE);
+			Drive_B.setPower(frontr * C_Scale * FAST_SCALE);
+			Drive_D.setPower(rearl * D_Scale * FAST_SCALE);
+		} else {
+			Drive_A.setPower(frontl * A_Scale * SLOW_SCALE);
+			Drive_C.setPower(rearr * B_Scale * SLOW_SCALE);
+			Drive_B.setPower(frontr * C_Scale * SLOW_SCALE);
+			Drive_D.setPower(rearl * D_Scale * SLOW_SCALE);
+		}
+		Drive_A.setPower(frontl * A_Scale);
+		Drive_C.setPower(rearr * B_Scale);
+		Drive_B.setPower(frontr * C_Scale);
+		Drive_D.setPower(rearl * D_Scale);
 		//TODO remove debugging
 		//mainRef.telemetry.addLine(Double.toString(frontl));
 		//mainRef.telemetry.addLine(Double.toString(frontr));

@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
+import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 /**
  * This file illustrates the concept of driving a path based on Gyro heading and encoder counts.
@@ -75,7 +76,7 @@ import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
 public class AutoGyroTest extends AutonomousCore {
 
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
-	static final double DRIVE_GEAR_REDUCTION = 2.0;     // This is < 1.0 if geared UP
+	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
 	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
@@ -98,7 +99,7 @@ public class AutoGyroTest extends AutonomousCore {
          * The init() method of the hardware class does most of the work here
          */
 		robot.initialize();
-		gyro = (ModernRoboticsI2cGyro) hardwareMap.gyroSensor.get("gyro");
+		gyro = (ModernRoboticsI2cGyro) hardwareMap.gyroSensor.get(Constants.gyro_name);
 
 		// Ensure the robot it stationary, then reset the encoders and calibrate the gyro.
 		robot.A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

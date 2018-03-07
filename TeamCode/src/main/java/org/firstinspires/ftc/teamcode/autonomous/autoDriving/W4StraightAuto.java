@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.autonomous.autoDriving;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
 import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 /**
@@ -28,9 +27,7 @@ public class W4StraightAuto {
 		this.autonomousCore = param_ac;
 	}
 
-	public void kickJewel(JewelColor toKick, JewelColor sensorColor) {
 
-	}
 
 	public void driveByPulses(int pulseNum, int afactor, int bfactor, int cfactor, int dfactor) {
 		/**Reset Encoders*/
