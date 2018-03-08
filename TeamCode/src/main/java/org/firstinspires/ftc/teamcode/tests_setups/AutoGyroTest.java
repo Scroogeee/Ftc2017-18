@@ -35,9 +35,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 /**
  * This file illustrates the concept of driving a path based on Gyro heading and encoder counts.

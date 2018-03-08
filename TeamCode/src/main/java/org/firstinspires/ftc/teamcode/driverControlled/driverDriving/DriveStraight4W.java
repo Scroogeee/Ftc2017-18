@@ -4,21 +4,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 import java.util.ArrayList;
 
+import static org.firstinspires.ftc.teamcode.Constants.A_Scale;
+import static org.firstinspires.ftc.teamcode.Constants.B_Scale;
+import static org.firstinspires.ftc.teamcode.Constants.C_Scale;
+import static org.firstinspires.ftc.teamcode.Constants.D_Scale;
+import static org.firstinspires.ftc.teamcode.Constants.FAST_SCALE;
+import static org.firstinspires.ftc.teamcode.Constants.SLOW_SCALE;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.EAST;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.SOUTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.WEST;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.A_Scale;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.B_Scale;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.C_Scale;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.D_Scale;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.FAST_SCALE;
-import static org.firstinspires.ftc.teamcode.robotModules.Constants.SLOW_SCALE;
 
 /**
  * Created by FTC on 08.01.2018.

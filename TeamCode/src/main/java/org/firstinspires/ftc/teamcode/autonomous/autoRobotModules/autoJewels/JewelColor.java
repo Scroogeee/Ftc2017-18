@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels;
 
 /**
  * Created by FTC on 21.02.2018.

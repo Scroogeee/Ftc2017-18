@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
 
 /**
  * Created by FTC on 23.02.2018.

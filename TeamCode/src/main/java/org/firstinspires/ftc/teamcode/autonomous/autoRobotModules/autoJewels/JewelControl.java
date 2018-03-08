@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.robotModules;
+package org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.autonomous.JewelColor;
+import static org.firstinspires.ftc.teamcode.Constants.jewelArm_name;
+import static org.firstinspires.ftc.teamcode.Constants.jewelSensor_name;
+import static org.firstinspires.ftc.teamcode.Constants.minimum_ConfidenceLevel;
 
 /**
  * Created by FTC on 21.02.2018.
@@ -16,17 +18,17 @@ public class JewelControl {
 
 	protected Servo jewel_arm;
 
-	protected HardwareMap hardwareMap;
+	private HardwareMap hardwareMap;
 
 	/**
 	 * Initializes the jewel control class
 	 */
 	public void initialize(HardwareMap hwMap) {
 		hardwareMap = hwMap;
-		jewel_arm = hardwareMap.servo.get(Constants.jewelArm_name);
-		jewel_sensor = hardwareMap.colorSensor.get(Constants.jewelSensor_name);
+		jewel_arm = hardwareMap.servo.get(jewelArm_name);
+		jewel_sensor = hardwareMap.colorSensor.get(jewelSensor_name);
 		jewel_arm.setDirection(Servo.Direction.FORWARD);
-		jewel_arm.setPosition(1);
+		jewel_arm.setPosition(0);
 	}
 
 	/**
@@ -39,9 +41,9 @@ public class JewelControl {
 	}
 
 	public JewelColor getColor() {
-		if (jewel_sensor.blue() > Constants.minimum_ConfidenceLevel) {
+		if (jewel_sensor.blue() > minimum_ConfidenceLevel) {
 			return JewelColor.BLUE;
-		} else if (jewel_sensor.red() > Constants.minimum_ConfidenceLevel) {
+		} else if (jewel_sensor.red() > minimum_ConfidenceLevel) {
 			return JewelColor.RED;
 		}
 		return JewelColor.NONE;
