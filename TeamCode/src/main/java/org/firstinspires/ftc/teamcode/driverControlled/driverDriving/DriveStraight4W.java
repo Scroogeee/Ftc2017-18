@@ -126,10 +126,6 @@ public class DriveStraight4W {
 			Drive_B.setPower(frontr * C_Scale * SLOW_SCALE);
 			Drive_D.setPower(rearl * D_Scale * SLOW_SCALE);
 		}
-		Drive_A.setPower(frontl * A_Scale);
-		Drive_C.setPower(rearr * B_Scale);
-		Drive_B.setPower(frontr * C_Scale);
-		Drive_D.setPower(rearl * D_Scale);
 		//TODO remove debugging
 		//mainRef.telemetry.addLine(Double.toString(frontl));
 		//mainRef.telemetry.addLine(Double.toString(frontr));
