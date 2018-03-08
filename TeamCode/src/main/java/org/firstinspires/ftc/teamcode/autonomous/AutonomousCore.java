@@ -3,10 +3,11 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.AutoRelicControl;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
-import org.firstinspires.ftc.teamcode.robotModules.JewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelControl;
 
 /**
  * Created by FTC on 24.01.2018.

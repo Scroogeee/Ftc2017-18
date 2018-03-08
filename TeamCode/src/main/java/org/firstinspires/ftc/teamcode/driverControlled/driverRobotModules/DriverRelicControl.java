@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.driverControlled.driverRobotModules;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 public class DriverRelicControl {
 

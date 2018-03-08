@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode.driverControlled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverDriving.DriveStraight4W;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobotModules.DriverGlyphControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobotModules.DriverRelicControl;
-import org.firstinspires.ftc.teamcode.robotModules.JewelControl;
 
 /**
  * Created by FTC on 25.09.2017.

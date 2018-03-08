@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.EAST;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.NORTH;

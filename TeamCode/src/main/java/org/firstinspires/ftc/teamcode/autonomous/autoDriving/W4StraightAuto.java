@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.autonomous.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.robotModules.Constants;
 
 /**
  * Created by FTC on 25.01.2018.
