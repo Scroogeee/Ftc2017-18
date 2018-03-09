@@ -88,6 +88,10 @@ public class DriveStraight4W {
 		Drive_B.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_C.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_D.setDirection(DcMotorSimple.Direction.FORWARD);
+		Drive_A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		Drive_B.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		Drive_C.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		Drive_D.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
 	/**

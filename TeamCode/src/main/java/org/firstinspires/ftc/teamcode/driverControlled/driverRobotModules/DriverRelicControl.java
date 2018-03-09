@@ -79,7 +79,7 @@ public class DriverRelicControl {
 	 * Updates the height of the relic claw arm
 	 */
 	private void updateHeight() {
-		height_motor.setPower(mainRef.gamepad2.left_stick_y * Constants.RELIC_HEIGHT_SCALE);
+		height_motor.setPower(-mainRef.gamepad2.left_stick_y * Constants.RELIC_HEIGHT_SCALE);
 		if (mainRef != null) {
 			mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
 		}

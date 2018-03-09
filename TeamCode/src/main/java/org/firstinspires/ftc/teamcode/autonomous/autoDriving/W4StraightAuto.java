@@ -73,6 +73,10 @@ public class W4StraightAuto {
 		B = autonomousCore.hardwareMap.dcMotor.get(Constants.Drive_B);
 		C = autonomousCore.hardwareMap.dcMotor.get(Constants.Drive_C);
 		D = autonomousCore.hardwareMap.dcMotor.get(Constants.Drive_D);
+		A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		B.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		C.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		D.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
 }
