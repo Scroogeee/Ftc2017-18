@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.driverControlled.driverRobotModules;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
@@ -12,6 +13,8 @@ public class DriverRelicControl {
 	 * Main reference
 	 */
 	private DriverCore mainRef;
+
+	private HardwareMap hardwareMap;
 
 	/**
 	 * Relic height and Grab arm
@@ -29,11 +32,18 @@ public class DriverRelicControl {
 	/**
 	 * Initializes the relic control class
 	 */
-	public void init(DriverCore p_mainRef) {
+	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		mainRef = p_mainRef;
-		height_motor = mainRef.hardwareMap.dcMotor.get(Constants.Vertical_Relic_Motor);
-		extending_motor = mainRef.hardwareMap.dcMotor.get(Constants.Lateral_Relic_Motor);
-		relic_grip = mainRef.hardwareMap.crservo.get(Constants.Servo_Relic);
+		if (hwMap != null) {
+			hardwareMap = hwMap;
+		} else if (mainRef != null) {
+			hardwareMap = mainRef.hardwareMap;
+		} else {
+			throw new NullPointerException("DriverCore or HardwareMap not specified");
+		}
+		height_motor = hardwareMap.dcMotor.get(Constants.Vertical_Relic_Motor);
+		extending_motor = hardwareMap.dcMotor.get(Constants.Lateral_Relic_Motor);
+		relic_grip = hardwareMap.crservo.get(Constants.Servo_Relic);
 		initValues();
 	}
 
@@ -70,7 +80,9 @@ public class DriverRelicControl {
 	 */
 	private void updateHeight() {
 		height_motor.setPower(mainRef.gamepad2.left_stick_y * Constants.RELIC_HEIGHT_SCALE);
-		mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
+		if (mainRef != null) {
+			mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
+		}
 	}
 
 	/**

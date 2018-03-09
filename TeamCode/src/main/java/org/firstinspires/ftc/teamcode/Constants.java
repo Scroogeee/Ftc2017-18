@@ -24,11 +24,6 @@ public class Constants {
 	public static final double B_Scale = 1;
 	public static final double C_Scale = 1;
 	public static final double D_Scale = 1;
-	//Scales for the side driving
-	public static final double sideScale_fr = 1;
-	public static final double sideScale_fl = 1;
-	public static final double sideScale_rr = 1;
-	public static final double sideScale_rl = 1;
 
 	//drive mode scales
 	public static final double FAST_SCALE = 1;

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.driverControlled.driverDriving;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
@@ -28,6 +29,8 @@ public class DriveCross4W {
 	 */
 	private DriverCore mainRef;
 
+	private HardwareMap hardwareMap;
+
 	private RobotDirection currentDir;
 
 	/**
@@ -48,19 +51,27 @@ public class DriveCross4W {
 
 	/**
 	 * Initializes the Drive Control class
+	 * CAUTION: At least one parameter has to be not null.
 	 */
-	public void init(DriverCore p_mainRef) {
+	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		mainRef = p_mainRef;
+		if (hwMap != null) {
+			hardwareMap = hwMap;
+		} else if (mainRef != null) {
+			hardwareMap = mainRef.hardwareMap;
+		} else {
+			throw new NullPointerException("DriverCore or HardwareMap not specified");
+		}
 		initMotors();
 		currentDir = NORTH;
 		update();
 	}
 
 	public void initMotors() {
-		Drive_A = mainRef.hardwareMap.dcMotor.get(Constants.Drive_A);
-		Drive_B = mainRef.hardwareMap.dcMotor.get(Constants.Drive_B);
-		Drive_C = mainRef.hardwareMap.dcMotor.get(Constants.Drive_C);
-		Drive_D = mainRef.hardwareMap.dcMotor.get(Constants.Drive_D);
+		Drive_A = hardwareMap.dcMotor.get(Constants.Drive_A);
+		Drive_B = hardwareMap.dcMotor.get(Constants.Drive_B);
+		Drive_C = hardwareMap.dcMotor.get(Constants.Drive_C);
+		Drive_D = hardwareMap.dcMotor.get(Constants.Drive_D);
 		Drive_A.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_B.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_C.setDirection(DcMotorSimple.Direction.FORWARD);

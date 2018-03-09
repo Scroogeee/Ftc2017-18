@@ -31,9 +31,9 @@ public class DriverCore extends OpMode {
 	public void init() {
 		//driveControl.init(this);
 		//drive4.init(this);
-		driveStraight4W.init(this);
-		driverGlyphControl.init(this);
-		driverRelicControl.init(this);
+		driveStraight4W.init(null, this);
+		driverGlyphControl.init(null, this);
+		driverRelicControl.init(null, this);
 		jewelControl.initialize(this.hardwareMap);
 		jewelControl.updateArm(1);
 	}

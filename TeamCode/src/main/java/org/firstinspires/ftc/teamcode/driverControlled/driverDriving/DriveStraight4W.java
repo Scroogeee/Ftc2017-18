@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.driverControlled.driverDriving;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
@@ -15,10 +16,6 @@ import static org.firstinspires.ftc.teamcode.Constants.C_Scale;
 import static org.firstinspires.ftc.teamcode.Constants.D_Scale;
 import static org.firstinspires.ftc.teamcode.Constants.FAST_SCALE;
 import static org.firstinspires.ftc.teamcode.Constants.SLOW_SCALE;
-import static org.firstinspires.ftc.teamcode.Constants.sideScale_fl;
-import static org.firstinspires.ftc.teamcode.Constants.sideScale_fr;
-import static org.firstinspires.ftc.teamcode.Constants.sideScale_rl;
-import static org.firstinspires.ftc.teamcode.Constants.sideScale_rr;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.EAST;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.SOUTH;
@@ -49,6 +46,8 @@ public class DriveStraight4W {
 	 */
 	private DriverCore mainRef;
 
+	private HardwareMap hardwareMap;
+
 	private RobotDirection currentDir;
 
 	/**
@@ -61,19 +60,27 @@ public class DriveStraight4W {
 
 	/**
 	 * Initializes the Drive Control class
+	 * CAUTION: At least one parameter has to be not null.
 	 */
-	public void init(DriverCore p_mainRef) {
+	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		mainRef = p_mainRef;
+		if (hwMap != null) {
+			hardwareMap = hwMap;
+		} else if (mainRef != null) {
+			hardwareMap = mainRef.hardwareMap;
+		} else {
+			throw new NullPointerException("DriverCore or HardwareMap not specified");
+		}
 		initMotors();
 		currentDir = NORTH;
 		update();
 	}
 
 	public void initMotors() {
-		Drive_A = mainRef.hardwareMap.dcMotor.get(Constants.Drive_A);
-		Drive_B = mainRef.hardwareMap.dcMotor.get(Constants.Drive_B);
-		Drive_C = mainRef.hardwareMap.dcMotor.get(Constants.Drive_C);
-		Drive_D = mainRef.hardwareMap.dcMotor.get(Constants.Drive_D);
+		Drive_A = hardwareMap.dcMotor.get(Constants.Drive_A);
+		Drive_B = hardwareMap.dcMotor.get(Constants.Drive_B);
+		Drive_C = hardwareMap.dcMotor.get(Constants.Drive_C);
+		Drive_D = hardwareMap.dcMotor.get(Constants.Drive_D);
 		Drive_A.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_B.setDirection(DcMotorSimple.Direction.FORWARD);
 		Drive_C.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -82,6 +89,7 @@ public class DriveStraight4W {
 
 	/**
 	 * This method updates every tick
+	 * CAUTION: Do only use if DriverCore is assigned
 	 */
 	public void update() {
 		getAndSetSlowMode();
@@ -130,12 +138,12 @@ public class DriveStraight4W {
 			Drive_B.setPower(frontr * C_Scale * SLOW_SCALE);
 			Drive_D.setPower(rearl * D_Scale * SLOW_SCALE);
 		}
-		//TODO remove debugging
-		//mainRef.telemetry.addLine(Double.toString(frontl));
-		//mainRef.telemetry.addLine(Double.toString(frontr));
-		//mainRef.telemetry.addLine(Double.toString(rearr));
-		//mainRef.telemetry.addLine(Double.toString(rearl));
-
+		if (mainRef != null) {
+			//mainRef.telemetry.addLine(Double.toString(frontl));
+			//mainRef.telemetry.addLine(Double.toString(frontr));
+			//mainRef.telemetry.addLine(Double.toString(rearr));
+			//mainRef.telemetry.addLine(Double.toString(rearl));
+		}
 	}
 
 	/**
@@ -158,10 +166,10 @@ public class DriveStraight4W {
 		rearr = -frontvector;
 
 		/** Drive values for cross driving */
-		frontl += sidevector * sideScale_fl;
-		frontr += sidevector * sideScale_fr;
-		rearr -= sidevector * sideScale_rr;
-		rearl -= sidevector * sideScale_rl;
+		frontl += sidevector;
+		frontr += sidevector;
+		rearr -= sidevector;
+		rearl -= sidevector;
 
 		/** Turning */
 		frontl -= turnrate;
@@ -192,8 +200,7 @@ public class DriveStraight4W {
 				frontvector = -p_sidevector;
 				break;
 			default:
-				mainRef.telemetry.addLine("Intenal Error: Bad Direction");
-				break;
+				throw new IllegalArgumentException("Bad Direction");
 		}
 	}
 
@@ -207,8 +214,9 @@ public class DriveStraight4W {
 		list.add(rearr);
 		list.add(rearl);
 		Double highestNumber = Constants.getHighestNumber(list);
-		//TODO remove debugging
-		mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
+		if (mainRef != null) {
+			mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
+		}
 		if (highestNumber >= 1) {
 			frontl = frontl / highestNumber;
 			frontr = frontr / highestNumber;

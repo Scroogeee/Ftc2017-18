@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.driverControlled.driverRobotModules;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
@@ -17,6 +18,7 @@ public class DriverGlyphControl {
 	 */
 	private DriverCore mainRef;
 
+	private HardwareMap hardwareMap;
 
 	/**
 	 * Tightloose
@@ -29,16 +31,24 @@ public class DriverGlyphControl {
 	 */
 	private DcMotor glyphlift;
 
-	public void init(DriverCore p_mainRef) {
-		//initialize mainRef
+	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
+		//initialize references
 		mainRef = p_mainRef;
+		if (hwMap != null) {
+			hardwareMap = hwMap;
+		} else if (mainRef != null) {
+			hardwareMap = mainRef.hardwareMap;
+		} else {
+			throw new NullPointerException("DriverCore or HardwareMap not specified");
+		}
+
 		//initialize tightloose
-		tightloose = mainRef.hardwareMap.crservo.get(Constants.servoGlyph_name);
+		tightloose = hardwareMap.crservo.get(Constants.servoGlyph_name);
 		//Standstill at FORWARD and 0.05
 		tightloose.setDirection(DcMotorSimple.Direction.FORWARD);
 		tightloose.setPower(0.05);
 		//Glyphlift
-		glyphlift = mainRef.hardwareMap.dcMotor.get(Constants.Glyphlift_name);
+		glyphlift = hardwareMap.dcMotor.get(Constants.Glyphlift_name);
 		glyphlift.setDirection(DcMotorSimple.Direction.REVERSE);
 		glyphlift.setPower(0);
 
@@ -73,8 +83,10 @@ public class DriverGlyphControl {
 		/** Set the power */
 		tightloose.setPower(tightloose_power);
 
-		//mainRef.telemetry.addLine(Double.toString(tightloose_power));
-		//mainRef.telemetry.update();
+		if (mainRef != null) {
+			//mainRef.telemetry.addLine(Double.toString(tightloose_power));
+			//mainRef.telemetry.update();
+		}
 	}
 
 
