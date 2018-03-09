@@ -45,6 +45,8 @@ public class DriveControl2W {
 		mainRef = p_mainRef;
 		left_drive = mainRef.hardwareMap.dcMotor.get(Constants.ld_name);
 		right_drive = mainRef.hardwareMap.dcMotor.get(Constants.rd_name);
+		right_drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		left_drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
 	/**
