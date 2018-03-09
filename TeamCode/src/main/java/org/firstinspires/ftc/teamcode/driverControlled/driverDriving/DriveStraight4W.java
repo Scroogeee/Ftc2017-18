@@ -15,6 +15,10 @@ import static org.firstinspires.ftc.teamcode.Constants.C_Scale;
 import static org.firstinspires.ftc.teamcode.Constants.D_Scale;
 import static org.firstinspires.ftc.teamcode.Constants.FAST_SCALE;
 import static org.firstinspires.ftc.teamcode.Constants.SLOW_SCALE;
+import static org.firstinspires.ftc.teamcode.Constants.sideScale_fl;
+import static org.firstinspires.ftc.teamcode.Constants.sideScale_fr;
+import static org.firstinspires.ftc.teamcode.Constants.sideScale_rl;
+import static org.firstinspires.ftc.teamcode.Constants.sideScale_rr;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.EAST;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.NORTH;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverDriving.RobotDirection.SOUTH;
@@ -154,10 +158,10 @@ public class DriveStraight4W {
 		rearr = -frontvector;
 
 		/** Drive values for cross driving */
-		frontl += sidevector;
-		frontr += sidevector;
-		rearr -= sidevector;
-		rearl -= sidevector;
+		frontl += sidevector * sideScale_fl;
+		frontr += sidevector * sideScale_fr;
+		rearr -= sidevector * sideScale_rr;
+		rearl -= sidevector * sideScale_rl;
 
 		/** Turning */
 		frontl -= turnrate;
