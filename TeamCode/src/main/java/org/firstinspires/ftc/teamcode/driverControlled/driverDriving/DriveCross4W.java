@@ -29,8 +29,14 @@ public class DriveCross4W {
 	 */
 	private DriverCore mainRef;
 
+	/**
+	 * HardwareMap reference
+	 */
 	private HardwareMap hardwareMap;
 
+	/**
+	 * Current direction
+	 */
 	private RobotDirection currentDir;
 
 	/**
@@ -67,6 +73,9 @@ public class DriveCross4W {
 		update();
 	}
 
+	/**
+	 * This method initializes the Motors
+	 */
 	public void initMotors() {
 		Drive_A = hardwareMap.dcMotor.get(Constants.Drive_A);
 		Drive_B = hardwareMap.dcMotor.get(Constants.Drive_B);
@@ -80,6 +89,7 @@ public class DriveCross4W {
 
 	/**
 	 * This method updates every tick
+	 * CAUTION: Do only use if DriverCore is assigned
 	 */
 	public void update() {
 		getDirectionFromGamepad();
@@ -87,6 +97,9 @@ public class DriveCross4W {
 		updateMotorData();
 	}
 
+	/**
+	 * Gets and sets the desired direction
+	 */
 	private void getDirectionFromGamepad() {
 		if (mainRef.gamepad1.y) {
 			currentDir = NORTH;

@@ -76,6 +76,9 @@ public class DriveStraight4W {
 		update();
 	}
 
+	/**
+	 * Initializes the motor references
+	 */
 	public void initMotors() {
 		Drive_A = hardwareMap.dcMotor.get(Constants.Drive_A);
 		Drive_B = hardwareMap.dcMotor.get(Constants.Drive_B);
@@ -97,6 +100,9 @@ public class DriveStraight4W {
 		updateMotorData();
 	}
 
+	/**
+	 * Gets and sets the slowmode on/off
+	 */
 	private void getAndSetSlowMode() {
 		if (mainRef.gamepad1.x) {
 			isSlow = true;
@@ -107,6 +113,9 @@ public class DriveStraight4W {
 		}
 	}
 
+	/**
+	 * Gets and sets the desired direction
+	 */
 	private void getDirectionFromGamepad() {
 		if (mainRef.gamepad1.dpad_up) {
 			currentDir = NORTH;
