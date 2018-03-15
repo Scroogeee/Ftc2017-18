@@ -66,7 +66,7 @@ import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightAuto;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
-@Autonomous(name = "Concept: VuMark Id", group = "Test")
+@Autonomous(name = "Concept_VuMark_Id", group = "Test")
 public class VuMarkTest extends AutonomousCore {
 
 	public static final String TAG = "Vuforia VuMark Sample";
