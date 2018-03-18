@@ -9,6 +9,8 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.AutoRelicContr
 import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelControl;
 
+import android.speech.tts.TextToSpeech;
+
 /**
  * Created by FTC on 24.01.2018.
  */
@@ -20,6 +22,7 @@ public class AutonomousCore extends LinearOpMode {
 	protected AutoRelicControl relicControl = new AutoRelicControl();
 	protected JewelControl jewelControl = new JewelControl();
 	protected JewelColor currentJewelColor = JewelColor.NONE;
+	protected TextToSpeech tts;
 
 	@Override
 	public void runOpMode() throws InterruptedException {
@@ -32,10 +35,12 @@ public class AutonomousCore extends LinearOpMode {
 		glyph_servo = hardwareMap.crservo.get(Constants.servoGlyph_name);
 		relicControl.initialize(this.hardwareMap);
 		jewelControl.initialize(this.hardwareMap);
+		tts = new TextToSpeech(hardwareMap.appContext, null);
+		tts.setLanguage(Locale.US);
 	}
 
 	protected void kickJewel(JewelColor toKick) {
-		//Jewels herunter kicken
+		// Jewels herunter kicken
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
@@ -59,5 +64,9 @@ public class AutonomousCore extends LinearOpMode {
 		}
 		sleep(1000);
 		jewelControl.updateArm(1);
+	}
+
+	protected void speak(String s) {
+		tts.speak(s, TextToSpeech.QUEUE_ADD, null);
 	}
 }
