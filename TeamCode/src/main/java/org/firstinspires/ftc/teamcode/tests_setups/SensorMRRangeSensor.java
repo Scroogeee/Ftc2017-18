@@ -61,6 +61,7 @@ public class SensorMRRangeSensor extends LinearOpMode {
 		waitForStart();
 
 		while (opModeIsActive()) {
+			telemetry.addData("Status:", rangeSensor.status());
 			telemetry.addData("raw ultrasonic", rangeSensor.rawUltrasonic());
 			telemetry.addData("raw optical", rangeSensor.rawOptical());
 			telemetry.addData("cm optical", "%.2f cm", rangeSensor.cmOptical());
