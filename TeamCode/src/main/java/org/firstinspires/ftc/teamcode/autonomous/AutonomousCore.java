@@ -26,7 +26,6 @@ public class AutonomousCore extends LinearOpMode {
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 	protected TextToSpeech textToSpeech;
 
-
 	@Override
 	public void runOpMode() throws InterruptedException {
 		initialize();
@@ -49,7 +48,7 @@ public class AutonomousCore extends LinearOpMode {
 	}
 
 	protected void kickJewel(JewelColor toKick) {
-		//Jewels herunter kicken
+		// Jewels herunter kicken
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
