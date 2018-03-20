@@ -27,12 +27,12 @@ public class Constants {
 
 	//drive mode scales
 	public static final double FAST_SCALE = 1;
-	public static final double SLOW_SCALE = 0.1;
+	public static final double SLOW_SCALE = 0.25;
 	//Relic
 	public static final String Vertical_Relic_Motor = "RelicHeight";
 	public static final String Lateral_Relic_Motor = "RelicLateral";
 	public static final String Servo_Relic = "servo_relic";
-	public static final double RELIC_HEIGHT_SCALE = -1;
+	public static final double RELIC_HEIGHT_SCALE = 1;
 	public static final double RELIC_EXTEND_SCALE = 1;
 	//Glyph
 	public static final String servoGlyph_name = "servo_glyph";
@@ -43,8 +43,9 @@ public class Constants {
 	public static final int minimum_ConfidenceLevel = 8;
 	//Presentation
 	public static final String greetings = "Hello! I am Herbert," +
-			" the robot of the FROG Team and I am very happy " +
+			" the robot of the FROG Team. I am  a rookie, 8 months old and I am very happy " +
 			"to participate in the competition today!";
+
 	public static String gyro_name = "drive_gyro";
 
 	public static double getHighestNumber(ArrayList<Double> list) {

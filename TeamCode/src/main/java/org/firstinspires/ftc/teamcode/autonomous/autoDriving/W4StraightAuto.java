@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
@@ -26,7 +27,6 @@ public class W4StraightAuto {
 	public W4StraightAuto(AutonomousCore param_ac) {
 		this.autonomousCore = param_ac;
 	}
-
 
 
 	public void driveByPulses(int pulseNum, int afactor, int bfactor, int cfactor, int dfactor) {
@@ -77,6 +77,10 @@ public class W4StraightAuto {
 		B.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 		C.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 		D.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-	}
+		A.setDirection(DcMotorSimple.Direction.FORWARD);
+		B.setDirection(DcMotorSimple.Direction.FORWARD);
+		C.setDirection(DcMotorSimple.Direction.FORWARD);
+		D.setDirection(DcMotorSimple.Direction.FORWARD);
 
+	}
 }

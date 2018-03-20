@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -85,7 +86,7 @@ public class AutoGyroTest extends AutonomousCore {
 	static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
 	static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
-	static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
+	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
 	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
 	/* Declare OpMode members. */
 	W4StraightAuto robot = new W4StraightAuto(this);   // Use a Pushbot's hardware
@@ -99,6 +100,11 @@ public class AutoGyroTest extends AutonomousCore {
          * The init() method of the hardware class does most of the work here
          */
 		robot.initialize();
+		robot.A.setDirection(DcMotorSimple.Direction.REVERSE);
+		robot.B.setDirection(DcMotorSimple.Direction.FORWARD);
+		robot.C.setDirection(DcMotorSimple.Direction.FORWARD);
+		robot.D.setDirection(DcMotorSimple.Direction.REVERSE);
+
 		gyro = (ModernRoboticsI2cGyro) hardwareMap.gyroSensor.get(Constants.gyro_name);
 
 		// Ensure the robot it stationary, then reset the encoders and calibrate the gyro.
@@ -137,19 +143,31 @@ public class AutoGyroTest extends AutonomousCore {
 		// Step through each leg of the path,
 		// Note: Reverse movement is obtained by setting a negative distance (not speed)
 		// Put a hold after each turn
-		gyroDrive(DRIVE_SPEED, 48.0, 0.0);    // Drive FWD 48 inches
-		gyroTurn(TURN_SPEED, -45.0);         // Turn  CCW to -45 Degrees
-		gyroHold(TURN_SPEED, -45.0, 0.5);    // Hold -45 Deg heading for a 1/2 second
-		gyroDrive(DRIVE_SPEED, 12.0, -45.0);  // Drive FWD 12 inches at 45 degrees
+		gyroDrive(DRIVE_SPEED, 36.0, 0.0);    // Drive FWD 36 inches
+		sleep(300);
+		gyroTurn(TURN_SPEED, -90.0);         // Turn  CCW to -90 Degrees
+		sleep(300);
+		gyroHold(TURN_SPEED, -90.0, 0.5);    // Hold -90 Deg heading for a 1/2 second
+		sleep(300);
+		gyroDrive(DRIVE_SPEED, 12.0, -90.0);  // Drive FWD 12 inches at -90 degrees
+		sleep(300);
 		gyroTurn(TURN_SPEED, 45.0);         // Turn  CW  to  45 Degrees
+		sleep(300);
 		gyroHold(TURN_SPEED, 45.0, 0.5);    // Hold  45 Deg heading for a 1/2 second
+		sleep(300);
 		gyroTurn(TURN_SPEED, 0.0);         // Turn  CW  to   0 Degrees
+		sleep(300);
 		gyroHold(TURN_SPEED, 0.0, 1.0);    // Hold  0 Deg heading for a 1 second
-		gyroDrive(DRIVE_SPEED, -48.0, 0.0);    // Drive REV 48 inches
+		sleep(300);
+		gyroDrive(DRIVE_SPEED, -36.0, 0.0);    // Drive REV 48 inches
+		sleep(300);
+		gyroTurn(TURN_SPEED, 0.0);
+		sleep(300);
+		gyroHold(TURN_SPEED, 0.0, 0.5);
 
 		telemetry.addData("Path", "Complete");
 		telemetry.update();
-		textToSpeech.shutdown();
+		//textToSpeech.shutdown();
 	}
 
 
@@ -180,7 +198,11 @@ public class AutoGyroTest extends AutonomousCore {
 
 		// Ensure that the opmode is still active
 		if (opModeIsActive()) {
-
+			telemetry.addData("A:", robot.A.getTargetPosition());
+			telemetry.addData("B:", robot.B.getTargetPosition());
+			telemetry.addData("C:", robot.C.getTargetPosition());
+			telemetry.addData("D:", robot.D.getTargetPosition());
+			telemetry.update();
 			// Determine new target position, and pass to motor controller
 			moveCounts = (int) (distance * COUNTS_PER_INCH);
 			newLeftTarget = robot.A.getCurrentPosition() + moveCounts;
@@ -232,12 +254,13 @@ public class AutoGyroTest extends AutonomousCore {
 				robot.C.setPower(rightSpeed);
 
 				// Display drive status for the driver.
-				telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+/*				telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
 				telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
 				telemetry.addData("Actual", "%7d:%7d", robot.A.getCurrentPosition(),
 						robot.B.getCurrentPosition());
 				telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
 				telemetry.update();
+*/
 			}
 
 			// Stop all motion;
@@ -266,7 +289,6 @@ public class AutoGyroTest extends AutonomousCore {
 	 *              If a relative angle is required, add/subtract from current heading.
 	 */
 	public void gyroTurn(double speed, double angle) {
-
 		// keep looping while we are still active, and not on heading.
 		while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
 			// Update telemetry & Allow time for other processes to run.
@@ -341,6 +363,7 @@ public class AutoGyroTest extends AutonomousCore {
 		robot.C.setPower(rightSpeed);
 
 		// Display it for the driver.
+		telemetry.addLine("Adjusting Error");
 		telemetry.addData("Target", "%5.2f", angle);
 		telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
 		telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
