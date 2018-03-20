@@ -180,6 +180,7 @@ public class VuMarkTest extends AutonomousCore {
 
 			telemetry.update();
 		}
+		//textToSpeech.shutdown();
 	}
 
 	String format(OpenGLMatrix transformationMatrix) {

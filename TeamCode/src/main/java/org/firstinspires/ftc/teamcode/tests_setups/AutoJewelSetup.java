@@ -23,6 +23,7 @@ public class AutoJewelSetup extends AutonomousCore {
 			}
 			telemetry.update();
 		}
+		textToSpeech.shutdown();
 	}
 
 	public void initialize() {

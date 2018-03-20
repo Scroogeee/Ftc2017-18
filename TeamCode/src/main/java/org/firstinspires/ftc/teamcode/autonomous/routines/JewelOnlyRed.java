@@ -16,6 +16,7 @@ public class JewelOnlyRed extends AutonomousCore {
 		initialize();
 		waitForStart();
 		kickJewel(JewelColor.BLUE);
+		//textToSpeech.shutdown();
 	}
 
 	@Override

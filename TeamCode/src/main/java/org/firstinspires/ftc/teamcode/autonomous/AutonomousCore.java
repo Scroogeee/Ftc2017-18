@@ -26,6 +26,7 @@ public class AutonomousCore extends LinearOpMode {
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 	protected TextToSpeech textToSpeech;
 
+
 	@Override
 	public void runOpMode() throws InterruptedException {
 		initialize();
@@ -38,7 +39,6 @@ public class AutonomousCore extends LinearOpMode {
 		relicControl.initialize(this.hardwareMap);
 		jewelControl.initialize(this.hardwareMap);
 		initTTS();
-
 	}
 
 	private void initTTS() {
@@ -46,7 +46,6 @@ public class AutonomousCore extends LinearOpMode {
 		textToSpeech.setLanguage(Locale.US);
 		textToSpeech.setSpeechRate((float) 1.25);
 		textToSpeech.setPitch(1);
-
 	}
 
 	protected void kickJewel(JewelColor toKick) {
@@ -76,8 +75,12 @@ public class AutonomousCore extends LinearOpMode {
 		jewelControl.updateArm(1);
 	}
 
-	protected void speak(String s) {
+	protected void say(String s) {
 		textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-		sleep(750 * Constants.countWords(s));
+		sleep(1000);
+		while (textToSpeech.isSpeaking()) {
+			sleep(1);
+		}
 	}
+
 }

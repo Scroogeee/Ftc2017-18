@@ -149,6 +149,7 @@ public class AutoGyroTest extends AutonomousCore {
 
 		telemetry.addData("Path", "Complete");
 		telemetry.update();
+		textToSpeech.shutdown();
 	}
 
 

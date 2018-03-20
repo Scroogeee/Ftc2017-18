@@ -15,7 +15,11 @@ public class Presentation extends AutonomousCore {
 		telemetry.addLine("Press Play");
 		telemetry.update();
 		waitForStart();
-		speak(Constants.greetings);
-		speak("Quack; " + "Quack");
+		telemetry.addLine("speaking");
+		telemetry.update();
+		say(Constants.greetings);
+		telemetry.addLine("Stopped");
+		telemetry.update();
+		//textToSpeech.shutdown();
 	}
 }

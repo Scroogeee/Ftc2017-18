@@ -55,6 +55,7 @@ public class AutonomousBlueLong extends AutonomousCore {
 		sleep(300);
 		//ZURÜCK
 		drive.driveByPulses(300, 1, -1, -1, 1);
+		//textToSpeech.shutdown();
 	}
 
 	protected void initialize() {

@@ -41,6 +41,7 @@ public class Constants {
 	public static final String jewelArm_name = "jewel_servo";
 	public static final String jewelSensor_name = "jewel_sensor";
 	public static final int minimum_ConfidenceLevel = 8;
+	//Presentation
 	public static final String greetings = "Hello! I am Herbert," +
 			" the robot of the FROG Team and I am very happy " +
 			"to participate in the competition today!";
