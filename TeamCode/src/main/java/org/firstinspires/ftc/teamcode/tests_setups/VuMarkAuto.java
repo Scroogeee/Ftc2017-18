@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.VuMarkAutonomous;
+import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 
 /**
  * Created by FTC on 20.03.2018.

@@ -35,6 +35,7 @@ public class AutonomousCore extends LinearOpMode {
 	protected void initialize() {
 		drive.initialize();
 		glyph_servo = hardwareMap.crservo.get(Constants.servoGlyph_name);
+		glyph_servo.setPower(1);
 		relicControl.initialize(this.hardwareMap);
 		jewelControl.initialize(this.hardwareMap);
 		initTTS();

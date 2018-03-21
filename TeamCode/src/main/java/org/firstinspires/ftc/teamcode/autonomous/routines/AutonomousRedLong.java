@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
 
 /**
@@ -10,12 +10,11 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.Jew
  */
 
 @Autonomous(name = "autoRL", group = "drive")
-public class AutonomousRedLong extends AutonomousCore {
+public class AutonomousRedLong extends VuMarkAutonomous {
 
 	@Override
 	public void runOpMode() throws InterruptedException {
 		initialize();
-		glyph_servo.setPower(1);
 		waitForStart();
 
 		//Relic ein Stück hochfahren
