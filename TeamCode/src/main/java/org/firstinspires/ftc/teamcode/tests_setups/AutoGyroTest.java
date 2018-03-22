@@ -97,7 +97,7 @@ public class AutoGyroTest extends AutonomousCore {
 
         /*
          * Initialize the standard drive system variables.
-         * The init() method of the hardware class does most of the work here
+         * The initialize() method of the hardware class does most of the work here
          */
 		robot.initialize();
 		robot.A.setDirection(DcMotorSimple.Direction.REVERSE);

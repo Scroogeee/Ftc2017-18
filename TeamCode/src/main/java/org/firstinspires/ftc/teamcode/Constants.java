@@ -46,7 +46,8 @@ public class Constants {
 			" the robot of the FROG Team. I am  a rookie, 8 months old and I am very happy " +
 			"to participate in the competition today!";
 
-	public static String gyro_name = "drive_gyro";
+	public static final String gyro_name = "drive_gyro";
+	public static final String reader_name = "reader";
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;

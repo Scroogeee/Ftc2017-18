@@ -29,8 +29,8 @@ public class DriverCore extends OpMode {
 	 */
 	@Override
 	public void init() {
-		//driveControl.init(this);
-		//drive4.init(this);
+		//driveControl.initialize(this);
+		//drive4.initialize(this);
 		driveStraight4W.init(null, this);
 		driverGlyphControl.init(null, this);
 		driverRelicControl.init(null, this);

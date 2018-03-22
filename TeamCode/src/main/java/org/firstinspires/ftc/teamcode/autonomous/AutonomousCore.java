@@ -25,6 +25,8 @@ public class AutonomousCore extends LinearOpMode {
 	protected JewelControl jewelControl = new JewelControl();
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 	protected TextToSpeech textToSpeech;
+	protected ModeDetector modeDetector = new ModeDetector();
+	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
 
 	@Override
 	public void runOpMode() throws InterruptedException {
@@ -39,6 +41,12 @@ public class AutonomousCore extends LinearOpMode {
 		relicControl.initialize(this.hardwareMap);
 		jewelControl.initialize(this.hardwareMap);
 		initTTS();
+		modeDetector.initialize(this.hardwareMap);
+		sleep(1000);
+		hardwareConfiguration = modeDetector.getConfiguration();
+		telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
+		telemetry.addData("Hue:", modeDetector.getHue());
+		telemetry.update();
 	}
 
 	private void initTTS() {
