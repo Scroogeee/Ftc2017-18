@@ -47,8 +47,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * @see <a href="http://modernroboticsinc.com/range-sensor">MR Range Sensor</a>
  */
-@Autonomous(name = "Sensor: MR range sensor", group = "sensor")
-@Disabled                   // Comment this out to add to the opmode list
+@Autonomous(name = "Sensor: MR range sensor", group = "Sensor")
+@Disabled   // comment out or remove this line to enable this opmode
 public class SensorMRRangeSensor extends LinearOpMode {
 
     ModernRoboticsI2cRangeSensor rangeSensor;
