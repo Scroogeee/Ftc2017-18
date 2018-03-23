@@ -28,12 +28,23 @@ public class ModeDetector {
 
 	public HardwareConfiguration getConfiguration() {
 		Color.RGBToHSV(reader.red() * 8, reader.green() * 8, reader.blue() * 8, hsvValues);
-		return HardwareConfiguration.NONE;
+		float hue = hsvValues[0];
+		if (hue >= 0 && hue <= 20) {
+			return HardwareConfiguration.RED;
+		} else if (hue >= 35 && hue <= 50) {
+			return HardwareConfiguration.YELLOW;
+		} else if (hue >= 90 && hue <= 150) {
+			return HardwareConfiguration.GREEN;
+		} else if (hue >= 220 && hue <= 240) {
+			return HardwareConfiguration.BLUE;
+		} else {
+			return HardwareConfiguration.NONE;
+		}
 	}
 
-	public float getHue() {
-		float i = hsvValues[0];
-		return i;
+	float getHue() {
+		float hue = hsvValues[0];
+		return hue;
 	}
 
 }

@@ -22,14 +22,14 @@ public class W4StraightAuto {
 	/**
 	 * Core reference
 	 */
-	private AutonomousCore autonomousCore;
+	protected AutonomousCore autonomousCore;
 
 	public W4StraightAuto(AutonomousCore param_ac) {
 		this.autonomousCore = param_ac;
 	}
 
 
-	public void driveByPulses(int pulseNum, int afactor, int bfactor, int cfactor, int dfactor) {
+	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
 		/**Reset Encoders*/
 		A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		B.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -41,10 +41,10 @@ public class W4StraightAuto {
 		C.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 		D.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 		/**Set the target position*/
-		A.setTargetPosition(pulseNum * afactor);
-		B.setTargetPosition(pulseNum * bfactor);
-		C.setTargetPosition(pulseNum * cfactor);
-		D.setTargetPosition(pulseNum * dfactor);
+		A.setTargetPosition(pulseNum * leftfactor);
+		B.setTargetPosition(pulseNum * rightfactor);
+		C.setTargetPosition(pulseNum * rightfactor);
+		D.setTargetPosition(pulseNum * leftfactor);
 		/**Set the power*/
 		A.setPower(0.9);
 		B.setPower(0.9);

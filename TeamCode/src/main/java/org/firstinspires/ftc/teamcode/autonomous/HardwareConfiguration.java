@@ -6,27 +6,27 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 public enum HardwareConfiguration {
 	/**
-	 * What to do when red is selected
+	 * What to do when red is selected <br>
 	 * Hue 0-20
 	 */
 	RED,
 	/**
-	 * What to do when green is selected
+	 * Activate every component <br>
 	 * Hue 90-150
 	 */
 	GREEN,
 	/**
-	 * What to do when yellow is selected
+	 * Activate Gyro <br>
 	 * Hue 35-60
 	 */
 	YELLOW,
 	/**
-	 * What to do when blue is selected
+	 * Activate Range Sensor <br>
 	 * Hue 220-240
 	 */
 	BLUE,
 	/**
-	 * What to do when none is selected
+	 * What to do when none is selected <br>
 	 * Hue >300
 	 */
 	NONE
