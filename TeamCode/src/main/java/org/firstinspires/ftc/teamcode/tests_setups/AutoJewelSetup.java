@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
 
 /**
  * Created by FTC on 21.02.2018.
@@ -14,7 +13,7 @@ public class AutoJewelSetup extends AutonomousCore {
 	private JewelControl jewelcontrol = new JewelControl();
 
 	@Override
-	public void runOpMode() throws InterruptedException {
+	public void runOpMode() {
 		initialize();
 		waitForStart();
 		while (opModeIsActive()) {

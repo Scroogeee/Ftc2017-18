@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.VuMarkDetector;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 
 /**
  * Created by FTC on 20.03.2018.
