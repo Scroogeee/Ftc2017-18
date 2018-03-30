@@ -8,9 +8,8 @@ import java.util.ArrayList;
  */
 public class Constants {
 
-	/**
-	 * motor names
-	 */
+	//motor names
+
 	//drives for tank-drive
 	public static final String rd_name = "right_drive";
 	public static final String ld_name = "left_drive";
@@ -48,6 +47,8 @@ public class Constants {
 
 	public static final String gyro_name = "drive_gyro";
 	public static final String reader_name = "reader";
+
+	public static final int MAX_SCAN_TIME_SECONDS = 5;
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;

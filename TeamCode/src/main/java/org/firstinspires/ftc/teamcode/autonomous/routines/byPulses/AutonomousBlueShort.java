@@ -15,11 +15,13 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 	public void runOpMode() {
 		initialize();
 		waitForStart();
-
+		resetTimer();
 		upRelic();
 
 		//Jewels herunter kicken
 		kickJewel(JewelColor.RED);
+		//VuMark
+		detectedVuMark = scanWithTurn();
 
 		//ZURÜCK,RECHTS,VOR
 
