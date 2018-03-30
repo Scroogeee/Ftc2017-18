@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.routines.byPulses;
+package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
@@ -15,11 +15,13 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 	public void runOpMode() {
 		initialize();
 		waitForStart();
-
+		resetTimer();
 		upRelic();
 
 		//Jewels herunter kicken
 		kickJewel(JewelColor.RED);
+		//VuMark
+		detectedVuMark = scanWithTurn();
 
 		//ZURÜCK,LINKS,VOR,LINKS,VOR
 

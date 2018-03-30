@@ -12,6 +12,8 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 
 import java.util.Locale;
 
+import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
+
 /**
  * Created by FTC on 24.01.2018.
  */
@@ -82,17 +84,33 @@ public class AutonomousCore extends LinearOpMode {
 		sleep(1000);
 		if (currentJewelColor != null) {
 			if (currentJewelColor.equals(toKick)) {
-				drive.driveByPulses(350, 1, 1);
+				if (drive.isGyroUsed()) {
+					drive.gyroTurn(TURN_SPEED, 30);
+				} else {
+					drive.driveByPulses(350, 1, 1);
+				}
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				drive.driveByPulses(350, -1, -1);
+				if (drive.isGyroUsed()) {
+					drive.gyroTurn(TURN_SPEED, 0);
+				} else {
+					drive.driveByPulses(350, -1, -1);
+				}
 			} else {
-				drive.driveByPulses(350, -1, -1);
+				if (drive.isGyroUsed()) {
+					drive.gyroTurn(TURN_SPEED, -30);
+				} else {
+					drive.driveByPulses(350, -1, -1);
+				}
 				sleep(200);
 				jewelControl.updateArm(1);
 				sleep(1000);
-				drive.driveByPulses(350, 1, 1);
+				if (drive.isGyroUsed()) {
+					drive.gyroTurn(TURN_SPEED, 0);
+				} else {
+					drive.driveByPulses(350, 1, 1);
+				}
 			}
 		}
 		sleep(1000);

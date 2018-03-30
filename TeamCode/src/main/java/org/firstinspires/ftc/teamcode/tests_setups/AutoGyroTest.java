@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -71,7 +72,7 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4Straigh
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-
+@Disabled
 @Autonomous(name = "Pushbot_Auto_Drive_By_Gyro", group = "Test")
 public class AutoGyroTest extends AutonomousCore {
 

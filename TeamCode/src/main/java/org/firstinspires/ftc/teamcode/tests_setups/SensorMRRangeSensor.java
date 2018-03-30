@@ -31,8 +31,8 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
@@ -46,6 +46,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * @see <a href="http://modernroboticsinc.com/range-sensor">MR Range Sensor</a>
  */
+@Disabled
 @Autonomous(name = "Sensor_MR_range_sensor", group = "Test")
 public class SensorMRRangeSensor extends LinearOpMode {
 

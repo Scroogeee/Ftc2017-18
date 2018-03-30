@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.tests_setups;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.teamcode.Constants;
 
 /**
  * Created by FTC on 11.12.2017.
  */
+@Disabled
 @TeleOp(name = "OmniSetupTest", group = "Test")
 public class OmniTest extends OpMode {
 
