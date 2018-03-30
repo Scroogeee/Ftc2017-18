@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.teamcode.autonomous.routines;
+package org.firstinspires.ftc.teamcode.autonomous.routines.byPulses;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -13,14 +12,11 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.Jew
 public class AutonomousRedLong extends VuMarkAutonomous {
 
 	@Override
-	public void runOpMode() throws InterruptedException {
+	public void runOpMode() {
 		initialize();
 		waitForStart();
 
-		//Relic ein Stück hochfahren
-		relicControl.update(1, 0, 0);
-		sleep(300);
-		relicControl.update(0, 0, 0);
+		upRelic();
 
 		//Jewels
 		kickJewel(JewelColor.BLUE);

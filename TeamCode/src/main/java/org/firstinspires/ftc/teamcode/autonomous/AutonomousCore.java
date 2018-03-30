@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.autonomous.autoDriving.W4StraightGyro;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.AutoRelicControl;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelColor;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobotModules.autoJewels.JewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
 
 import java.util.Locale;
 
@@ -20,7 +18,7 @@ import java.util.Locale;
 
 public class AutonomousCore extends LinearOpMode {
 
-	protected W4StraightGyro drive = new W4StraightGyro(this);
+	protected W4StraightByColor drive = new W4StraightByColor(this);
 	protected CRServo glyph_servo;
 	protected AutoRelicControl relicControl = new AutoRelicControl();
 	protected JewelControl jewelControl = new JewelControl();
@@ -107,6 +105,14 @@ public class AutonomousCore extends LinearOpMode {
 		while (textToSpeech.isSpeaking()) {
 			sleep(1);
 		}
+	}
+
+	protected void upRelic() {
+		//Relic ein Stück hochfahren
+		relicControl.update(1, 0, 0);
+		sleep(300);
+		relicControl.update(0, 0, 0);
+
 	}
 
 }

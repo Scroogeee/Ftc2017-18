@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode.autonomous.autoDriving;
+package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -28,8 +30,8 @@ public class W4StraightAuto {
 		this.autonomousCore = param_ac;
 	}
 
-
 	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
+		setupForTank(false);
 		/**Reset Encoders*/
 		A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		B.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -83,4 +85,19 @@ public class W4StraightAuto {
 		D.setDirection(DcMotorSimple.Direction.FORWARD);
 
 	}
+
+	protected void setupForTank(boolean b) {
+		if (b) {
+			A.setDirection(REVERSE);
+			B.setDirection(FORWARD);
+			C.setDirection(FORWARD);
+			D.setDirection(REVERSE);
+		} else {
+			A.setDirection(FORWARD);
+			B.setDirection(FORWARD);
+			C.setDirection(FORWARD);
+			D.setDirection(FORWARD);
+		}
+	}
+
 }
