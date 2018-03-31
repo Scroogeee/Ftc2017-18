@@ -287,7 +287,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *               0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
 	 *               If a relative angle is required, add/subtract from current heading.
 	 * @param PCoeff Proportional Gain coefficient
-	 * @return
+	 * @return if on Heading
 	 */
 	boolean onHeading(double speed, double angle, double PCoeff) {
 		if (useGyro) {
@@ -359,7 +359,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *
 	 * @param error  Error angle in robot relative degrees
 	 * @param PCoeff Proportional Gain Coefficient
-	 * @return
+	 * @return the steer value
 	 */
 	private double getSteer(double error, double PCoeff) {
 		if (useGyro) {

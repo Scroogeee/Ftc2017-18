@@ -34,8 +34,8 @@ public class JewelControl {
 	 * Updates the Servo position to the given values
 	 */
 	public void updateArm(double position) {
-		Math.min(position, 1);
-		Math.max(position, 0);
+		position = Math.min(position, 1);
+		position = Math.max(position, 0);
 		jewel_arm.setPosition(position);
 	}
 

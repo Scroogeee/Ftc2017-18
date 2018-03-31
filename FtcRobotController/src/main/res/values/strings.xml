@@ -67,5 +67,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   </integer-array>
 
   <string name="packageName">@string/packageNameRobotController</string>
+	<string name="roboticon">robotIcon</string>
+	<string name="properties">properties</string>
 
 </resources>

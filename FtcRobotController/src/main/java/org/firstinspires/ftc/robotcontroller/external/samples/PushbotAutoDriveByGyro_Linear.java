@@ -297,7 +297,7 @@ public class PushbotAutoDriveByGyro_Linear extends LinearOpMode {
      *                  0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
      *                  If a relative angle is required, add/subtract from current heading.
      * @param PCoeff    Proportional Gain coefficient
-     * @return
+     * @return if on Heading
      */
     boolean onHeading(double speed, double angle, double PCoeff) {
         double   error ;
@@ -354,7 +354,7 @@ public class PushbotAutoDriveByGyro_Linear extends LinearOpMode {
      * returns desired steering force.  +/- 1 range.  +ve = steer left
      * @param error   Error angle in robot relative degrees
      * @param PCoeff  Proportional Gain Coefficient
-     * @return
+     * @return the steer value
      */
     public double getSteer(double error, double PCoeff) {
         return Range.clip(error * PCoeff, -1, 1);

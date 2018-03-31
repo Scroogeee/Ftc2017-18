@@ -23,7 +23,6 @@ public class DriverGlyphControl {
 	 * Tightloose
 	 */
 	private CRServo tightloose;
-	private double tightloose_power = 0;
 
 	/**
 	 * Glyphlift
@@ -66,6 +65,7 @@ public class DriverGlyphControl {
 	 * Updates position of the CRServo
 	 */
 	private void updateTLPos() {
+		double tightloose_power = 0;
 		if (mainRef.gamepad2.left_bumper) {
 			tightloose.setDirection(DcMotorSimple.Direction.FORWARD);
 			tightloose_power = 1;

@@ -31,13 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package org.firstinspires.ftc.robotcontroller.internal;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.usb.UsbDevice;
@@ -55,24 +52,14 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.blocks.ftcrobotcontroller.BlocksActivity;
 import com.google.blocks.ftcrobotcontroller.ProgrammingModeActivity;
 import com.google.blocks.ftcrobotcontroller.ProgrammingModeControllerImpl;
 import com.google.blocks.ftcrobotcontroller.ProgrammingWebHandlers;
 import com.google.blocks.ftcrobotcontroller.runtime.BlocksOpMode;
-import com.qualcomm.ftccommon.AboutActivity;
-import com.qualcomm.ftccommon.ClassManagerFactory;
-import com.qualcomm.ftccommon.FtcEventLoop;
-import com.qualcomm.ftccommon.FtcEventLoopIdle;
-import com.qualcomm.ftccommon.FtcRobotControllerService;
+import com.qualcomm.ftccommon.*;
 import com.qualcomm.ftccommon.FtcRobotControllerService.FtcRobotControllerBinder;
-import com.qualcomm.ftccommon.FtcRobotControllerSettingsActivity;
-import com.qualcomm.ftccommon.LaunchActivityConstantsList;
 import com.qualcomm.ftccommon.LaunchActivityConstantsList.RequestCode;
-import com.qualcomm.ftccommon.ProgrammingModeController;
-import com.qualcomm.ftccommon.Restarter;
-import com.qualcomm.ftccommon.UpdateUI;
 import com.qualcomm.ftccommon.configuration.EditParameters;
 import com.qualcomm.ftccommon.configuration.FtcLoadFileActivity;
 import com.qualcomm.ftccommon.configuration.RobotConfigFile;
@@ -90,7 +77,6 @@ import com.qualcomm.robotcore.util.RobotLog;
 import com.qualcomm.robotcore.wifi.NetworkConnectionFactory;
 import com.qualcomm.robotcore.wifi.NetworkType;
 import com.qualcomm.robotcore.wifi.WifiDirectAssistant;
-
 import org.firstinspires.ftc.ftccommon.external.SoundPlayingRobotMonitor;
 import org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService;
 import org.firstinspires.ftc.ftccommon.internal.ProgramAndManageActivity;
@@ -243,7 +229,7 @@ public class FtcRobotControllerActivity extends Activity
     DeviceNameManager.getInstance().start(deviceNameManagerStartResult);
     PreferenceRemoterRC.getInstance().start(prefRemoterStartResult);
 
-    receivedUsbAttachmentNotifications = new ConcurrentLinkedQueue<UsbDevice>();
+	  receivedUsbAttachmentNotifications = new ConcurrentLinkedQueue<>();
     eventLoop = null;
 
     setContentView(R.layout.activity_ftc_controller);
@@ -321,27 +307,28 @@ public class FtcRobotControllerActivity extends Activity
     return result;
   }
 
-  @Override
-  protected void onStart() {
-    super.onStart();
-    RobotLog.vv(TAG, "onStart()");
+	  @SuppressLint("ClickableViewAccessibility")
+	  @Override
+	  protected void onStart() {
+		  super.onStart();
+		  RobotLog.vv(TAG, "onStart()");
 
-    // If we're start()ing after a stop(), then shut the old robot down so
-    // we can refresh it with new state (e.g., with new hw configurations)
-    shutdownRobot();
+		  // If we're start()ing after a stop(), then shut the old robot down so
+		  // we can refresh it with new state (e.g., with new hw configurations)
+		  shutdownRobot();
 
-    updateUIAndRequestRobotSetup();
+		  updateUIAndRequestRobotSetup();
 
-    cfgFileMgr.getActiveConfigAndUpdateUI();
+		  cfgFileMgr.getActiveConfigAndUpdateUI();
 
-    entireScreenLayout.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        dimmer.handleDimTimer();
-        return false;
-      }
-    });
-  }
+		  entireScreenLayout.setOnTouchListener(new View.OnTouchListener() {
+			  @Override
+			  public boolean onTouch(View v, MotionEvent event) {
+				  dimmer.handleDimTimer();
+				  return false;
+			  }
+		  });
+	  }
 
   @Override
   protected void onResume() {

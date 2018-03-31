@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 @Autonomous(name = "JewelTest", group = "Test")
 public class AutoJewelSetup extends AutonomousCore {
 
-	private JewelControl jewelcontrol = new JewelControl();
+	private final JewelControl jewelcontrol = new JewelControl();
 
 	@Override
 	public void runOpMode() {

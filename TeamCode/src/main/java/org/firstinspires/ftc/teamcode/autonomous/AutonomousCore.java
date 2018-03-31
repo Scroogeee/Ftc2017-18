@@ -20,13 +20,13 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
 
 public class AutonomousCore extends LinearOpMode {
 
-	protected W4StraightByColor drive = new W4StraightByColor(this);
+	protected final W4StraightByColor drive = new W4StraightByColor(this);
 	protected CRServo glyph_servo;
-	protected AutoRelicControl relicControl = new AutoRelicControl();
-	protected JewelControl jewelControl = new JewelControl();
+	protected final AutoRelicControl relicControl = new AutoRelicControl();
+	protected final JewelControl jewelControl = new JewelControl();
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 	protected TextToSpeech textToSpeech;
-	protected ModeDetector modeDetector = new ModeDetector();
+	protected final ModeDetector modeDetector = new ModeDetector();
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
 	protected ModernRoboticsI2cRangeSensor rangeSensor;
 
@@ -35,7 +35,7 @@ public class AutonomousCore extends LinearOpMode {
 	}
 
 	@Override
-	public void runOpMode() throws InterruptedException {
+	public void runOpMode() {
 		initialize();
 		waitForStart();
 	}

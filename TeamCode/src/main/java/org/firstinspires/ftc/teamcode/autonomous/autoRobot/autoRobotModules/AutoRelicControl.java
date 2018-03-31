@@ -58,8 +58,8 @@ public class AutoRelicControl {
 	 * Updates the rotaion of the CRServo for the relic grip
 	 */
 	private void updateRelicGrip(double grip) {
-		Math.min(grip, 1);
-		Math.max(grip, -1);
+		grip = Math.min(grip, 1);
+		grip = Math.max(grip, -1);
 		relic_grip.setPower(grip);
 	}
 
@@ -67,8 +67,8 @@ public class AutoRelicControl {
 	 * Updates the height of the relic claw arm
 	 */
 	private void updateHeight(double height) {
-		Math.min(height, 1);
-		Math.max(height, -1);
+		height = Math.min(height, 1);
+		height = Math.max(height, -1);
 		height_motor.setPower(height * Constants.RELIC_HEIGHT_SCALE);
 		//mainRef.telemetry.addLine("Relic height: " + Double.toString(height_motor.getPower()));
 	}
@@ -77,8 +77,8 @@ public class AutoRelicControl {
 	 * Updates the extend of the relic claw arm
 	 */
 	private void updateExtend(double extend) {
-		Math.min(extend, 1);
-		Math.max(extend, -1);
+		extend = Math.min(extend, 1);
+		extend = Math.max(extend, -1);
 		extending_motor.setPower(extend * Constants.RELIC_EXTEND_SCALE);
 	}
 

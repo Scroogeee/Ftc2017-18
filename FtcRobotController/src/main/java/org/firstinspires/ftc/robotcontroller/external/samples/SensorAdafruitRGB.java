@@ -32,7 +32,6 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -124,7 +123,7 @@ public class SensorAdafruitRGB extends LinearOpMode {
       bCurrState = gamepad1.x;
 
       // check for button-press state transitions.
-      if ((bCurrState == true) && (bCurrState != bPrevState))  {
+	    if ((bCurrState) && (bCurrState != bPrevState)) {
 
         // button is transitioning to a pressed state. Toggle the LED.
         bLedOn = !bLedOn;

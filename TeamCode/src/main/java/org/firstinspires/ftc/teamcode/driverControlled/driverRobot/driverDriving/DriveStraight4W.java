@@ -103,9 +103,9 @@ public class DriveStraight4W {
 			isSlow = true;
 		} else if (mainRef.gamepad1.y) {
 			isSlow = false;
-		} else {
-			//Slowmode status unchanged
 		}
+		//Else Slowmode status unchanged
+
 	}
 
 	/**
@@ -120,9 +120,9 @@ public class DriveStraight4W {
 			currentDir = SOUTH;
 		} else if (mainRef.gamepad1.dpad_left) {
 			currentDir = WEST;
-		} else {
-			//Direction unchanged
 		}
+		//Else Direction unchanged
+
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class DriveStraight4W {
 	 * Scales down all values so that none exceeds 1 or -1
 	 */
 	private void scaleDownValues() {
-		ArrayList<Double> list = new ArrayList<Double>();
+		ArrayList<Double> list = new ArrayList<>();
 		list.add(frontl);
 		list.add(frontr);
 		list.add(rearr);

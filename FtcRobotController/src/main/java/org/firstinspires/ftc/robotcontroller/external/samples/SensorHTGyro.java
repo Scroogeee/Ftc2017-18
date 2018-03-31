@@ -35,7 +35,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /*
@@ -59,7 +58,8 @@ public class SensorHTGyro extends LinearOpMode {
     Gyroscope gyroscope;
     HiTechnicNxtGyroSensor hiTechnicNxtGyroSensor;
 
-    @Override public void runOpMode() throws InterruptedException {
+	@Override
+	public void runOpMode() {
 
         // Get a reference to the gyroscope from the hardware map
         gyroscope = hardwareMap.get(Gyroscope.class, "gyro");

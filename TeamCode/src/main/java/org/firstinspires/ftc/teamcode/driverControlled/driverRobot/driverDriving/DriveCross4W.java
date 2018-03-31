@@ -109,9 +109,9 @@ public class DriveCross4W {
 			currentDir = SOUTH;
 		} else if (mainRef.gamepad1.x) {
 			currentDir = WEST;
-		} else {
-			//Direction unchanged
 		}
+		//Else Direction unchanged
+
 	}
 
 	/**

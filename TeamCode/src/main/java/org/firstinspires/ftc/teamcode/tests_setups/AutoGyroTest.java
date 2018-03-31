@@ -76,21 +76,21 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4Straigh
 @Autonomous(name = "Pushbot_Auto_Drive_By_Gyro", group = "Test")
 public class AutoGyroTest extends AutonomousCore {
 
-	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
-	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
-	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
-	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+	private static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
+	private static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
+	private static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
+	private static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
 	// These constants define the desired driving/control characteristics
 	// The can/should be tweaked to suite the specific robot drive train.
-	static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
-	static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
-	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
-	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
-	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
+	private static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
+	private static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
+	private static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
+	private static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
+	private static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
 	/* Declare OpMode members. */
-	W4StraightAuto robot = new W4StraightAuto(this);   // Use a Pushbot's hardware
-	ModernRoboticsI2cGyro gyro = null;                    // Additional Gyro device
+	private final W4StraightAuto robot = new W4StraightAuto(this);   // Use a Pushbot's hardware
+	private ModernRoboticsI2cGyro gyro = null;                    // Additional Gyro device
 
 	@Override
 	public void runOpMode() {
@@ -183,9 +183,9 @@ public class AutoGyroTest extends AutonomousCore {
 	 *                 0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
 	 *                 If a relative angle is required, add/subtract from current heading.
 	 */
-	public void gyroDrive(double speed,
-	                      double distance,
-	                      double angle) {
+	private void gyroDrive(double speed,
+	                       double distance,
+	                       double angle) {
 
 		int newLeftTarget;
 		int newRightTarget;
@@ -333,7 +333,7 @@ public class AutoGyroTest extends AutonomousCore {
 	 *               0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
 	 *               If a relative angle is required, add/subtract from current heading.
 	 * @param PCoeff Proportional Gain coefficient
-	 * @return
+	 * @return if on Heading
 	 */
 	boolean onHeading(double speed, double angle, double PCoeff) {
 		double error;
@@ -394,7 +394,7 @@ public class AutoGyroTest extends AutonomousCore {
 	 *
 	 * @param error  Error angle in robot relative degrees
 	 * @param PCoeff Proportional Gain Coefficient
-	 * @return
+	 * @return the Steer value
 	 */
 	public double getSteer(double error, double PCoeff) {
 		return Range.clip(error * PCoeff, -1, 1);
