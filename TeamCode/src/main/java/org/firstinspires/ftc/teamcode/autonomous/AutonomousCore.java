@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -28,7 +27,6 @@ public class AutonomousCore extends LinearOpMode {
 	protected TextToSpeech textToSpeech;
 	protected final ModeDetector modeDetector = new ModeDetector();
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
-	protected ModernRoboticsI2cRangeSensor rangeSensor;
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -67,12 +65,6 @@ public class AutonomousCore extends LinearOpMode {
 		telemetry.update();
 		//Drive
 		drive.initialize();
-		//Range Sensor
-		if (hardwareConfiguration == HardwareConfiguration.GREEN //everything
-				|| hardwareConfiguration == HardwareConfiguration.BLUE) //only range
-		{
-			rangeSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
-		}
 		//Glyph Servo
 		glyph_servo = hardwareMap.crservo.get(Constants.servoGlyph_name);
 		glyph_servo.setPower(1);

@@ -3,13 +3,18 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
 
+import java.util.ArrayList;
+
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
+import static org.firstinspires.ftc.teamcode.Constants.RANGE_THRESHHOLD;
 import static org.firstinspires.ftc.teamcode.Constants.gyro_name;
 import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
 
@@ -376,5 +381,58 @@ public class W4StraightByColor extends W4StraightAuto {
 		}
 	}
 
+	private double rangeBaseValue = 0;
+
+	private void driveToNextColumnByRange(DcMotorSimple.Direction d) {
+		if (useRange) {
+			//Drive past the last column
+			while (autonomousCore.opModeIsActive() &&
+					!(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHHOLD))) {
+				if (d == DcMotorSimple.Direction.FORWARD) {
+					driveByPulses(10, -1, 1);
+				} else if (d == DcMotorSimple.Direction.REVERSE) {
+					driveByPulses(10, 1, -1);
+				}
+			}
+			//Drive to the column
+			while (autonomousCore.opModeIsActive() &&
+					!(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHHOLD))) {
+				if (d == DcMotorSimple.Direction.FORWARD) {
+					driveByPulses(10, -1, 1);
+				} else if (d == DcMotorSimple.Direction.REVERSE) {
+					driveByPulses(10, 1, -1);
+				}
+			}
+		}
+	}
+
+	public void driveToColumnByRange(int columnNum, DcMotorSimple.Direction d) {
+		if (useRange) {
+			int columnCounter = 0;
+			while (autonomousCore.opModeIsActive()) {
+				if (columnCounter >= columnNum) {
+					break;
+				}
+				driveToNextColumnByRange(d);
+				columnCounter++;
+			}
+		}
+	}
+
+	public void calibrateRange() {
+		if (useRange) {
+			ArrayList<Double> list = new ArrayList<>();
+			double average = 0;
+			for (int i = 0; i < 5; i++) {
+				autonomousCore.sleep(50);
+				list.add(rangeSensor.getDistance(DistanceUnit.INCH));
+			}
+			for (double d : list) {
+				average += d;
+			}
+			average /= list.size();
+			rangeBaseValue = average;
+		}
+	}
 
 }
