@@ -32,6 +32,9 @@ public class VuMarkAutonomous extends AutonomousCore {
 		vuMarkDetector.initialize(this);
 	}
 
+	/**
+	 * Resets the timer for the scan
+	 */
 	protected void resetTimer() {
 		elapsedTime.reset();
 	}

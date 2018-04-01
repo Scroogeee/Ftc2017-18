@@ -39,6 +39,9 @@ public class JewelControl {
 		jewel_arm.setPosition(position);
 	}
 
+	/**
+	 * returns the current jewel color which is visible
+	 */
 	public JewelColor getColor() {
 		if (jewel_sensor.blue() > minimum_ConfidenceLevel) {
 			return JewelColor.BLUE;

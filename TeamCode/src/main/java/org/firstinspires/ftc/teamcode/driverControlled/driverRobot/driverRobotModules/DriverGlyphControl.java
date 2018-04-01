@@ -29,6 +29,9 @@ public class DriverGlyphControl {
 	 */
 	private DcMotor glyphlift;
 
+	/**
+	 * Initializes the Driver GlyphControl class
+	 */
 	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		//initialize references
 		mainRef = p_mainRef;
@@ -52,11 +55,17 @@ public class DriverGlyphControl {
 
 	}
 
+	/**
+	 * Updates the values for the Glyph arm
+	 */
 	public void updateGlyphArm() {
 		updateHeight();
 		updateTLPos();
 	}
 
+	/**
+	 * Updates the height of the glyph lift
+	 */
 	private void updateHeight() {
 		glyphlift.setPower(-mainRef.gamepad2.right_stick_y);
 	}

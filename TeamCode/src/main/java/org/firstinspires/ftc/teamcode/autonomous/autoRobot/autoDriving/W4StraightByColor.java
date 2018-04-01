@@ -39,6 +39,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	public boolean isRangeUsed() {
 		return useRange;
 	}
+
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
 	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
 	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
@@ -74,10 +75,16 @@ public class W4StraightByColor extends W4StraightAuto {
 		}
 	}
 
+	/**
+	 * Initializes the range sensor
+	 */
 	private void initRange() {
 		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
 	}
 
+	/**
+	 * Initializes the gyroscope
+	 */
 	private void initGyro() {
 		setupForTank(true);
 

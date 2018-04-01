@@ -23,7 +23,10 @@ public class DriverCore extends OpMode {
 	/**
 	 * Initializes the Robot and its sub-components such as:
 	 * <ul>
-	 * <li>Drive Controls</li>
+	 * <li>Drive Control</li>
+	 * <li>Glyph Control</li>
+	 * <li>Relic Control</li>
+	 * <li>Jewel Control</li>
 	 * </ul>
 	 */
 	@Override

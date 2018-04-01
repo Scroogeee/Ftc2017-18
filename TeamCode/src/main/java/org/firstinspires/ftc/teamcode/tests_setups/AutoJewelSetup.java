@@ -27,6 +27,9 @@ public class AutoJewelSetup extends AutonomousCore {
 		textToSpeech.shutdown();
 	}
 
+	/**
+	 * initializes the JewelSetup class
+	 */
 	public void initialize() {
 		super.initialize();
 		jewelcontrol.initialize(this.hardwareMap);

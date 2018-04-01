@@ -30,6 +30,9 @@ public class W4StraightAuto {
 		this.autonomousCore = param_ac;
 	}
 
+	/**
+	 * Drives the robot by the specified number of pulses using tank drive
+	 */
 	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
 		setupForTank(false);
 		/**Reset Encoders*/
@@ -70,6 +73,9 @@ public class W4StraightAuto {
 		D.setPower(0);
 	}
 
+	/**
+	 * Initializes the robot
+	 */
 	public void initialize() {
 		A = autonomousCore.hardwareMap.dcMotor.get(Constants.Drive_A);
 		B = autonomousCore.hardwareMap.dcMotor.get(Constants.Drive_B);
@@ -86,6 +92,9 @@ public class W4StraightAuto {
 
 	}
 
+	/**
+	 * Sets up the robot for a tank drive with two reversed motors as used in GyroDrive
+	 */
 	protected void setupForTank(boolean b) {
 		if (b) {
 			A.setDirection(REVERSE);

@@ -29,7 +29,7 @@ public class DriverRelicControl {
 	private CRServo relic_grip;
 
 	/**
-	 * Initializes the relic control class
+	 * Initializes the driver relic control class
 	 */
 	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		mainRef = p_mainRef;

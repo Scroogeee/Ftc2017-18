@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
  * Created by FTC on 20.03.2018.
  */
 @Disabled
-@Autonomous(name = "VuMarkRecognitionTest", group = "Test")
+@Autonomous(name = "VuMarkVoiceTest", group = "Test")
 public class VuMarkAuto extends VuMarkAutonomous {
 	@Override
 	public void runOpMode() {

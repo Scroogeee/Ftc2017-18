@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.graphics.Color;
-
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.teamcode.Constants;
 
 
@@ -20,12 +18,18 @@ public class ModeDetector {
 
 	private float[] hsvValues = new float[3];
 
+	/**
+	 * Initializes the <code>ModeDetector</code> class
+	 */
 	public void initialize(HardwareMap hwMap) {
 		this.hardwareMap = hwMap;
 		reader = hardwareMap.colorSensor.get(Constants.reader_name);
 		reader.enableLed(true);
 	}
 
+	/**
+	 * @return the current <code>HardwareConfiguration</code>
+	 */
 	public HardwareConfiguration getConfiguration() {
 		Color.RGBToHSV(reader.red() * 8, reader.green() * 8, reader.blue() * 8, hsvValues);
 		float hue = hsvValues[0];
@@ -42,6 +46,9 @@ public class ModeDetector {
 		}
 	}
 
+	/**
+	 * @return the current Hue value read by the sensor (debugging)
+	 */
 	float getHue() {
 		float hue = hsvValues[0];
 		return hue;
