@@ -78,4 +78,21 @@ public class VuMarkAutonomous extends AutonomousCore {
 		return vuMark;
 	}
 
+	protected int VuMarkToInt(RelicRecoveryVuMark v) {
+		switch (v) {
+			case UNKNOWN:
+				return 1;
+			case LEFT:
+				return 1;
+
+			case CENTER:
+				return 2;
+
+			case RIGHT:
+				return 3;
+
+		}
+		return 1;
+	}
+
 }

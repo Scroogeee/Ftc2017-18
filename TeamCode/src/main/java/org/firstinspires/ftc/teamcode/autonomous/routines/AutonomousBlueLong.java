@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 
@@ -23,14 +24,18 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		//ZURÜCK
 		drive.driveByPulses(2500, 1, -1);
 		sleep(300);
-		//LINKS
-		drive.driveByPulses(1400, 1, 1);
+		//RECHTS
+		drive.driveByPulses(1400, -1, -1);
 		sleep(300);
-		//VOR
-		drive.driveByPulses(1250, -1, 1);
+		//ZURÜCK
+		if (!drive.isRangeUsed()) {
+			drive.driveByPulses(1250, 1, -1);
+		} else {
+			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark), DcMotorSimple.Direction.REVERSE);
+		}
 		sleep(300);
-		//LINKS
-		drive.driveByPulses(1600, 1, 1);
+		//RECHTS
+		drive.driveByPulses(1600, -1, -1);
 		sleep(300);
 		//VOR
 		drive.driveByPulses(800, -1, 1);

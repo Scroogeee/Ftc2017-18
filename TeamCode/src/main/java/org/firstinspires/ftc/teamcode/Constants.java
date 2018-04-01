@@ -49,6 +49,7 @@ public class Constants {
 	public static final String reader_name = "reader";
 
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
+	public static final double RANGE_THRESHHOLD = 2;
 
 	public static double getHighestNumber(ArrayList<Double> list) {
 		double Highest = 1;
