@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
 
+import java.util.ArrayList;
+
 import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.*;
 
 /**
@@ -192,7 +194,22 @@ public class DriveCross4W {
 	 * Scales down all values so that none exceeds 1 or -1
 	 */
 	private void scaleDownValues() {
-		//TODO scale the values instead of clamping them
+		ArrayList<Double> list = new ArrayList<>();
+		list.add(fl);
+		list.add(fr);
+		list.add(rr);
+		list.add(rl);
+		Double highestNumber = Constants.getHighestNumber(list);
+		if (mainRef != null) {
+			mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
+		}
+		if (highestNumber >= 1) {
+			fl = fl / highestNumber;
+			fr = fr / highestNumber;
+			rr = rr / highestNumber;
+			rl = rl / highestNumber;
+		}
+		/**Clamp to ensure no errors occur*/
 		fl = Math.min(fl, 1);
 		rr = Math.min(rr, 1);
 		fr = Math.min(fr, 1);

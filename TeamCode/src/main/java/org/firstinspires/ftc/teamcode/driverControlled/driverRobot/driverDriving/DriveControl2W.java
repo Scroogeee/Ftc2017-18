@@ -104,7 +104,6 @@ public class DriveControl2W {
 		l_value = Math.max(l_value, -1);
 		r_value = Math.max(r_value, -1);
 
-		//TODO remove Debugging
 		//mainRef.telemetry.addData("left:", l_value);
 		//mainRef.telemetry.addData("right:", r_value);
 		//mainRef.telemetry.addData("Slow:", isSlow);
