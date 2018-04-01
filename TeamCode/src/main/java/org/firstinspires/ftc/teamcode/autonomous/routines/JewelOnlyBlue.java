@@ -10,17 +10,11 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 
 @Autonomous(name = "BlueJewel", group = "jewelAlternate")
 public class JewelOnlyBlue extends AutonomousCore {
+
 	@Override
-	public void runOpMode() {
-		initialize();
-		waitForStart();
-		upRelic();
+	protected void routine() {
 		kickJewel(JewelColor.RED);
 		//textToSpeech.shutdown();
 	}
 
-	@Override
-	protected void initialize() {
-		super.initialize();
-	}
 }

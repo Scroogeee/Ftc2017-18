@@ -30,6 +30,9 @@ public class AutonomousCore extends LinearOpMode {
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
 	protected ModernRoboticsI2cRangeSensor rangeSensor;
 
+	/**
+	 * @return the current <code>HardwareConfiguration</code>
+	 */
 	public HardwareConfiguration getHardwareConfiguration() {
 		return hardwareConfiguration;
 	}
@@ -38,8 +41,21 @@ public class AutonomousCore extends LinearOpMode {
 	public void runOpMode() {
 		initialize();
 		waitForStart();
+		upRelic();
+		routine();
 	}
 
+	/**
+	 * The routine to perform
+	 * Should be overridden
+	 */
+	protected void routine() {
+
+	}
+
+	/**
+	 * Initializes the <code>AutonomousCore</code> class
+	 */
 	protected void initialize() {
 		//HardwareConfig
 		modeDetector.initialize(this.hardwareMap);
@@ -67,6 +83,9 @@ public class AutonomousCore extends LinearOpMode {
 		initTTS();
 	}
 
+	/**
+	 * Initializes the TextToSpeech software
+	 */
 	private void initTTS() {
 		textToSpeech = new TextToSpeech(hardwareMap.appContext, null, "com.google.android.tts");
 		textToSpeech.setLanguage(Locale.US);
@@ -74,6 +93,9 @@ public class AutonomousCore extends LinearOpMode {
 		textToSpeech.setPitch(1);
 	}
 
+	/**
+	 * Kicks the jewel of the given Color
+	 */
 	protected void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
 		jewelControl.updateArm(0.27);
@@ -117,6 +139,9 @@ public class AutonomousCore extends LinearOpMode {
 		jewelControl.updateArm(1);
 	}
 
+	/**
+	 * Says the given String via the TextToSpeech software
+	 */
 	protected void say(String s) {
 		textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
 		sleep(1000);
@@ -125,6 +150,9 @@ public class AutonomousCore extends LinearOpMode {
 		}
 	}
 
+	/**
+	 * Pushes the relic grip up a little, so it doesn't influence the driving
+	 */
 	protected void upRelic() {
 		//Relic ein Stück hochfahren
 		relicControl.update(1, 0, 0);

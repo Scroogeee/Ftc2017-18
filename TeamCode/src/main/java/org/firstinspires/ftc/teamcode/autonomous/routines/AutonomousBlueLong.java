@@ -12,12 +12,7 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 public class AutonomousBlueLong extends VuMarkAutonomous {
 
 	@Override
-	public void runOpMode() {
-		initialize();
-		waitForStart();
-		resetTimer();
-		upRelic();
-
+	protected void routine() {
 		//Jewels herunter kicken
 		kickJewel(JewelColor.RED);
 		//VuMark
@@ -54,7 +49,4 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		//textToSpeech.shutdown();
 	}
 
-	protected void initialize() {
-		super.initialize();
-	}
 }

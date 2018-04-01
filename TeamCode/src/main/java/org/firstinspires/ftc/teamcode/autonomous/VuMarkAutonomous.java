@@ -18,12 +18,21 @@ public class VuMarkAutonomous extends AutonomousCore {
 	private VuMarkDetector vuMarkDetector = new VuMarkDetector();
 
 	@Override
+	public void runOpMode() {
+		initialize();
+		waitForStart();
+		resetTimer();
+		upRelic();
+		routine();
+	}
+
+	@Override
 	protected void initialize() {
 		super.initialize();
 		vuMarkDetector.initialize(this);
 	}
 
-	public void resetTimer() {
+	protected void resetTimer() {
 		elapsedTime.reset();
 	}
 

@@ -11,14 +11,8 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 @Autonomous(name = "autoRS", group = "drive")
 public class AutonomousRedShort extends VuMarkAutonomous {
 
-
 	@Override
-	public void runOpMode() {
-		initialize();
-		waitForStart();
-		resetTimer();
-		upRelic();
-
+	protected void routine() {
 		//Jewels
 		kickJewel(JewelColor.BLUE);
 		//VuMark
@@ -48,7 +42,4 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 		//textToSpeech.shutdown();
 	}
 
-	protected void initialize() {
-		super.initialize();
-	}
 }
