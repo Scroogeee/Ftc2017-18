@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 
+import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
+
 /**
  * Created by FTC on 25.01.2018.
  */
@@ -25,7 +27,11 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 		drive.driveByPulses(2500, -1, 1);
 		sleep(300);
 		//LINKS
-		drive.driveByPulses(1400, 1, 1);
+		if (!drive.isGyroUsed()) {
+			drive.driveByPulses(1400, 1, 1);
+		} else {
+			drive.gyroTurn(TURN_SPEED, 90);
+		}
 		sleep(300);
 		//VOR
 		if (!drive.isRangeUsed()) {
@@ -35,7 +41,11 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 		}
 		sleep(300);
 		//RECHTS
-		drive.driveByPulses(1700, -1, -1);
+		if (!drive.isGyroUsed()) {
+			drive.driveByPulses(1700, -1, -1);
+		} else {
+			drive.gyroTurn(TURN_SPEED, 0);
+		}
 		sleep(300);
 		//VOR
 		drive.driveByPulses(1000, -1, 1);

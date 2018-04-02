@@ -79,6 +79,9 @@ public class VuMarkAutonomous extends AutonomousCore {
 	}
 
 	protected int VuMarkToInt(RelicRecoveryVuMark v) {
+		//TODO remove debugging
+		telemetry.addData("VuMark: ", detectedVuMark.toString());
+		telemetry.update();
 		switch (v) {
 			case UNKNOWN:
 				return 1;
