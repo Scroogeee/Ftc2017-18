@@ -3,8 +3,11 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
+/**
+ * Controls the relic robot module
+ */
 public class AutoRelicControl {
 
 	/**

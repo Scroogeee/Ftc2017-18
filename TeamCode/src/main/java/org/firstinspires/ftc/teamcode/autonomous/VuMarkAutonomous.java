@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 
-import static org.firstinspires.ftc.teamcode.Constants.MAX_SCAN_TIME_SECONDS;
 import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
+import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECONDS;
 
 /**
  * Created by FTC on 20.03.2018.
@@ -24,6 +24,11 @@ public class VuMarkAutonomous extends AutonomousCore {
 		resetTimer();
 		upRelic();
 		routine();
+	}
+
+	@Override
+	protected void routine() {
+		//empty routine
 	}
 
 	@Override

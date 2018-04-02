@@ -36,9 +36,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightAuto;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 /**
  * This file illustrates the concept of driving a path based on Gyro heading and encoder counts.
@@ -168,6 +168,11 @@ public class AutoGyroTest extends AutonomousCore {
 		telemetry.addData("Path", "Complete");
 		telemetry.update();
 		//textToSpeech.shutdown();
+	}
+
+	@Override
+	protected void routine() {
+
 	}
 
 

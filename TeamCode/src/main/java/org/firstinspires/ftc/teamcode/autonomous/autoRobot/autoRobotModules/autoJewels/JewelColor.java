@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.aut
 
 /**
  * Created by FTC on 21.02.2018.
+ * Denotes the color of a Jewel
  */
 
 public enum JewelColor {

@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 
 /**
  * Created by FTC on 20.03.2018.
+ * Detects and scans VuMarks
  */
 
 public class VuMarkDetector {

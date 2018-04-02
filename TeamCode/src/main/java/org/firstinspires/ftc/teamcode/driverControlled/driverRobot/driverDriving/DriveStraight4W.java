@@ -4,13 +4,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
+import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.Methods;
 
 import java.util.ArrayList;
 
-import static org.firstinspires.ftc.teamcode.Constants.*;
 import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
 
 /**
  * Created by FTC on 08.01.2018.
@@ -217,7 +218,7 @@ public class DriveStraight4W {
 		list.add(frontr);
 		list.add(rearr);
 		list.add(rearl);
-		Double highestNumber = Constants.getHighestNumber(list);
+		Double highestNumber = Methods.getHighestNumber(list);
 		if (mainRef != null) {
 			mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
 		}

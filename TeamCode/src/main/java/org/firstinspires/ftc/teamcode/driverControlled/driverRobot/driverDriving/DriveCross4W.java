@@ -4,8 +4,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
+import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.Methods;
 
 import java.util.ArrayList;
 
@@ -199,7 +200,7 @@ public class DriveCross4W {
 		list.add(fr);
 		list.add(rr);
 		list.add(rl);
-		Double highestNumber = Constants.getHighestNumber(list);
+		Double highestNumber = Methods.getHighestNumber(list);
 		if (mainRef != null) {
 			mainRef.telemetry.addLine("Highest: " + highestNumber.toString());
 		}

@@ -3,11 +3,11 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import android.speech.tts.TextToSpeech;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 import java.util.Locale;
 
@@ -17,7 +17,7 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
  * Created by FTC on 24.01.2018.
  */
 
-public class AutonomousCore extends LinearOpMode {
+public abstract class AutonomousCore extends LinearOpMode {
 
 	protected final W4StraightByColor drive = new W4StraightByColor(this);
 	protected CRServo glyph_servo;
@@ -46,11 +46,9 @@ public class AutonomousCore extends LinearOpMode {
 	/**
 	 * The routine to perform
 	 * <br>
-	 * Should be overridden
+	 * Has to be overwritten
 	 */
-	protected void routine() {
-
-	}
+	protected abstract void routine();
 
 	/**
 	 * Initializes the <code>AutonomousCore</code> class
