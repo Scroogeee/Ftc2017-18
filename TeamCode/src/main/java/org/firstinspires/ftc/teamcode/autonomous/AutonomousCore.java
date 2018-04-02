@@ -60,6 +60,7 @@ public class AutonomousCore extends LinearOpMode {
 		modeDetector.initialize(this.hardwareMap);
 		sleep(1000);
 		hardwareConfiguration = modeDetector.getConfiguration();
+		//TODO remove debugging
 		telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
 		telemetry.addData("Hue: ", modeDetector.getHue());
 		telemetry.update();
@@ -94,8 +95,9 @@ public class AutonomousCore extends LinearOpMode {
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
-		telemetry.update();
+		//TODO remove debugging
 		telemetry.addData("CurrentColor:", currentJewelColor.toString());
+		telemetry.update();
 		sleep(1000);
 		if (currentJewelColor != null) {
 			if (currentJewelColor.equals(toKick)) {

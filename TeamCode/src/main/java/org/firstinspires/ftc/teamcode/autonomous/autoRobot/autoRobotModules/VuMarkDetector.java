@@ -56,8 +56,6 @@ public class VuMarkDetector {
 
 		/*
 		 * We also indicate which camera on the RC that we wish to use.
-		 * Here we chose the back (HiRes) camera (for greater range), but
-		 * for a competition robot, the front camera might be more convenient.
 		 */
 		parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
 		this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
@@ -76,7 +74,7 @@ public class VuMarkDetector {
 
 
 	/**
-	 * Scans for vuMarks but returns null if none visible
+	 * Scans for vuMarks but returns unknown if none visible
 	 */
 	public RelicRecoveryVuMark scan() {
 		relicTrackables.activate();

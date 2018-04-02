@@ -85,6 +85,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	private void initRange() {
 		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+		calibrateRange();
 	}
 
 	/**
@@ -432,12 +433,6 @@ public class W4StraightByColor extends W4StraightAuto {
 			}
 			average /= list.size();
 			rangeBaseValue = average;
-		}
-	}
-
-	public void resetGyro() {
-		if (useGyro) {
-			gyro.resetZAxisIntegrator();
 		}
 	}
 
