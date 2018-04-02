@@ -28,7 +28,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	@Override
 	protected void routine() {
-		//empty routine
+
 	}
 
 	@Override
@@ -84,9 +84,8 @@ public class VuMarkAutonomous extends AutonomousCore {
 	}
 
 	protected int VuMarkToInt(RelicRecoveryVuMark v) {
-		//TODO remove debugging
-		telemetry.addData("VuMark: ", detectedVuMark.toString());
-		telemetry.update();
+		/*telemetry.addData("VuMark: ", detectedVuMark.toString());
+		telemetry.update();*/
 		switch (v) {
 			case UNKNOWN:
 				return 1;

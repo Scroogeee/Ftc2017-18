@@ -8,6 +8,11 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.Auto
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.HalDashboard;
+import org.firstinspires.ftc.teamcode.util.autoChoices.Alliance;
+import org.firstinspires.ftc.teamcode.util.autoChoices.BalancingStone;
+import org.firstinspires.ftc.teamcode.util.autoChoices.FtcChoiceMenu;
+import org.firstinspires.ftc.teamcode.util.autoChoices.FtcMenu;
 
 import java.util.Locale;
 
@@ -17,16 +22,22 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
  * Created by FTC on 24.01.2018.
  */
 
-public abstract class AutonomousCore extends LinearOpMode {
+public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.MenuButtons {
 
 	protected final W4StraightByColor drive = new W4StraightByColor(this);
 	protected CRServo glyph_servo;
 	protected final AutoRelicControl relicControl = new AutoRelicControl();
 	protected final JewelControl jewelControl = new JewelControl();
-	protected JewelColor currentJewelColor = JewelColor.NONE;
 	protected TextToSpeech textToSpeech;
+
 	protected final ModeDetector modeDetector = new ModeDetector();
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
+
+	protected HalDashboard dashboard = HalDashboard.createInstance(this.telemetry);
+
+	protected JewelColor currentJewelColor = JewelColor.NONE;
+
+	protected AutonomousStrategy strategy;
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -39,15 +50,11 @@ public abstract class AutonomousCore extends LinearOpMode {
 	public void runOpMode() {
 		initialize();
 		waitForStart();
+		dashboard.clearDisplay();
 		upRelic();
 		routine();
 	}
 
-	/**
-	 * The routine to perform
-	 * <br>
-	 * Has to be overwritten
-	 */
 	protected abstract void routine();
 
 	/**
@@ -58,10 +65,9 @@ public abstract class AutonomousCore extends LinearOpMode {
 		modeDetector.initialize(this.hardwareMap);
 		sleep(1000);
 		hardwareConfiguration = modeDetector.getConfiguration();
-		//TODO remove debugging
-		telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
+		/*telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
 		telemetry.addData("Hue: ", modeDetector.getHue());
-		telemetry.update();
+		telemetry.update();*/
 		//Drive
 		drive.initialize();
 		//Glyph Servo
@@ -73,7 +79,64 @@ public abstract class AutonomousCore extends LinearOpMode {
 		jewelControl.initialize(this.hardwareMap);
 		//TextToSpeech
 		initTTS();
+		dashboard.clearDisplay();
+		doMenus();
 	}
+
+	protected void doMenus() {
+		FtcChoiceMenu<Alliance> allianceMenu =
+				new FtcChoiceMenu<>("Alliance:", null, this);
+		FtcChoiceMenu<BalancingStone> startPositionMenu =
+				new FtcChoiceMenu<>("Start Position:", allianceMenu, this);
+		FtcChoiceMenu<Boolean> jewelMenu =
+				new FtcChoiceMenu<>("Do Jewel?", startPositionMenu, this);
+		FtcChoiceMenu<Boolean> cryptoMenu =
+				new FtcChoiceMenu<>("Do Crypto?", jewelMenu, this);
+
+		allianceMenu.addChoice("Red", Alliance.RED, true, startPositionMenu);
+		allianceMenu.addChoice("Blue", Alliance.BLUE, false, startPositionMenu);
+
+		startPositionMenu.addChoice("Short", BalancingStone.SHORT, true, jewelMenu);
+		startPositionMenu.addChoice("Long", BalancingStone.LONG, false, jewelMenu);
+
+		jewelMenu.addChoice("Yes", true, true, cryptoMenu);
+		jewelMenu.addChoice("No", false, false, cryptoMenu);
+
+		cryptoMenu.addChoice("Yes", true, true);
+		cryptoMenu.addChoice("No", false, false);
+
+		FtcMenu.walkMenuTree(allianceMenu, this);
+		strategy = new AutonomousStrategy(allianceMenu.getCurrentChoiceObject(),
+				startPositionMenu.getCurrentChoiceObject(), jewelMenu.getCurrentChoiceObject(), cryptoMenu.getCurrentChoiceObject());
+
+		dashboard.displayPrintf(1, "Alliance=%s", strategy.getAlliance().toString());
+		dashboard.displayPrintf(2, "StartPos=%s", strategy.getStartingPos().toString());
+		dashboard.displayPrintf(3, "DoJewel=%s,DoCrypto=%s",
+				Boolean.toString(strategy.doJewel()), Boolean.toString(strategy.doCrypto()));
+
+	}
+
+
+	@Override
+	public boolean isMenuUpButton() {
+		return gamepad1.dpad_up;
+	}   //isMenuUpButton
+
+	@Override
+	public boolean isMenuDownButton() {
+		return gamepad1.dpad_down;
+	}   //isMenuDownButton
+
+	@Override
+	public boolean isMenuEnterButton() {
+		return gamepad1.a;
+	}   //isMenuEnterButton
+
+	@Override
+	public boolean isMenuBackButton() {
+		return gamepad1.dpad_left;
+	}   //isMenuBackButton
+
 
 	/**
 	 * Initializes the TextToSpeech software
@@ -93,9 +156,9 @@ public abstract class AutonomousCore extends LinearOpMode {
 		jewelControl.updateArm(0.27);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
-		//TODO remove debugging
+		/*
 		telemetry.addData("CurrentColor:", currentJewelColor.toString());
-		telemetry.update();
+		telemetry.update();*/
 		sleep(1000);
 		if (currentJewelColor != null) {
 			if (currentJewelColor.equals(toKick)) {
