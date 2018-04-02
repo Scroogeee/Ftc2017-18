@@ -1,15 +1,15 @@
 package org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 import java.util.concurrent.TimeUnit;
 
 
 /**
  * Created by FTC on 16.10.2017.
- * This class
+ * This class is the wrapper for a two wheeled robot
  */
 public class DriveControl2W {
 

@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 /**
  * Created by FTC on 19.03.2018.
@@ -21,5 +21,10 @@ public class Presentation extends AutonomousCore {
 		telemetry.addLine("Stopped");
 		telemetry.update();
 		//textToSpeech.shutdown();
+	}
+
+	@Override
+	protected void routine() {
+
 	}
 }

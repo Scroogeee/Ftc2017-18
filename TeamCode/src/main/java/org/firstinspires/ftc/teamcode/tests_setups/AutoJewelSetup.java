@@ -27,6 +27,11 @@ public class AutoJewelSetup extends AutonomousCore {
 		textToSpeech.shutdown();
 	}
 
+	@Override
+	protected void routine() {
+
+	}
+
 	/**
 	 * initializes the JewelSetup class
 	 */

@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;

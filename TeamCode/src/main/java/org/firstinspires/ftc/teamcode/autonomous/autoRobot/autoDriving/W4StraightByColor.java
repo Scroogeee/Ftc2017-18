@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.Constants.RANGE_THRESHHOLD;
-import static org.firstinspires.ftc.teamcode.Constants.gyro_name;
 import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
+import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -384,11 +384,17 @@ public class W4StraightByColor extends W4StraightAuto {
 
 	private double rangeBaseValue = 0;
 
+	/**
+	 * Drives to the next cryptobox column using the<br>
+	 * range sensor in the given direction
+	 *
+	 * @param d the direction
+	 */
 	private void driveToNextColumnByRange(DcMotorSimple.Direction d) {
 		if (useRange) {
 			//Drive past the last column
 			while (autonomousCore.opModeIsActive() &&
-					!(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHHOLD))) {
+					!(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHOLD))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
 					driveByPulses(10, -1, 1);
 				} else if (d == DcMotorSimple.Direction.REVERSE) {
@@ -397,7 +403,7 @@ public class W4StraightByColor extends W4StraightAuto {
 			}
 			//Drive to the column
 			while (autonomousCore.opModeIsActive() &&
-					!(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHHOLD))) {
+					!(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHOLD))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
 					driveByPulses(10, -1, 1);
 				} else if (d == DcMotorSimple.Direction.REVERSE) {
@@ -407,6 +413,13 @@ public class W4StraightByColor extends W4StraightAuto {
 		}
 	}
 
+	/**
+	 * Drives to a specified number of cryptobox columns<br>
+	 * using the range sensor in the given direction
+	 *
+	 * @param columnNum the number of cryptbox columns to pass
+	 * @param d         the direction
+	 */
 	public void driveToColumnByRange(int columnNum, DcMotorSimple.Direction d) {
 		if (useRange) {
 			int columnCounter = 0;
@@ -420,6 +433,10 @@ public class W4StraightByColor extends W4StraightAuto {
 		}
 	}
 
+	/**
+	 * Sets the range base value to the <br>
+	 * current reading of the sensor
+	 */
 	public void calibrateRange() {
 		if (useRange) {
 			ArrayList<Double> list = new ArrayList<>();

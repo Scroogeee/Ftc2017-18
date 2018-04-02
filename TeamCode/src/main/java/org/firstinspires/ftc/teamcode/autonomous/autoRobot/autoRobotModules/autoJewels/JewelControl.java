@@ -4,10 +4,11 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import static org.firstinspires.ftc.teamcode.Constants.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
 
 /**
  * Created by FTC on 21.02.2018.
+ * Controls the Jewel robot module
  */
 
 public class JewelControl {
@@ -40,7 +41,7 @@ public class JewelControl {
 	}
 
 	/**
-	 * returns the current jewel color which is visible
+	 * Returns the current jewel color which is visible
 	 */
 	public JewelColor getColor() {
 		if (jewel_sensor.blue() > minimum_ConfidenceLevel) {

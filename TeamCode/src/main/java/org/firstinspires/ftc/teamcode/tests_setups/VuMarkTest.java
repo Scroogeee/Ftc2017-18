@@ -174,6 +174,11 @@ public class VuMarkTest extends AutonomousCore {
 		//textToSpeech.shutdown();
 	}
 
+	@Override
+	protected void routine() {
+
+	}
+
 	String format(OpenGLMatrix transformationMatrix) {
 		return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
 
