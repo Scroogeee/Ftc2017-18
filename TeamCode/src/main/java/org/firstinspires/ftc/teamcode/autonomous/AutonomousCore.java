@@ -24,8 +24,13 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
 
 public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.MenuButtons {
 
+	public CRServo glyph_servo;
+
 	protected final W4StraightByColor drive = new W4StraightByColor(this);
-	protected CRServo glyph_servo;
+
+	public W4StraightByColor getDrive() {
+		return drive;
+	}
 	protected final AutoRelicControl relicControl = new AutoRelicControl();
 	protected final JewelControl jewelControl = new JewelControl();
 	protected TextToSpeech textToSpeech;
@@ -38,6 +43,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 
 	protected AutonomousStrategy strategy;
+
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -52,7 +58,6 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		waitForStart();
 		dashboard.clearDisplay();
 		upRelic();
-		routine();
 	}
 
 	protected abstract void routine();
@@ -151,7 +156,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	/**
 	 * Kicks the jewel of the given Color
 	 */
-	protected void kickJewel(JewelColor toKick) {
+	public void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
 		jewelControl.updateArm(0.27);
 		sleep(1000);
