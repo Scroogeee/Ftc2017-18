@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
+import org.firstinspires.ftc.teamcode.autonomous.routines.RoutineMgr;
 
 import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECONDS;
@@ -10,12 +12,18 @@ import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECOND
 /**
  * Created by FTC on 20.03.2018.
  */
-
+@Autonomous(name = "MainAutonomous", group = "drive")
 public class VuMarkAutonomous extends AutonomousCore {
+
+	protected RoutineMgr routineMgr = new RoutineMgr(this);
 
 	protected RelicRecoveryVuMark detectedVuMark = RelicRecoveryVuMark.UNKNOWN;
 	private ElapsedTime elapsedTime = new ElapsedTime();
 	private VuMarkDetector vuMarkDetector = new VuMarkDetector();
+
+	public RelicRecoveryVuMark getDetectedVuMark() {
+		return detectedVuMark;
+	}
 
 	@Override
 	public void runOpMode() {
@@ -28,7 +36,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	@Override
 	protected void routine() {
-
+		routineMgr.selectRoutine(strategy);
 	}
 
 	@Override
@@ -48,42 +56,42 @@ public class VuMarkAutonomous extends AutonomousCore {
 	 * Scans until either a VuMark is visible, the OpMode is stopped or the Timer reaches 10 seconds
 	 */
 	protected RelicRecoveryVuMark scanVuMark() {
-		RelicRecoveryVuMark vuMark = vuMarkDetector.scan();
+		detectedVuMark = vuMarkDetector.scan();
 		resetTimer();
-		while (vuMark == RelicRecoveryVuMark.UNKNOWN && !isStopRequested() &&
+		while (detectedVuMark == RelicRecoveryVuMark.UNKNOWN && !isStopRequested() &&
 				elapsedTime.seconds() < MAX_SCAN_TIME_SECONDS) {
-			vuMark = vuMarkDetector.scan();
+			detectedVuMark = vuMarkDetector.scan();
 		}
-		return vuMark;
+		return detectedVuMark;
 	}
 
 	/**
 	 * Scans for a VuMark once
 	 */
 	protected RelicRecoveryVuMark scanGeneral() {
-		RelicRecoveryVuMark vuMark = vuMarkDetector.scan();
-		return vuMark;
+		detectedVuMark = vuMarkDetector.scan();
+		return detectedVuMark;
 	}
 
 	/**
 	 * Scan with turning (As in competition)
 	 */
-	protected RelicRecoveryVuMark scanWithTurn() {
+	public RelicRecoveryVuMark scanWithTurn() {
 		if (drive.isGyroUsed()) {
 			drive.gyroTurn(TURN_SPEED, 30);
 		} else {
 			drive.driveByPulses(350, 1, 1);
 		}
-		RelicRecoveryVuMark vuMark = scanVuMark();
+		detectedVuMark = scanVuMark();
 		if (drive.isGyroUsed()) {
 			drive.gyroTurn(TURN_SPEED, 0);
 		} else {
 			drive.driveByPulses(350, -1, -1);
 		}
-		return vuMark;
+		return detectedVuMark;
 	}
 
-	protected int VuMarkToInt(RelicRecoveryVuMark v) {
+	public int VuMarkToInt(RelicRecoveryVuMark v) {
 		/*telemetry.addData("VuMark: ", detectedVuMark.toString());
 		telemetry.update();*/
 		switch (v) {

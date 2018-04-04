@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.auto
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.HalDashboard;
-import org.firstinspires.ftc.teamcode.util.autoChoices.Alliance;
 import org.firstinspires.ftc.teamcode.util.autoChoices.BalancingStone;
 import org.firstinspires.ftc.teamcode.util.autoChoices.FtcChoiceMenu;
 import org.firstinspires.ftc.teamcode.util.autoChoices.FtcMenu;
@@ -24,8 +23,13 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
 
 public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.MenuButtons {
 
+	public CRServo glyph_servo;
+
 	protected final W4StraightByColor drive = new W4StraightByColor(this);
-	protected CRServo glyph_servo;
+
+	public W4StraightByColor getDrive() {
+		return drive;
+	}
 	protected final AutoRelicControl relicControl = new AutoRelicControl();
 	protected final JewelControl jewelControl = new JewelControl();
 	protected TextToSpeech textToSpeech;
@@ -38,6 +42,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	protected JewelColor currentJewelColor = JewelColor.NONE;
 
 	protected AutonomousStrategy strategy;
+
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -52,7 +57,6 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		waitForStart();
 		dashboard.clearDisplay();
 		upRelic();
-		routine();
 	}
 
 	protected abstract void routine();
@@ -84,20 +88,17 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	}
 
 	protected void doMenus() {
-		FtcChoiceMenu<Alliance> allianceMenu =
-				new FtcChoiceMenu<>("Alliance:", null, this);
 		FtcChoiceMenu<BalancingStone> startPositionMenu =
-				new FtcChoiceMenu<>("Start Position:", allianceMenu, this);
+				new FtcChoiceMenu<>("Start Position:", null, this);
 		FtcChoiceMenu<Boolean> jewelMenu =
 				new FtcChoiceMenu<>("Do Jewel?", startPositionMenu, this);
 		FtcChoiceMenu<Boolean> cryptoMenu =
 				new FtcChoiceMenu<>("Do Crypto?", jewelMenu, this);
 
-		allianceMenu.addChoice("Red", Alliance.RED, true, startPositionMenu);
-		allianceMenu.addChoice("Blue", Alliance.BLUE, false, startPositionMenu);
-
-		startPositionMenu.addChoice("Short", BalancingStone.SHORT, true, jewelMenu);
-		startPositionMenu.addChoice("Long", BalancingStone.LONG, false, jewelMenu);
+		startPositionMenu.addChoice("RedShort", BalancingStone.RED_SHORT, true, jewelMenu);
+		startPositionMenu.addChoice("RedLong", BalancingStone.RED_LONG, false, jewelMenu);
+		startPositionMenu.addChoice("BlueShort", BalancingStone.BLUE_SHORT, false, jewelMenu);
+		startPositionMenu.addChoice("BlueLong", BalancingStone.BLUE_LONG, false, jewelMenu);
 
 		jewelMenu.addChoice("Yes", true, true, cryptoMenu);
 		jewelMenu.addChoice("No", false, false, cryptoMenu);
@@ -105,8 +106,9 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		cryptoMenu.addChoice("Yes", true, true);
 		cryptoMenu.addChoice("No", false, false);
 
-		FtcMenu.walkMenuTree(allianceMenu, this);
-		strategy = new AutonomousStrategy(allianceMenu.getCurrentChoiceObject(),
+		FtcMenu.walkMenuTree(startPositionMenu, this);
+
+		strategy = new AutonomousStrategy(AutonomousStrategy.getAllianceFromBalancingStone(startPositionMenu.getCurrentChoiceObject()),
 				startPositionMenu.getCurrentChoiceObject(), jewelMenu.getCurrentChoiceObject(), cryptoMenu.getCurrentChoiceObject());
 
 		dashboard.displayPrintf(1, "Alliance=%s", strategy.getAlliance().toString());
@@ -151,7 +153,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	/**
 	 * Kicks the jewel of the given Color
 	 */
-	protected void kickJewel(JewelColor toKick) {
+	public void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
 		jewelControl.updateArm(0.27);
 		sleep(1000);

@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.util.autoChoices.BalancingStone;
 public class AutonomousStrategy {
 
 	private Alliance alliance = Alliance.RED;
-	private BalancingStone startingPos = BalancingStone.SHORT;
+	private BalancingStone startingPos = BalancingStone.RED_SHORT;
 	private boolean doJewel = true;
 	private boolean doCrypto = true;
 
@@ -19,6 +19,20 @@ public class AutonomousStrategy {
 		}
 		doJewel = p_doJewel;
 		doCrypto = p_doCrypto;
+	}
+
+	public static Alliance getAllianceFromBalancingStone(BalancingStone currentChoice) {
+		switch (currentChoice) {
+			case RED_LONG:
+				return Alliance.RED;
+			case RED_SHORT:
+				return Alliance.RED;
+			case BLUE_LONG:
+				return Alliance.BLUE;
+			case BLUE_SHORT:
+				return Alliance.BLUE;
+		}
+		return null;
 	}
 
 	public Alliance getAlliance() {
