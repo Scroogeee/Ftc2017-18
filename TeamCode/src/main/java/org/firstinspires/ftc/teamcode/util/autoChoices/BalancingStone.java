@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.util.autoChoices;
 
 public enum BalancingStone {
-	LONG, SHORT
+	RED_LONG, RED_SHORT, BLUE_LONG, BLUE_SHORT
 }
