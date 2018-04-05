@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 import org.firstinspires.ftc.teamcode.autonomous.routines.RoutineMgr;
@@ -15,7 +16,7 @@ import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECOND
 @Autonomous(name = "MainAutonomous", group = "drive")
 public class VuMarkAutonomous extends AutonomousCore {
 
-	protected RoutineMgr routineMgr = new RoutineMgr(this);
+	protected RoutineMgr routineMgr = new RoutineMgr();
 
 	protected RelicRecoveryVuMark detectedVuMark = RelicRecoveryVuMark.UNKNOWN;
 	private ElapsedTime elapsedTime = new ElapsedTime();
@@ -42,6 +43,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 	@Override
 	protected void initialize() {
 		super.initialize();
+		routineMgr.initialize(this);
 		vuMarkDetector.initialize(this);
 	}
 

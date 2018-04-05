@@ -30,11 +30,21 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaNavigation;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
-import org.firstinspires.ftc.robotcore.external.navigation.*;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.robotcore.external.navigation.VuMarkInstanceId;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightAuto;
 
@@ -120,9 +130,10 @@ public class VuMarkTest extends AutonomousCore {
 		VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
 		VuforiaTrackable relicTemplate = relicTrackables.get(0);
 		relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
-
+		dashboard.displayText(1, "> Press play to start");
+		dashboard.refreshDisplay();/*
 		telemetry.addData(">", "Press Play to start");
-		telemetry.update();
+		telemetry.update();*/
 		waitForStart();
 
 		relicTrackables.activate();
@@ -141,13 +152,14 @@ public class VuMarkTest extends AutonomousCore {
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
                  * on which VuMark was visible. */
-				telemetry.addData("VuMark", "%s visible", vuMark);
+				dashboard.displayText(1, "VuMark " + vuMark + "is visible");
 
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
 				OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
 				telemetry.addData("Pose", format(pose));
+				dashboard.displayText(1, "Pose: " + format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
@@ -166,10 +178,9 @@ public class VuMarkTest extends AutonomousCore {
 					double rZ = rot.thirdAngle;
 				}
 			} else {
-				telemetry.addData("VuMark", "not visible");
+				dashboard.displayText(1, "VuMark not visible");
 			}
-
-			telemetry.update();
+			dashboard.refreshDisplay();
 		}
 		//textToSpeech.shutdown();
 	}

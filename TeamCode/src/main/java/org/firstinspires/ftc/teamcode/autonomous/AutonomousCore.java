@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
@@ -23,26 +25,20 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
 
 public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.MenuButtons {
 
-	public CRServo glyph_servo;
-
 	protected final W4StraightByColor drive = new W4StraightByColor(this);
+	protected final AutoRelicControl relicControl = new AutoRelicControl();
+	protected final JewelControl jewelControl = new JewelControl();
+	protected final ModeDetector modeDetector = new ModeDetector();
+	public CRServo glyph_servo;
+	public HalDashboard dashboard;
+	protected TextToSpeech textToSpeech;
+	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
+	protected JewelColor currentJewelColor = JewelColor.NONE;
+	protected AutonomousStrategy strategy;
 
 	public W4StraightByColor getDrive() {
 		return drive;
 	}
-	protected final AutoRelicControl relicControl = new AutoRelicControl();
-	protected final JewelControl jewelControl = new JewelControl();
-	protected TextToSpeech textToSpeech;
-
-	protected final ModeDetector modeDetector = new ModeDetector();
-	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
-
-	protected HalDashboard dashboard = HalDashboard.createInstance(this.telemetry);
-
-	protected JewelColor currentJewelColor = JewelColor.NONE;
-
-	protected AutonomousStrategy strategy;
-
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -83,6 +79,8 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		jewelControl.initialize(this.hardwareMap);
 		//TextToSpeech
 		initTTS();
+		//Init dashboard
+		dashboard = HalDashboard.createInstance(this.telemetry);
 		dashboard.clearDisplay();
 		doMenus();
 	}

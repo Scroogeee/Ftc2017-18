@@ -10,7 +10,7 @@ public class RoutineMgr {
 	private AutonomousRedShort rs;
 	private VuMarkAutonomous vuMarkAutonomous;
 
-	public RoutineMgr(VuMarkAutonomous param_va) {
+	public void initialize(VuMarkAutonomous param_va) {
 		vuMarkAutonomous = param_va;
 		bl = new AutonomousBlueLong(vuMarkAutonomous);
 		bs = new AutonomousBlueShort(vuMarkAutonomous);
@@ -19,26 +19,18 @@ public class RoutineMgr {
 	}
 
 	public void selectRoutine(AutonomousStrategy strategy) {
-		switch (strategy.getAlliance()) {
-			case RED:
-				switch (strategy.getStartingPos()) {
-					case LONG:
-						rl.routine(strategy);
-						break;
-					case SHORT:
-						rs.routine(strategy);
-						break;
-				}
+		switch (strategy.getStartingPos()) {
+			case RED_LONG:
+				rl.routine(strategy);
 				break;
-			case BLUE:
-				switch (strategy.getStartingPos()) {
-					case LONG:
-						bl.routine(strategy);
-						break;
-					case SHORT:
-						bs.routine(strategy);
-						break;
-				}
+			case RED_SHORT:
+				rs.routine(strategy);
+				break;
+			case BLUE_LONG:
+				bl.routine(strategy);
+				break;
+			case BLUE_SHORT:
+				bs.routine(strategy);
 				break;
 		}
 	}

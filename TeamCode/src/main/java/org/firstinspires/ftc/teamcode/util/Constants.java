@@ -35,15 +35,15 @@ public class Constants {
 	public static final String servoGlyph_name = "servo_glyph";
 	public static final String Glyphlift_name = "glyph_lift";
 	//Jewel
-	public static final String jewelArm_name = "jewel_servo";
-	public static final String jewelSensor_name = "jewel_sensor";
+	public static final String jewelArm_name = "servo_jewel";
+	public static final String jewelSensor_name = "sensor_jewel";
 	public static final int minimum_ConfidenceLevel = 8;
 	//Presentation
 	public static final String greetings = "Hello! I am Herbert," +
 			" the robot of the FROG Team. I am  a rookie, 8 months old and I am very happy " +
 			"to participate in the competition today!";
 
-	public static final String gyro_name = "drive_gyro";
+	public static final String gyro_name = "sensor_gyro";
 	public static final String reader_name = "reader";
 
 	public static final int MAX_SCAN_TIME_SECONDS = 5;

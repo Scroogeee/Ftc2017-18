@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
 import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
 
@@ -28,23 +31,11 @@ public class W4StraightByColor extends W4StraightAuto {
 	// The can/should be tweaked to suite the specific robot drive train.
 	public static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
 	public static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
-	private boolean useGyro = false;
-	private boolean useRange = false;
-
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
 	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
-
-	public boolean isGyroUsed() {
-		return useGyro;
-	}
-
-	public boolean isRangeUsed() {
-		return useRange;
-	}
-
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
 	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
 	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
@@ -57,9 +48,19 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	protected ModernRoboticsI2cRangeSensor rangeSensor = null;
 	HardwareConfiguration hwConfig = null;
-
+	private boolean useGyro = false;
+	private boolean useRange = false;
+	private double rangeBaseValue = 0;
 	public W4StraightByColor(AutonomousCore param_ac) {
 		super(param_ac);
+	}
+
+	public boolean isGyroUsed() {
+		return useGyro;
+	}
+
+	public boolean isRangeUsed() {
+		return useRange;
 	}
 
 	@Override
@@ -102,8 +103,10 @@ public class W4StraightByColor extends W4StraightAuto {
 		C.setMode(STOP_AND_RESET_ENCODER);
 		D.setMode(STOP_AND_RESET_ENCODER);
 		// Send telemetry message to alert driver that we are calibrating;
-		autonomousCore.telemetry.addData(">", "Calibrating Gyro");    //
-		autonomousCore.telemetry.update();
+		//autonomousCore.telemetry.addData(">", "Calibrating Gyro");
+		autonomousCore.dashboard.displayText(1, "> Calibrating Gyro");
+		autonomousCore.dashboard.refreshDisplay();
+		//autonomousCore.telemetry.update();
 
 		gyro.calibrate();
 
@@ -112,9 +115,8 @@ public class W4StraightByColor extends W4StraightAuto {
 			autonomousCore.sleep(50);
 			autonomousCore.idle();
 		}
-
-		autonomousCore.telemetry.addData(">", "Robot Ready.");    //
-		autonomousCore.telemetry.update();
+		autonomousCore.dashboard.displayText(1, "> Robot Ready");
+		autonomousCore.dashboard.refreshDisplay();
 
 		A.setMode(RUN_USING_ENCODER);
 		B.setMode(RUN_USING_ENCODER);
@@ -154,11 +156,11 @@ public class W4StraightByColor extends W4StraightAuto {
 
 				setupForTank(true);
 
-				autonomousCore.telemetry.addData("A:", A.getTargetPosition());
+				/*autonomousCore.telemetry.addData("A:", A.getTargetPosition());
 				autonomousCore.telemetry.addData("B:", B.getTargetPosition());
 				autonomousCore.telemetry.addData("C:", C.getTargetPosition());
 				autonomousCore.telemetry.addData("D:", D.getTargetPosition());
-				autonomousCore.telemetry.update();
+				autonomousCore.telemetry.update();*/
 
 				// Determine new target position, and pass to motor controller
 				moveCounts = (int) (distance * COUNTS_PER_INCH);
@@ -211,12 +213,12 @@ public class W4StraightByColor extends W4StraightAuto {
 					C.setPower(rightSpeed);
 
 					// Display drive status for the driver.
-					autonomousCore.telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+					/*autonomousCore.telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
 					autonomousCore.telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
 					autonomousCore.telemetry.addData("Actual", "%7d:%7d", A.getCurrentPosition(),
 							B.getCurrentPosition());
 					autonomousCore.telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
-					autonomousCore.telemetry.update();
+					autonomousCore.telemetry.update();*/
 
 				}
 
@@ -334,10 +336,10 @@ public class W4StraightByColor extends W4StraightAuto {
 			C.setPower(rightSpeed);
 
 			// Display it for the driver.
-			autonomousCore.telemetry.addLine("Adjusting Error");
+			/*autonomousCore.telemetry.addLine("Adjusting Error");
 			autonomousCore.telemetry.addData("Target", "%5.2f", angle);
 			autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-			autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+			autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);*/
 
 			return onTarget;
 		}
@@ -381,8 +383,6 @@ public class W4StraightByColor extends W4StraightAuto {
 			return 0;
 		}
 	}
-
-	private double rangeBaseValue = 0;
 
 	/**
 	 * Drives to the next cryptobox column using the<br>

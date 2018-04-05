@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -12,14 +13,14 @@ public class Presentation extends AutonomousCore {
 	@Override
 	public void runOpMode() {
 		initialize();
-		telemetry.addLine("Press Play");
-		telemetry.update();
+		dashboard.displayText(1, "Press Play");
+		dashboard.refreshDisplay();
 		waitForStart();
-		telemetry.addLine("speaking");
-		telemetry.update();
+		dashboard.displayText(1, "speaking");
+		dashboard.refreshDisplay();
 		say(Constants.greetings);
-		telemetry.addLine("Stopped");
-		telemetry.update();
+		dashboard.displayText(1, "Stopped");
+		dashboard.refreshDisplay();
 		//textToSpeech.shutdown();
 	}
 

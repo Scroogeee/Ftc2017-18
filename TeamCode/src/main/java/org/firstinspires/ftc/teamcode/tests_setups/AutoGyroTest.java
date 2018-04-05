@@ -36,6 +36,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightAuto;
 import org.firstinspires.ftc.teamcode.util.Constants;
@@ -113,8 +114,10 @@ public class AutoGyroTest extends AutonomousCore {
 		robot.C.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		robot.D.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		// Send telemetry message to alert driver that we are calibrating;
-		telemetry.addData(">", "Calibrating Gyro");    //
-		telemetry.update();
+		/*telemetry.addData(">", "Calibrating Gyro");    //
+		telemetry.update();*/
+		dashboard.displayText(1, "> Calibrating Gyro");
+		dashboard.refreshDisplay();
 
 		gyro.calibrate();
 
@@ -123,9 +126,12 @@ public class AutoGyroTest extends AutonomousCore {
 			sleep(50);
 			idle();
 		}
-
+/*
 		telemetry.addData(">", "Robot Ready.");    //
-		telemetry.update();
+		telemetry.update();*/
+
+		dashboard.displayText(1, "> Robot Ready.");
+		dashboard.refreshDisplay();
 
 		robot.A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		robot.B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -164,9 +170,12 @@ public class AutoGyroTest extends AutonomousCore {
 		gyroTurn(TURN_SPEED, 0.0);
 		sleep(300);
 		gyroHold(TURN_SPEED, 0.0, 0.5);
-
+/*
 		telemetry.addData("Path", "Complete");
-		telemetry.update();
+		telemetry.update();*/
+		dashboard.displayText(1, "Path complete");
+		dashboard.refreshDisplay();
+
 		//textToSpeech.shutdown();
 	}
 
@@ -203,11 +212,12 @@ public class AutoGyroTest extends AutonomousCore {
 
 		// Ensure that the opmode is still active
 		if (opModeIsActive()) {
+			/*
 			telemetry.addData("A:", robot.A.getTargetPosition());
 			telemetry.addData("B:", robot.B.getTargetPosition());
 			telemetry.addData("C:", robot.C.getTargetPosition());
 			telemetry.addData("D:", robot.D.getTargetPosition());
-			telemetry.update();
+			telemetry.update();*/
 			// Determine new target position, and pass to motor controller
 			moveCounts = (int) (distance * COUNTS_PER_INCH);
 			newLeftTarget = robot.A.getCurrentPosition() + moveCounts;
@@ -368,10 +378,10 @@ public class AutoGyroTest extends AutonomousCore {
 		robot.C.setPower(rightSpeed);
 
 		// Display it for the driver.
-		telemetry.addLine("Adjusting Error");
+		/*telemetry.addLine("Adjusting Error");
 		telemetry.addData("Target", "%5.2f", angle);
 		telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-		telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+		telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);*/
 
 		return onTarget;
 	}
