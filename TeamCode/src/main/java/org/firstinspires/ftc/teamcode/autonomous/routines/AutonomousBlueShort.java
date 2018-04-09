@@ -39,6 +39,7 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 			drive.driveByPulses(1800, -1, -1);
 		} else {
 			drive.gyroTurn(TURN_SPEED, -90);
+			drive.gyroHold(TURN_SPEED, -90, 0.5);
 		}
 		sleep(300);
 		//VOR

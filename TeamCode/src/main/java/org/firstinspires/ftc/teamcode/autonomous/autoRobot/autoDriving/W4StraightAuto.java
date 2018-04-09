@@ -2,11 +2,9 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
-
-import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
-import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -34,7 +32,6 @@ public class W4StraightAuto {
 	 * Drives the robot by the specified number of pulses using tank drive
 	 */
 	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
-		setupForTank(false);
 		/**Reset Encoders*/
 		A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		B.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -90,23 +87,6 @@ public class W4StraightAuto {
 		C.setDirection(DcMotorSimple.Direction.FORWARD);
 		D.setDirection(DcMotorSimple.Direction.FORWARD);
 
-	}
-
-	/**
-	 * Sets up the robot for a tank drive with two reversed motors as used in GyroDrive
-	 */
-	protected void setupForTank(boolean b) {
-		if (b) {
-			A.setDirection(REVERSE);
-			B.setDirection(FORWARD);
-			C.setDirection(FORWARD);
-			D.setDirection(REVERSE);
-		} else {
-			A.setDirection(FORWARD);
-			B.setDirection(FORWARD);
-			C.setDirection(FORWARD);
-			D.setDirection(FORWARD);
-		}
 	}
 
 }

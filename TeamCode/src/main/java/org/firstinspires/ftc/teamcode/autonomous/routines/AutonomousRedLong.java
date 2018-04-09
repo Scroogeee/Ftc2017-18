@@ -33,7 +33,9 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 		if (!drive.isGyroUsed()) {
 			drive.driveByPulses(1400, 1, 1);
 		} else {
+			drive.gyroHold(TURN_SPEED, 90, 0.5);
 			drive.gyroTurn(TURN_SPEED, 90);
+
 		}
 		sleep(300);
 		//VOR
@@ -47,6 +49,7 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 		if (!drive.isGyroUsed()) {
 			drive.driveByPulses(1700, -1, -1);
 		} else {
+			drive.gyroHold(TURN_SPEED, 0, 0.5);
 			drive.gyroTurn(TURN_SPEED, 0);
 		}
 		sleep(300);

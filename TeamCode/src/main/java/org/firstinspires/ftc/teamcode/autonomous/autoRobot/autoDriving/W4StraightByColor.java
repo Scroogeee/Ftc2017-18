@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
 import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
 
@@ -26,25 +29,13 @@ public class W4StraightByColor extends W4StraightAuto {
 
 	// These constants define the desired driving/control characteristics
 	// The can/should be tweaked to suite the specific robot drive train.
-	public static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
-	public static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
-	private boolean useGyro = false;
-	private boolean useRange = false;
-
+	public static final double DRIVE_SPEED = 1;     // Nominal speed for better accuracy.
+	public static final double TURN_SPEED = DRIVE_SPEED;     // Nominal half speed for better accuracy.
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
 	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
-
-	public boolean isGyroUsed() {
-		return useGyro;
-	}
-
-	public boolean isRangeUsed() {
-		return useRange;
-	}
-
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
 	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
 	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
@@ -57,9 +48,19 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	protected ModernRoboticsI2cRangeSensor rangeSensor = null;
 	HardwareConfiguration hwConfig = null;
-
+	private boolean useGyro = false;
+	private boolean useRange = false;
+	private double rangeBaseValue = 0;
 	public W4StraightByColor(AutonomousCore param_ac) {
 		super(param_ac);
+	}
+
+	public boolean isGyroUsed() {
+		return useGyro;
+	}
+
+	public boolean isRangeUsed() {
+		return useRange;
 	}
 
 	@Override
@@ -92,8 +93,6 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * Initializes the gyroscope
 	 */
 	private void initGyro() {
-		setupForTank(true);
-
 		gyro = (ModernRoboticsI2cGyro) autonomousCore.hardwareMap.gyroSensor.get(gyro_name);
 
 		// Ensure the robot it stationary, then reset the encoders and calibrate the gyro.
@@ -120,8 +119,12 @@ public class W4StraightByColor extends W4StraightAuto {
 		B.setMode(RUN_USING_ENCODER);
 		C.setMode(RUN_USING_ENCODER);
 		D.setMode(RUN_USING_ENCODER);
-
 		gyro.resetZAxisIntegrator();
+
+		A.setDirection(DcMotorSimple.Direction.REVERSE);
+		B.setDirection(DcMotorSimple.Direction.FORWARD);
+		C.setDirection(DcMotorSimple.Direction.FORWARD);
+		D.setDirection(DcMotorSimple.Direction.REVERSE);
 	}
 
 	/**
@@ -136,102 +139,97 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *                 0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
 	 *                 If a relative angle is required, add/subtract from current heading.
 	 */
-	public void gyroDrive(double speed,
-	                      double distance,
-	                      double angle) {
-		if (useGyro) {
-			int newLeftTarget;
-			int newRightTarget;
-			int moveCounts;
-			double max;
-			double error;
-			double steer;
-			double leftSpeed;
-			double rightSpeed;
+	private void gyroDrive(double speed,
+	                       double distance,
+	                       double angle) {
 
-			// Ensure that the opmode is still active
-			if (autonomousCore.opModeIsActive()) {
+		int newLeftTarget;
+		int newRightTarget;
+		int moveCounts;
+		double max;
+		double error;
+		double steer;
+		double leftSpeed;
+		double rightSpeed;
 
-				setupForTank(true);
+		// Ensure that the opmode is still active
+		if (autonomousCore.opModeIsActive()) {
+			autonomousCore.telemetry.addData("A:", A.getTargetPosition());
+			autonomousCore.telemetry.addData("B:", B.getTargetPosition());
+			autonomousCore.telemetry.addData("C:", C.getTargetPosition());
+			autonomousCore.telemetry.addData("D:", D.getTargetPosition());
+			autonomousCore.telemetry.update();
+			// Determine new target position, and pass to motor controller
+			moveCounts = (int) (distance * COUNTS_PER_INCH);
+			newLeftTarget = A.getCurrentPosition() + moveCounts;
+			newRightTarget = B.getCurrentPosition() + moveCounts;
 
-				autonomousCore.telemetry.addData("A:", A.getTargetPosition());
-				autonomousCore.telemetry.addData("B:", B.getTargetPosition());
-				autonomousCore.telemetry.addData("C:", C.getTargetPosition());
-				autonomousCore.telemetry.addData("D:", D.getTargetPosition());
-				autonomousCore.telemetry.update();
+			// Set Target and Turn On RUN_TO_POSITION
+			A.setTargetPosition(newLeftTarget);
+			B.setTargetPosition(newRightTarget);
+			D.setTargetPosition(newLeftTarget);
+			C.setTargetPosition(newRightTarget);
 
-				// Determine new target position, and pass to motor controller
-				moveCounts = (int) (distance * COUNTS_PER_INCH);
-				newLeftTarget = A.getCurrentPosition() + moveCounts;
-				newRightTarget = B.getCurrentPosition() + moveCounts;
+			A.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			B.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			C.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			D.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-				// Set Target and Turn On RUN_TO_POSITION
-				A.setTargetPosition(newLeftTarget);
-				B.setTargetPosition(newRightTarget);
-				D.setTargetPosition(newLeftTarget);
-				C.setTargetPosition(newRightTarget);
+			// start motion.
+			speed = Range.clip(Math.abs(speed), 0.0, 1.0);
+			A.setPower(speed);
+			B.setPower(speed);
+			C.setPower(speed);
+			D.setPower(speed);
 
-				A.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-				B.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-				C.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-				D.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			// keep looping while we are still active, and BOTH motors are running.
+			while (autonomousCore.opModeIsActive() &&
+					(A.isBusy() && B.isBusy() && C.isBusy() && D.isBusy())) {
 
-				// start motion.
-				speed = Range.clip(Math.abs(speed), 0.0, 1.0);
-				A.setPower(speed);
-				B.setPower(speed);
-				C.setPower(speed);
-				D.setPower(speed);
+				// adjust relative speed based on heading error.
+				error = getError(angle);
+				steer = getSteer(error, P_DRIVE_COEFF);
 
-				// keep looping while we are still active, and BOTH motors are running.
-				while (autonomousCore.opModeIsActive() &&
-						(A.isBusy() && B.isBusy() && C.isBusy() && D.isBusy())) {
+				// if driving in reverse, the motor correction also needs to be reversed
+				if (distance < 0)
+					steer *= -1.0;
 
-					// adjust relative speed based on heading error.
-					error = getError(angle);
-					steer = getSteer(error, P_DRIVE_COEFF);
+				leftSpeed = speed - steer;
+				rightSpeed = speed + steer;
 
-					// if driving in reverse, the motor correction also needs to be reversed
-					if (distance < 0)
-						steer *= -1.0;
-
-					leftSpeed = speed - steer;
-					rightSpeed = speed + steer;
-
-					// Normalize speeds if either one exceeds +/- 1.0;
-					max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
-					if (max > 1.0) {
-						leftSpeed /= max;
-						rightSpeed /= max;
-					}
-
-					A.setPower(leftSpeed);
-					B.setPower(rightSpeed);
-					D.setPower(leftSpeed);
-					C.setPower(rightSpeed);
-
-					// Display drive status for the driver.
-					autonomousCore.telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
-					autonomousCore.telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
-					autonomousCore.telemetry.addData("Actual", "%7d:%7d", A.getCurrentPosition(),
-							B.getCurrentPosition());
-					autonomousCore.telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
-					autonomousCore.telemetry.update();
-
+				// Normalize speeds if either one exceeds +/- 1.0;
+				max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
+				if (max > 1.0) {
+					leftSpeed /= max;
+					rightSpeed /= max;
 				}
 
-				// Stop all motion;
-				A.setPower(0);
-				B.setPower(0);
-				C.setPower(0);
-				D.setPower(0);
+				A.setPower(leftSpeed);
+				B.setPower(rightSpeed);
+				D.setPower(leftSpeed);
+				C.setPower(rightSpeed);
 
-				// Turn off RUN_TO_POSITION
-				A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-				B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-				C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-				D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+				// Display drive status for the driver.
+/*				autonomousCore.telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+				autonomousCore.telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
+				autonomousCore.telemetry.addData("Actual", "%7d:%7d", A.getCurrentPosition(),
+						B.getCurrentPosition());
+				autonomousCore.telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+				autonomousCore.telemetry.update();
+*/
 			}
+
+			// Stop all motion;
+			A.setPower(0);
+			B.setPower(0);
+			C.setPower(0);
+			D.setPower(0);
+
+			// Turn off RUN_TO_POSITION
+			A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		}
 	}
 
@@ -247,15 +245,10 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *              If a relative angle is required, add/subtract from current heading.
 	 */
 	public void gyroTurn(double speed, double angle) {
-		if (useGyro) {
-
-			setupForTank(true);
-
-			// keep looping while we are still active, and not on heading.
-			while (autonomousCore.opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
-				// Update telemetry & Allow time for other processes to run.
-				autonomousCore.telemetry.update();
-			}
+		// keep looping while we are still active, and not on heading.
+		while (autonomousCore.opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
+			// Update telemetry & Allow time for other processes to run.
+			autonomousCore.telemetry.update();
 		}
 	}
 
@@ -270,26 +263,22 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @param holdTime Length of time (in seconds) to hold the specified heading.
 	 */
 	public void gyroHold(double speed, double angle, double holdTime) {
-		if (useGyro) {
 
-			setupForTank(true);
+		ElapsedTime holdTimer = new ElapsedTime();
 
-			ElapsedTime holdTimer = new ElapsedTime();
-
-			// keep looping while we have time remaining.
-			holdTimer.reset();
-			while (autonomousCore.opModeIsActive() && (holdTimer.time() < holdTime)) {
-				// Update telemetry & Allow time for other processes to run.
-				onHeading(speed, angle, P_TURN_COEFF);
-				autonomousCore.telemetry.update();
-			}
-
-			// Stop all motion;
-			A.setPower(0);
-			B.setPower(0);
-			C.setPower(0);
-			D.setPower(0);
+		// keep looping while we have time remaining.
+		holdTimer.reset();
+		while (autonomousCore.opModeIsActive() && (holdTimer.time() < holdTime)) {
+			// Update telemetry & Allow time for other processes to run.
+			onHeading(speed, angle, P_TURN_COEFF);
+			autonomousCore.telemetry.update();
 		}
+
+		// Stop all motion;
+		A.setPower(0);
+		B.setPower(0);
+		C.setPower(0);
+		D.setPower(0);
 	}
 
 	/**
@@ -303,45 +292,39 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @return if on Heading
 	 */
 	boolean onHeading(double speed, double angle, double PCoeff) {
-		if (useGyro) {
+		double error;
+		double steer;
+		boolean onTarget = false;
+		double leftSpeed;
+		double rightSpeed;
 
-			setupForTank(true);
+		// determine turn power based on +/- error
+		error = getError(angle);
 
-			double error;
-			double steer;
-			boolean onTarget = false;
-			double leftSpeed;
-			double rightSpeed;
-
-			// determine turn power based on +/- error
-			error = getError(angle);
-
-			if (Math.abs(error) <= HEADING_THRESHOLD) {
-				steer = 0.0;
-				leftSpeed = 0.0;
-				rightSpeed = 0.0;
-				onTarget = true;
-			} else {
-				steer = getSteer(error, PCoeff);
-				rightSpeed = speed * steer;
-				leftSpeed = -rightSpeed;
-			}
-
-			// Send desired speeds to motors.
-			A.setPower(leftSpeed);
-			D.setPower(leftSpeed);
-			B.setPower(rightSpeed);
-			C.setPower(rightSpeed);
-
-			// Display it for the driver.
-			autonomousCore.telemetry.addLine("Adjusting Error");
-			autonomousCore.telemetry.addData("Target", "%5.2f", angle);
-			autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-			autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
-
-			return onTarget;
+		if (Math.abs(error) <= HEADING_THRESHOLD) {
+			steer = 0.0;
+			leftSpeed = 0.0;
+			rightSpeed = 0.0;
+			onTarget = true;
+		} else {
+			steer = getSteer(error, PCoeff);
+			rightSpeed = speed * steer;
+			leftSpeed = -rightSpeed;
 		}
-		return true;
+
+		// Send desired speeds to motors.
+		A.setPower(leftSpeed);
+		D.setPower(leftSpeed);
+		B.setPower(rightSpeed);
+		C.setPower(rightSpeed);
+
+		// Display it for the driver.
+		autonomousCore.telemetry.addLine("Adjusting Error");
+		autonomousCore.telemetry.addData("Target", "%5.2f", angle);
+		autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
+		autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+
+		return onTarget;
 	}
 
 	/**
@@ -351,20 +334,15 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @return error angle: Degrees in the range +/- 180. Centered on the robot's frame of reference
 	 * +ve error means the robot should turn LEFT (CCW) to reduce error.
 	 */
-	private double getError(double targetAngle) {
-		if (useGyro) {
+	public double getError(double targetAngle) {
 
-			setupForTank(true);
+		double robotError;
 
-			double robotError;
-
-			// calculate error in -179 to +180 range  (
-			robotError = targetAngle - gyro.getIntegratedZValue();
-			while (robotError > 180) robotError -= 360;
-			while (robotError <= -180) robotError += 360;
-			return robotError;
-		}
-		return 0;
+		// calculate error in -179 to +180 range  (
+		robotError = targetAngle - gyro.getIntegratedZValue();
+		while (robotError > 180) robotError -= 360;
+		while (robotError <= -180) robotError += 360;
+		return robotError;
 	}
 
 	/**
@@ -372,17 +350,11 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *
 	 * @param error  Error angle in robot relative degrees
 	 * @param PCoeff Proportional Gain Coefficient
-	 * @return the steer value
+	 * @return the Steer value
 	 */
-	private double getSteer(double error, double PCoeff) {
-		if (useGyro) {
-			return Range.clip(error * PCoeff, -1, 1);
-		} else {
-			return 0;
-		}
+	public double getSteer(double error, double PCoeff) {
+		return Range.clip(error * PCoeff, -1, 1);
 	}
-
-	private double rangeBaseValue = 0;
 
 	/**
 	 * Drives to the next cryptobox column using the<br>

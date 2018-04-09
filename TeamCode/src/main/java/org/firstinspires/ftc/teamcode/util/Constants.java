@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.util;
  */
 public class Constants {
 
-	//motor names
+	//motor names0
 
 	//drives for tank-drive
 	public static final String rd_name = "right_drive";
