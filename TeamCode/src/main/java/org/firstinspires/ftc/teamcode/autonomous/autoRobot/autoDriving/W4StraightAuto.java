@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -53,7 +52,7 @@ public class W4StraightAuto {
 		C.setPower(0.9);
 		D.setPower(0.9);
 		while (autonomousCore.opModeIsActive()) {
-			if (A.isBusy() && B.isBusy() && C.isBusy() && D.isBusy()) {
+			if (A.isBusy() || B.isBusy() || C.isBusy() || D.isBusy()) {
 				/*autonomousCore.telemetry.addLine(String.valueOf(A.getCurrentPosition()));
 				autonomousCore.telemetry.addLine(String.valueOf(B.getCurrentPosition()));
 				autonomousCore.telemetry.addLine(String.valueOf(C.getCurrentPosition()));
@@ -68,6 +67,12 @@ public class W4StraightAuto {
 		B.setPower(0);
 		C.setPower(0);
 		D.setPower(0);
+
+		//Turn off RunToPosition
+		A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 	}
 
 	/**
