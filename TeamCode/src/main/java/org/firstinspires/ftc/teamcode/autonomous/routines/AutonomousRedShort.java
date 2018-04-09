@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 
@@ -19,8 +20,9 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 		//Jewels
 		kickJewel(JewelColor.BLUE);
 		//VuMark
-		detectedVuMark = scanWithTurn();
-
+		if (drive.isRangeUsed()) {
+			detectedVuMark = scanWithTurn();
+		}
 		//VOR,RECHTS,VOR
 
 		//VOR

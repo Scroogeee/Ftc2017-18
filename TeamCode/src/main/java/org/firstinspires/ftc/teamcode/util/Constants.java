@@ -45,6 +45,7 @@ public class Constants {
 
 	public static final String gyro_name = "drive_gyro";
 	public static final String reader_name = "reader";
+	public static final String servoFrog_name = "frog_servo";
 
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
 	public static final double RANGE_THRESHOLD = 2;
