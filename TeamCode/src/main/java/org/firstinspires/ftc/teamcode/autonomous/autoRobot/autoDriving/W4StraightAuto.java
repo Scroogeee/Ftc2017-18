@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -31,6 +32,7 @@ public class W4StraightAuto {
 	 * Drives the robot by the specified number of pulses using tank drive
 	 */
 	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
+		setupForTank(false);
 		/**Reset Encoders*/
 		A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 		B.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -73,6 +75,20 @@ public class W4StraightAuto {
 		B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+	}
+
+	protected void setupForTank(boolean b) {
+		if (b) {
+			A.setDirection(DcMotorSimple.Direction.REVERSE);
+			B.setDirection(DcMotorSimple.Direction.FORWARD);
+			C.setDirection(DcMotorSimple.Direction.FORWARD);
+			D.setDirection(DcMotorSimple.Direction.REVERSE);
+		} else {
+			A.setDirection(DcMotorSimple.Direction.FORWARD);
+			B.setDirection(DcMotorSimple.Direction.FORWARD);
+			C.setDirection(DcMotorSimple.Direction.FORWARD);
+			D.setDirection(DcMotorSimple.Direction.FORWARD);
+		}
 	}
 
 	/**

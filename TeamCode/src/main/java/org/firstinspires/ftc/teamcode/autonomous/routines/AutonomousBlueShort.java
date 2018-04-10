@@ -29,7 +29,7 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 
 		//ZURÜCK
 		if (!drive.isRangeUsed()) {
-			drive.driveByPulses(3000, 1, -1);
+			drive.driveByPulses(3200, 1, -1);
 		} else {
 			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark), DcMotorSimple.Direction.REVERSE);
 		}
@@ -39,7 +39,7 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 			drive.driveByPulses(1800, -1, -1);
 		} else {
 			drive.gyroTurn(TURN_SPEED, -90);
-			drive.gyroHold(TURN_SPEED, -90, 0.5);
+			drive.gyroHold(TURN_SPEED, -90, 1);
 		}
 		sleep(300);
 		//VOR

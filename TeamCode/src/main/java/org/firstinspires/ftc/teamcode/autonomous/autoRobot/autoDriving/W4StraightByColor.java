@@ -20,6 +20,7 @@ import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GR
 import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
 import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
 import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -30,15 +31,15 @@ public class W4StraightByColor extends W4StraightAuto {
 	// These constants define the desired driving/control characteristics
 	// The can/should be tweaked to suite the specific robot drive train.
 	public static final double DRIVE_SPEED = 1;     // Nominal speed for better accuracy.
-	public static final double TURN_SPEED = DRIVE_SPEED;     // Nominal half speed for better accuracy.
+	public static final double TURN_SPEED = 0.7;     // Nominal half speed for better accuracy.
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
 	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
-	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
-	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
+	static final double P_TURN_COEFF = 0.3;     // Larger is more responsive, but also less stable
+	static final double P_DRIVE_COEFF = 0.13;     // Larger is more responsive, but also less stable
 	/**
 	 * Gyro
 	 */
@@ -85,7 +86,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * Initializes the range sensor
 	 */
 	private void initRange() {
-		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, range_sensor_name);
 		calibrateRange();
 	}
 
@@ -121,10 +122,6 @@ public class W4StraightByColor extends W4StraightAuto {
 		D.setMode(RUN_USING_ENCODER);
 		gyro.resetZAxisIntegrator();
 
-		A.setDirection(DcMotorSimple.Direction.REVERSE);
-		B.setDirection(DcMotorSimple.Direction.FORWARD);
-		C.setDirection(DcMotorSimple.Direction.FORWARD);
-		D.setDirection(DcMotorSimple.Direction.REVERSE);
 	}
 
 	/**
@@ -154,6 +151,7 @@ public class W4StraightByColor extends W4StraightAuto {
 
 		// Ensure that the opmode is still active
 		if (autonomousCore.opModeIsActive()) {
+			setupForTank(true);
 			autonomousCore.telemetry.addData("A:", A.getTargetPosition());
 			autonomousCore.telemetry.addData("B:", B.getTargetPosition());
 			autonomousCore.telemetry.addData("C:", C.getTargetPosition());
@@ -245,6 +243,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *              If a relative angle is required, add/subtract from current heading.
 	 */
 	public void gyroTurn(double speed, double angle) {
+		setupForTank(true);
 		// keep looping while we are still active, and not on heading.
 		while (autonomousCore.opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
 			// Update telemetry & Allow time for other processes to run.
@@ -263,7 +262,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @param holdTime Length of time (in seconds) to hold the specified heading.
 	 */
 	public void gyroHold(double speed, double angle, double holdTime) {
-
+		setupForTank(true);
 		ElapsedTime holdTimer = new ElapsedTime();
 
 		// keep looping while we have time remaining.
@@ -363,6 +362,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @param d the direction
 	 */
 	private void driveToNextColumnByRange(DcMotorSimple.Direction d) {
+		setupForTank(false);
 		if (useRange) {
 			//Drive past the last column
 			while (autonomousCore.opModeIsActive() &&

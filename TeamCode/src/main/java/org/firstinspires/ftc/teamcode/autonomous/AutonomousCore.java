@@ -41,8 +41,12 @@ public abstract class AutonomousCore extends LinearOpMode {
 	public void runOpMode() {
 		initialize();
 		waitForStart();
-		upRelic();
-		routine();
+		if (opModeIsActive()) {
+			upRelic();
+		}
+		if (opModeIsActive()) {
+			routine();
+		}
 	}
 
 	/**
@@ -92,7 +96,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	 */
 	protected void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
-		jewelControl.updateArm(0.4);
+		jewelControl.updateArm(0.325);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		//TODO remove debugging

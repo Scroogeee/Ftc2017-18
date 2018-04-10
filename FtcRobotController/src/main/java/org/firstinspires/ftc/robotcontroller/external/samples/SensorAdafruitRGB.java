@@ -32,6 +32,7 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -70,12 +71,11 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 @Disabled                            // Comment this out to add to the opmode list
 public class SensorAdafruitRGB extends LinearOpMode {
 
-  ColorSensor sensorRGB;
-  DeviceInterfaceModule cdim;
-
   // we assume that the LED pin of the RGB sensor is connected to
   // digital port 5 (zero indexed).
   static final int LED_CHANNEL = 5;
+	ColorSensor sensorRGB;
+	DeviceInterfaceModule cdim;
 
   @Override
   public void runOpMode() {
