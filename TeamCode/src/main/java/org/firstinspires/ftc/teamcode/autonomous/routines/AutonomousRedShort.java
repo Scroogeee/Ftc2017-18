@@ -32,7 +32,9 @@ public class AutonomousRedShort {
 		}
 		if (strategy.doCrypto()) {
 			//VuMark
-			vuMarkAutonomous.scanWithTurn();
+			if (drive.isRangeUsed()) {
+				vuMarkAutonomous.detectedVuMark = vuMarkAutonomous.scanWithTurn();
+			}
 
 			//VOR,RECHTS,VOR
 
@@ -40,19 +42,25 @@ public class AutonomousRedShort {
 			if (!drive.isRangeUsed()) {
 				drive.driveByPulses(3200, -1, 1);
 			} else {
-				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()), DcMotorSimple.Direction.FORWARD);
+				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()),
+						DcMotorSimple.Direction.FORWARD);
 			}
+
 			vuMarkAutonomous.sleep(300);
+
 			//RECHTS
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1800, -1, -1);
 			} else {
 				drive.gyroTurn(TURN_SPEED, -90);
+				drive.gyroHold(TURN_SPEED, -90, 1);
 			}
+
 			vuMarkAutonomous.sleep(300);
 			//VOR
 			drive.driveByPulses(1500, -1, 1);
 			vuMarkAutonomous.sleep(300);
+			//release glyph
 			vuMarkAutonomous.glyph_servo.setPower(-1);
 			vuMarkAutonomous.sleep(1200);
 			//ZURÜCK
@@ -64,6 +72,7 @@ public class AutonomousRedShort {
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			//textToSpeech.shutdown();
+
 		}
 
 	}

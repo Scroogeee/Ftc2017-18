@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.util;
  */
 public class Constants {
 
-	//motor names
+	//motor names0
 
 	//drives for tank-drive
 	public static final String rd_name = "right_drive";
@@ -45,6 +45,8 @@ public class Constants {
 
 	public static final String gyro_name = "sensor_gyro";
 	public static final String reader_name = "reader";
+	public static final String servoFrog_name = "servo_frog";
+	public static final String range_sensor_name = "sensor_range";
 
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
 	public static final double RANGE_THRESHOLD = 2;

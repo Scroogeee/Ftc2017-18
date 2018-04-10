@@ -34,26 +34,32 @@ public class AutonomousBlueLong {
 			//VuMark
 			vuMarkAutonomous.scanWithTurn();
 
+
 			//ZURÜCK,LINKS,VOR,LINKS,VOR
+
 
 			//ZURÜCK
 			drive.driveByPulses(2500, 1, -1);
 			vuMarkAutonomous.sleep(300);
+
 			//RECHTS
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1400, -1, -1);
 			} else {
-				drive.gyroTurn(TURN_SPEED, -90);
+				drive.gyroTurn(TURN_SPEED, -180);
+				drive.gyroHold(TURN_SPEED, -180, 1);
 			}
-
 			vuMarkAutonomous.sleep(300);
+
 			//ZURÜCK
 			if (!drive.isRangeUsed()) {
 				drive.driveByPulses(1250, 1, -1);
 			} else {
-				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()), DcMotorSimple.Direction.REVERSE);
+				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()),
+						DcMotorSimple.Direction.REVERSE);
 			}
 			vuMarkAutonomous.sleep(300);
+
 			//RECHTS
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1600, -1, -1);
@@ -61,18 +67,23 @@ public class AutonomousBlueLong {
 				drive.gyroTurn(TURN_SPEED, -180);
 			}
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(800, -1, 1);
 			vuMarkAutonomous.sleep(300);
 
+			//release glyph
 			vuMarkAutonomous.glyph_servo.setPower(-1);
 			vuMarkAutonomous.sleep(1200);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(300, -1, 1);
 			vuMarkAutonomous.sleep(300);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			//textToSpeech.shutdown();

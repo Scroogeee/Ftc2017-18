@@ -40,27 +40,36 @@ public class AutonomousBlueShort {
 			if (!drive.isRangeUsed()) {
 				drive.driveByPulses(3000, 1, -1);
 			} else {
-				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()), DcMotorSimple.Direction.REVERSE);
+				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()),
+						DcMotorSimple.Direction.REVERSE);
 			}
 			vuMarkAutonomous.sleep(300);
+
 			//RECHTS
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1800, -1, -1);
 			} else {
 				drive.gyroTurn(TURN_SPEED, -90);
+				drive.gyroHold(TURN_SPEED, -90, 1);
 			}
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(1500, -1, 1);
 			vuMarkAutonomous.sleep(300);
+
+			//release glyph
 			vuMarkAutonomous.glyph_servo.setPower(-1);
 			vuMarkAutonomous.sleep(1200);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(300, -1, 1);
 			vuMarkAutonomous.sleep(300);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			//textToSpeech.shutdown();

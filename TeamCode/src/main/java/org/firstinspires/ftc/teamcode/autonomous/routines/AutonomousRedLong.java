@@ -43,6 +43,7 @@ public class AutonomousRedLong {
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1400, 1, 1);
 			} else {
+				drive.gyroHold(TURN_SPEED, 90, 1);
 				drive.gyroTurn(TURN_SPEED, 90);
 			}
 			vuMarkAutonomous.sleep(300);
@@ -57,12 +58,14 @@ public class AutonomousRedLong {
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1700, -1, -1);
 			} else {
+				drive.gyroHold(TURN_SPEED, 0, 1);
 				drive.gyroTurn(TURN_SPEED, 0);
 			}
 			vuMarkAutonomous.sleep(300);
 			//VOR
 			drive.driveByPulses(1000, -1, 1);
 			vuMarkAutonomous.sleep(300);
+			//release glyph
 			vuMarkAutonomous.glyph_servo.setPower(-1);
 			vuMarkAutonomous.sleep(1200);
 			//ZURÜCK
@@ -74,6 +77,7 @@ public class AutonomousRedLong {
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			//textToSpeech.shutdown();
+
 		}
 	}
 }
