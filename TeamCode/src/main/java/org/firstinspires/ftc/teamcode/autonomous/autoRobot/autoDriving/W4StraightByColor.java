@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
@@ -15,11 +14,9 @@ import java.util.ArrayList;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
-import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
-import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
+
 
 /**
  * Created by FTC on 25.01.2018.
@@ -29,16 +26,18 @@ public class W4StraightByColor extends W4StraightAuto {
 
 	// These constants define the desired driving/control characteristics
 	// The can/should be tweaked to suite the specific robot drive train.
-	public static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
-	public static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
+
+	public static final double DRIVE_SPEED = 1;     // Nominal speed for better accuracy.
+	public static final double TURN_SPEED = 0.7;     // Nominal half speed for better accuracy.
+
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
 	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
 			(WHEEL_DIAMETER_INCHES * 3.1415926535);
 	static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
-	static final double P_TURN_COEFF = 0.5;     // Larger is more responsive, but also less stable
-	static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
+	static final double P_TURN_COEFF = 0.3;     // Larger is more responsive, but also less stable
+	static final double P_DRIVE_COEFF = 0.13;     // Larger is more responsive, but also less stable
 	/**
 	 * Gyro
 	 */
@@ -51,6 +50,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	private boolean useGyro = false;
 	private boolean useRange = false;
 	private double rangeBaseValue = 0;
+
 	public W4StraightByColor(AutonomousCore param_ac) {
 		super(param_ac);
 	}
@@ -85,7 +85,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * Initializes the range sensor
 	 */
 	private void initRange() {
-		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+		rangeSensor = autonomousCore.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, range_sensor_name);
 		calibrateRange();
 	}
 
@@ -93,8 +93,6 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * Initializes the gyroscope
 	 */
 	private void initGyro() {
-		setupForTank(true);
-
 		gyro = (ModernRoboticsI2cGyro) autonomousCore.hardwareMap.gyroSensor.get(gyro_name);
 
 		// Ensure the robot it stationary, then reset the encoders and calibrate the gyro.
@@ -122,8 +120,8 @@ public class W4StraightByColor extends W4StraightAuto {
 		B.setMode(RUN_USING_ENCODER);
 		C.setMode(RUN_USING_ENCODER);
 		D.setMode(RUN_USING_ENCODER);
-
 		gyro.resetZAxisIntegrator();
+
 	}
 
 	/**
@@ -220,6 +218,26 @@ public class W4StraightByColor extends W4StraightAuto {
 					autonomousCore.telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
 					autonomousCore.telemetry.update();*/
 
+					// Normalize speeds if either one exceeds +/- 1.0;
+					max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
+					if (max > 1.0) {
+						leftSpeed /= max;
+						rightSpeed /= max;
+					}
+
+					A.setPower(leftSpeed);
+					B.setPower(rightSpeed);
+					D.setPower(leftSpeed);
+					C.setPower(rightSpeed);
+
+					// Display drive status for the driver.
+/*				autonomousCore.telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+				autonomousCore.telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
+				autonomousCore.telemetry.addData("Actual", "%7d:%7d", A.getCurrentPosition(),
+						B.getCurrentPosition());
+				autonomousCore.telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+				autonomousCore.telemetry.update();
+*/
 				}
 
 				// Stop all motion;
@@ -250,9 +268,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	public void gyroTurn(double speed, double angle) {
 		if (useGyro) {
-
 			setupForTank(true);
-
 			// keep looping while we are still active, and not on heading.
 			while (autonomousCore.opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
 				// Update telemetry & Allow time for other processes to run.
@@ -273,9 +289,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	public void gyroHold(double speed, double angle, double holdTime) {
 		if (useGyro) {
-
 			setupForTank(true);
-
 			ElapsedTime holdTimer = new ElapsedTime();
 
 			// keep looping while we have time remaining.
@@ -305,45 +319,40 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @return if on Heading
 	 */
 	boolean onHeading(double speed, double angle, double PCoeff) {
-		if (useGyro) {
+		double error;
+		double steer;
+		boolean onTarget = false;
+		double leftSpeed;
+		double rightSpeed;
 
-			setupForTank(true);
+		// determine turn power based on +/- error
+		error = getError(angle);
 
-			double error;
-			double steer;
-			boolean onTarget = false;
-			double leftSpeed;
-			double rightSpeed;
+		if (Math.abs(error) <= HEADING_THRESHOLD) {
+			steer = 0.0;
+			leftSpeed = 0.0;
+			rightSpeed = 0.0;
+			onTarget = true;
+		} else {
+			steer = getSteer(error, PCoeff);
+			rightSpeed = speed * steer;
+			leftSpeed = -rightSpeed;
+		}
 
-			// determine turn power based on +/- error
-			error = getError(angle);
+		// Send desired speeds to motors.
+		A.setPower(leftSpeed);
+		D.setPower(leftSpeed);
+		B.setPower(rightSpeed);
+		C.setPower(rightSpeed);
 
-			if (Math.abs(error) <= HEADING_THRESHOLD) {
-				steer = 0.0;
-				leftSpeed = 0.0;
-				rightSpeed = 0.0;
-				onTarget = true;
-			} else {
-				steer = getSteer(error, PCoeff);
-				rightSpeed = speed * steer;
-				leftSpeed = -rightSpeed;
-			}
-
-			// Send desired speeds to motors.
-			A.setPower(leftSpeed);
-			D.setPower(leftSpeed);
-			B.setPower(rightSpeed);
-			C.setPower(rightSpeed);
-
-			// Display it for the driver.
+		// Display it for the driver.
 			/*autonomousCore.telemetry.addLine("Adjusting Error");
 			autonomousCore.telemetry.addData("Target", "%5.2f", angle);
 			autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
 			autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);*/
 
-			return onTarget;
-		}
-		return true;
+
+		return onTarget;
 	}
 
 	/**
@@ -354,19 +363,14 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * +ve error means the robot should turn LEFT (CCW) to reduce error.
 	 */
 	private double getError(double targetAngle) {
-		if (useGyro) {
 
-			setupForTank(true);
+		double robotError;
 
-			double robotError;
-
-			// calculate error in -179 to +180 range  (
-			robotError = targetAngle - gyro.getIntegratedZValue();
-			while (robotError > 180) robotError -= 360;
-			while (robotError <= -180) robotError += 360;
-			return robotError;
-		}
-		return 0;
+		// calculate error in -179 to +180 range  (
+		robotError = targetAngle - gyro.getIntegratedZValue();
+		while (robotError > 180) robotError -= 360;
+		while (robotError <= -180) robotError += 360;
+		return robotError;
 	}
 
 	/**
@@ -374,14 +378,10 @@ public class W4StraightByColor extends W4StraightAuto {
 	 *
 	 * @param error  Error angle in robot relative degrees
 	 * @param PCoeff Proportional Gain Coefficient
-	 * @return the steer value
+	 * @return the Steer value
 	 */
 	private double getSteer(double error, double PCoeff) {
-		if (useGyro) {
-			return Range.clip(error * PCoeff, -1, 1);
-		} else {
-			return 0;
-		}
+		return Range.clip(error * PCoeff, -1, 1);
 	}
 
 	/**
@@ -391,6 +391,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * @param d the direction
 	 */
 	private void driveToNextColumnByRange(DcMotorSimple.Direction d) {
+		setupForTank(false);
 		if (useRange) {
 			//Drive past the last column
 			while (autonomousCore.opModeIsActive() &&
@@ -437,7 +438,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	 * Sets the range base value to the <br>
 	 * current reading of the sensor
 	 */
-	public void calibrateRange() {
+	private void calibrateRange() {
 		if (useRange) {
 			ArrayList<Double> list = new ArrayList<>();
 			double average = 0;

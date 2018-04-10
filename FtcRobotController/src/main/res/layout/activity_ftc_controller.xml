@@ -33,12 +33,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/entire_screen"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context="org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity"
               android:focusable="true"
-              android:id="@+id/entire_screen"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              tools:context="org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity">
 
   <!-- black bar on top -->
   <RelativeLayout
@@ -48,46 +48,47 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     android:background="@color/background_black">
 
     <ImageView
-            android:id="@+id/robotIcon"
-            android:src="@drawable/icon_robotcontroller"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:adjustViewBounds="true"
-            android:layout_margin="1dp"
-            android:contentDescription="@string/roboticon"
+		    android:id="@+id/robotIcon"
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:layout_margin="1dp"
+		    android:adjustViewBounds="true"
+		    android:contentDescription="@string/roboticon"
+		    android:src="@drawable/icon_robotcontroller"
     />
 
     <TextView
-      android:id="@+id/textDeviceName"
-      android:layout_toEndOf="@id/robotIcon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textColor="?attr/textWhite"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:padding="8dp"
-      android:textStyle="bold"/>
+		    android:id="@+id/textDeviceName"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toEndOf="@id/robotIcon"
+		    android:padding="8dp"
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+		    android:textColor="?attr/textWhite"
+		    android:textStyle="bold"/>
 
     <ImageButton
-            android:id="@+id/menu_buttons"
-            android:scaleType="fitXY"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_menu"
-            android:background="@android:color/transparent"
-            android:padding="15dp"
-            android:adjustViewBounds="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:contentDescription="@string/properties"
+		    android:id="@+id/menu_buttons"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentEnd="true"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerInParent="true"
+		    android:layout_margin="10dp"
+		    android:adjustViewBounds="true"
+		    android:background="@android:color/transparent"
+		    android:contentDescription="@string/properties"
+		    android:padding="15dp"
+		    android:scaleType="fitXY"
+		    android:src="@drawable/icon_menu"
     />
 
   </RelativeLayout>
   <!-- end of black bar -->
 
-  <include layout="@layout/header"
-           android:id="@+id/included_header"/>
+	<include
+			android:id="@+id/included_header"
+			layout="@layout/header"/>
 
   <RelativeLayout
     android:id="@+id/RelativeLayout"
@@ -100,33 +101,33 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
-      android:id="@+id/textNetworkConnectionStatus"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textNetworkConnectionStatus"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text=""
+		    android:visibility="invisible"/>
 
     <TextView
-      android:id="@+id/textRobotStatus"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/textNetworkConnectionStatus"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textRobotStatus"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/textNetworkConnectionStatus"
+		    android:text=""
+		    android:visibility="invisible"/>
 
     <TextView
-      android:id="@+id/textOpMode"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/textRobotStatus"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textOpMode"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/textRobotStatus"
+		    android:text=""
+		    android:visibility="invisible"/>
 
     <FrameLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/textOpMode"
-      android:layout_above="@+id/textGamepad1">
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_above="@+id/textGamepad1"
+		    android:layout_below="@+id/textOpMode">
 
       <LinearLayout
           android:id="@+id/cameraMonitorViewId"
@@ -140,44 +141,45 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
            allow for a bigger camera monitor view in the common case when the
            error is not in fact present
         -->
-        <TextView style="@style/FtcTextViewStyleBold"
-            android:id="@+id/textErrorMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:visibility="invisible"
-            android:textColor="?attr/textMediumDark" />
+	    <TextView
+			    android:id="@+id/textErrorMessage"
+			    style="@style/FtcTextViewStyleBold"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text=""
+			    android:textColor="?attr/textMediumDark"
+			    android:visibility="invisible"/>
 
     </FrameLayout>
 
     <TextView
-      android:id="@+id/textGamepad1"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_above="@+id/textGamepad2"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textGamepad1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_above="@+id/textGamepad2"
+		    android:text=""
+		    android:visibility="invisible"/>
 
     <TextView
-      android:id="@+id/textGamepad2"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textGamepad2"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:text=""
+		    android:visibility="invisible"/>
 
     <!-- invisible except when programming mode is activated from the DS -->
     <TextView
-      android:id="@+id/textRemoteProgrammingMode"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="?attr/backgroundLight"
-      android:gravity="center"
-      android:textColor="?attr/textWhite"
-      android:textSize="40sp"
-      android:textStyle="bold"
-      android:visibility="invisible"
-      android:text="" />
+		    android:id="@+id/textRemoteProgrammingMode"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:background="?attr/backgroundLight"
+		    android:gravity="center"
+		    android:text=""
+		    android:textColor="?attr/textWhite"
+		    android:textSize="40sp"
+		    android:textStyle="bold"
+		    android:visibility="invisible"/>
 
   </RelativeLayout>
 

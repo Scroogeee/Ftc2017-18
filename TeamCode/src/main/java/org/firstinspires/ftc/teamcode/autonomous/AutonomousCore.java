@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
@@ -52,7 +50,12 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		initialize();
 		waitForStart();
 		dashboard.clearDisplay();
-		upRelic();
+		if (opModeIsActive()) {
+			upRelic();
+		}
+		if (opModeIsActive()) {
+			routine();
+		}
 	}
 
 	protected abstract void routine();
@@ -65,6 +68,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		modeDetector.initialize(this.hardwareMap);
 		sleep(1000);
 		hardwareConfiguration = modeDetector.getConfiguration();
+		//TODO remove debugging
 		/*telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
 		telemetry.addData("Hue: ", modeDetector.getHue());
 		telemetry.update();*/
@@ -104,6 +108,7 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 		cryptoMenu.addChoice("Yes", true, true);
 		cryptoMenu.addChoice("No", false, false);
 
+		//let the user choose
 		FtcMenu.walkMenuTree(startPositionMenu, this);
 
 		strategy = new AutonomousStrategy(AutonomousStrategy.getAllianceFromBalancingStone(startPositionMenu.getCurrentChoiceObject()),
@@ -153,14 +158,14 @@ public abstract class AutonomousCore extends LinearOpMode implements FtcMenu.Men
 	 */
 	public void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
-		jewelControl.updateArm(0.27);
+		jewelControl.updateArm(0.325);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		/*
 		telemetry.addData("CurrentColor:", currentJewelColor.toString());
 		telemetry.update();*/
 		sleep(1000);
-		if (currentJewelColor != null) {
+		if (currentJewelColor != null && currentJewelColor != JewelColor.NONE) {
 			if (currentJewelColor.equals(toKick)) {
 				if (drive.isGyroUsed()) {
 					drive.gyroTurn(TURN_SPEED, 30);

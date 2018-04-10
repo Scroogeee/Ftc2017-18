@@ -31,12 +31,10 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightAuto;
 import org.firstinspires.ftc.teamcode.util.Constants;
@@ -73,7 +71,6 @@ import org.firstinspires.ftc.teamcode.util.Constants;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@Disabled
 @Autonomous(name = "Pushbot_Auto_Drive_By_Gyro", group = "Test")
 public class AutoGyroTest extends AutonomousCore {
 
@@ -96,10 +93,10 @@ public class AutoGyroTest extends AutonomousCore {
 	@Override
 	public void runOpMode() {
 
-        /*
-         * Initialize the standard drive system variables.
-         * The initialize() method of the hardware class does most of the work here
-         */
+		/*
+		 * Initialize the standard drive system variables.
+		 * The initialize() method of the hardware class does most of the work here
+		 */
 		robot.initialize();
 		robot.A.setDirection(DcMotorSimple.Direction.REVERSE);
 		robot.B.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -145,6 +142,11 @@ public class AutoGyroTest extends AutonomousCore {
 		}
 
 		gyro.resetZAxisIntegrator();
+		routine();
+	}
+
+	@Override
+	protected void routine() {
 
 		// Step through each leg of the path,
 		// Note: Reverse movement is obtained by setting a negative distance (not speed)
@@ -177,11 +179,6 @@ public class AutoGyroTest extends AutonomousCore {
 		dashboard.refreshDisplay();
 
 		//textToSpeech.shutdown();
-	}
-
-	@Override
-	protected void routine() {
-
 	}
 
 
@@ -378,10 +375,10 @@ public class AutoGyroTest extends AutonomousCore {
 		robot.C.setPower(rightSpeed);
 
 		// Display it for the driver.
-		/*telemetry.addLine("Adjusting Error");
-		telemetry.addData("Target", "%5.2f", angle);
-		telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-		telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);*/
+		dashboard.displayPrintf(1, "Adjusting Error");
+		dashboard.displayPrintf(2, "Target", "%5.2f", angle);
+		dashboard.displayPrintf(3, "Err/St", "%5.2f/%5.2f", error, steer);
+		dashboard.displayPrintf(4, "Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
 
 		return onTarget;
 	}

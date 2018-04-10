@@ -19,51 +19,65 @@ import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4
 public class AutonomousRedShort {
 
 	private VuMarkAutonomous vuMarkAutonomous;
-	private W4StraightByColor drive = vuMarkAutonomous.getDrive();
+	private W4StraightByColor drive;
 
-	public AutonomousRedShort(VuMarkAutonomous param_vuMarkAutonomous) {
+	public void initialize(VuMarkAutonomous param_vuMarkAutonomous) {
 		this.vuMarkAutonomous = param_vuMarkAutonomous;
+		drive = vuMarkAutonomous.getDrive();
 	}
 
 	public void routine(AutonomousStrategy strategy) {
 		if (strategy.doJewel()) {
-			//Jewels
+			//Jewels herunter kicken
 			vuMarkAutonomous.kickJewel(JewelColor.BLUE);
 		}
 		if (strategy.doCrypto()) {
 			//VuMark
-			vuMarkAutonomous.scanWithTurn();
+			if (drive.isRangeUsed()) {
+				vuMarkAutonomous.scanWithTurn();
+			}
 
 			//VOR,RECHTS,VOR
 
 			//VOR
 			if (!drive.isRangeUsed()) {
-				drive.driveByPulses(3200, -1, 1);
+				drive.driveByPulses(3100, -1, 1);
 			} else {
-				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()), DcMotorSimple.Direction.FORWARD);
+				drive.driveToColumnByRange(vuMarkAutonomous.VuMarkToInt(vuMarkAutonomous.getDetectedVuMark()),
+						DcMotorSimple.Direction.FORWARD);
 			}
+
 			vuMarkAutonomous.sleep(300);
+
 			//RECHTS
 			if (!drive.isGyroUsed()) {
 				drive.driveByPulses(1800, -1, -1);
 			} else {
 				drive.gyroTurn(TURN_SPEED, -90);
+				drive.gyroHold(TURN_SPEED, -90, 1);
 			}
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(1500, -1, 1);
 			vuMarkAutonomous.sleep(300);
+
+			//release glyph
 			vuMarkAutonomous.glyph_servo.setPower(-1);
 			vuMarkAutonomous.sleep(1200);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			vuMarkAutonomous.sleep(300);
+
 			//VOR
 			drive.driveByPulses(300, -1, 1);
 			vuMarkAutonomous.sleep(300);
+
 			//ZURÜCK
 			drive.driveByPulses(300, 1, -1);
 			//textToSpeech.shutdown();
+
 		}
 
 	}

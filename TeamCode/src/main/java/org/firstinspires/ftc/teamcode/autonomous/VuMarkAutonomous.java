@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 import org.firstinspires.ftc.teamcode.autonomous.routines.RoutineMgr;
@@ -16,9 +15,9 @@ import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECOND
 @Autonomous(name = "MainAutonomous", group = "drive")
 public class VuMarkAutonomous extends AutonomousCore {
 
-	protected RoutineMgr routineMgr = new RoutineMgr();
+	private RoutineMgr routineMgr = new RoutineMgr();
 
-	protected RelicRecoveryVuMark detectedVuMark = RelicRecoveryVuMark.UNKNOWN;
+	private RelicRecoveryVuMark detectedVuMark = RelicRecoveryVuMark.UNKNOWN;
 	private ElapsedTime elapsedTime = new ElapsedTime();
 	private VuMarkDetector vuMarkDetector = new VuMarkDetector();
 
@@ -31,8 +30,12 @@ public class VuMarkAutonomous extends AutonomousCore {
 		initialize();
 		waitForStart();
 		resetTimer();
-		upRelic();
-		routine();
+		if (opModeIsActive()) {
+			upRelic();
+		}
+		if (opModeIsActive()) {
+			routine();
+		}
 	}
 
 	@Override
@@ -56,6 +59,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	/**
 	 * Scans until either a VuMark is visible, the OpMode is stopped or the Timer reaches 10 seconds
+	 * Saves the scan
 	 */
 	protected RelicRecoveryVuMark scanVuMark() {
 		detectedVuMark = vuMarkDetector.scan();
@@ -69,6 +73,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	/**
 	 * Scans for a VuMark once
+	 * Saves the scan
 	 */
 	protected RelicRecoveryVuMark scanGeneral() {
 		detectedVuMark = vuMarkDetector.scan();
@@ -77,6 +82,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	/**
 	 * Scan with turning (As in competition)
+	 * Saves the scan
 	 */
 	public RelicRecoveryVuMark scanWithTurn() {
 		if (drive.isGyroUsed()) {

@@ -12,10 +12,14 @@ public class RoutineMgr {
 
 	public void initialize(VuMarkAutonomous param_va) {
 		vuMarkAutonomous = param_va;
-		bl = new AutonomousBlueLong(vuMarkAutonomous);
-		bs = new AutonomousBlueShort(vuMarkAutonomous);
-		rl = new AutonomousRedLong(vuMarkAutonomous);
-		rs = new AutonomousRedShort(vuMarkAutonomous);
+		bl = new AutonomousBlueLong();
+		bs = new AutonomousBlueShort();
+		rl = new AutonomousRedLong();
+		rs = new AutonomousRedShort();
+		bl.initialize(param_va);
+		bs.initialize(param_va);
+		rl.initialize(param_va);
+		rs.initialize(param_va);
 	}
 
 	public void selectRoutine(AutonomousStrategy strategy) {

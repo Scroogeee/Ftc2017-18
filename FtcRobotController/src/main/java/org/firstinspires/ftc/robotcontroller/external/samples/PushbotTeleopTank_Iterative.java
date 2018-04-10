@@ -53,11 +53,11 @@ import com.qualcomm.robotcore.util.Range;
 @Disabled
 public class PushbotTeleopTank_Iterative extends OpMode{
 
-    /* Declare OpMode members. */
+	final double CLAW_SPEED = 0.02;                 // sets rate to move servo
+	/* Declare OpMode members. */
     HardwarePushbot robot       = new HardwarePushbot(); // use the class created to define a Pushbot's hardware
                                                          // could also use HardwarePushbotMatrix class.
     double          clawOffset  = 0.0 ;                  // Servo mid position
-    final double    CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
 
     /*
      * Code to run ONCE when the driver hits INIT
