@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.driverControlled;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.DriveStraight4W;
+import org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverRobotModules.DriverDecorationControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverRobotModules.DriverGlyphControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverRobotModules.DriverRelicControl;
 
@@ -20,6 +20,7 @@ public class DriverCore extends OpMode {
 	private DriverGlyphControl driverGlyphControl = new DriverGlyphControl();
 	private DriverRelicControl driverRelicControl = new DriverRelicControl();
 	private JewelControl jewelControl = new JewelControl();
+	private DriverDecorationControl decorationControl = new DriverDecorationControl();
 
 	/**
 	 * Initializes the Robot and its sub-components such as:
@@ -38,6 +39,7 @@ public class DriverCore extends OpMode {
 		driverGlyphControl.init(null, this);
 		driverRelicControl.init(null, this);
 		jewelControl.initialize(this.hardwareMap);
+		decorationControl.initialize(this);
 	}
 
 	/**
@@ -50,6 +52,7 @@ public class DriverCore extends OpMode {
 		driveStraight4W.update();
 		driverGlyphControl.updateGlyphArm();
 		driverRelicControl.update();
+		decorationControl.update();
 	}
 
 

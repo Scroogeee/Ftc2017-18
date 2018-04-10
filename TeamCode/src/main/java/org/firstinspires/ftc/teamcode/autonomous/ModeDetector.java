@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.graphics.Color;
-
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.teamcode.util.Constants;
 
 
