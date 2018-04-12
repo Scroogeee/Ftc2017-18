@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.util;
  */
 public class Constants {
 
-	//motor names0
+	//motor names
 
 	//drives for tank-drive
 	public static final String rd_name = "right_drive";
@@ -38,6 +38,8 @@ public class Constants {
 	public static final String jewelArm_name = "servo_jewel";
 	public static final String jewelSensor_name = "sensor_jewel";
 	public static final int minimum_ConfidenceLevel = 8;
+	public static final double jewelArm_up = 1;
+	public static final double jewelArm_down = 0.37;
 	//Presentation
 	public static final String greetings = "Hello! I am Herbert," +
 			" the robot of the FROG Team. I am  a rookie, 8 months old and I am very happy " +

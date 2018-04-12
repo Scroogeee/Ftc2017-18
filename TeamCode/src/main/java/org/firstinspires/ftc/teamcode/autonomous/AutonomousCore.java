@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
@@ -94,7 +96,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	 */
 	protected void kickJewel(JewelColor toKick) {
 		// Jewels herunter kicken
-		jewelControl.updateArm(0.325);
+		jewelControl.updateArm(Constants.jewelArm_down);
 		sleep(1000);
 		currentJewelColor = jewelControl.getColor();
 		//TODO remove debugging
@@ -104,12 +106,12 @@ public abstract class AutonomousCore extends LinearOpMode {
 		if (currentJewelColor != null && currentJewelColor != JewelColor.NONE) {
 			if (currentJewelColor.equals(toKick)) {
 				if (drive.isGyroUsed()) {
-					drive.gyroTurn(TURN_SPEED, 30);
+					drive.gyroTurn(TURN_SPEED, 10);
 				} else {
 					drive.driveByPulses(350, 1, 1);
 				}
 				sleep(200);
-				jewelControl.updateArm(1);
+				jewelControl.updateArm(Constants.jewelArm_up);
 				sleep(1000);
 				if (drive.isGyroUsed()) {
 					drive.gyroTurn(TURN_SPEED, 0);
@@ -118,12 +120,12 @@ public abstract class AutonomousCore extends LinearOpMode {
 				}
 			} else {
 				if (drive.isGyroUsed()) {
-					drive.gyroTurn(TURN_SPEED, -30);
+					drive.gyroTurn(TURN_SPEED, -10);
 				} else {
 					drive.driveByPulses(350, -1, -1);
 				}
 				sleep(200);
-				jewelControl.updateArm(1);
+				jewelControl.updateArm(Constants.jewelArm_up);
 				sleep(1000);
 				if (drive.isGyroUsed()) {
 					drive.gyroTurn(TURN_SPEED, 0);
@@ -133,7 +135,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 			}
 		}
 		sleep(1000);
-		jewelControl.updateArm(1);
+		jewelControl.updateArm(Constants.jewelArm_up);
 	}
 
 	/**

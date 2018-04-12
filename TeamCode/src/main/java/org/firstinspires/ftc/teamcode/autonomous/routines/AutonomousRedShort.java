@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
 
@@ -26,7 +27,7 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 
 		//VOR
 		if (!drive.isRangeUsed()) {
-			drive.driveByPulses(3200, -1, 1);
+			drive.driveByPulses(3300, -1, 1);
 		} else {
 			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark), DcMotorSimple.Direction.FORWARD);
 		}

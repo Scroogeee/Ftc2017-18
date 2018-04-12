@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
@@ -13,9 +14,14 @@ import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
 import java.util.ArrayList;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
-import static org.firstinspires.ftc.teamcode.util.Constants.*;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
+import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
+import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -147,6 +153,10 @@ public class W4StraightByColor extends W4StraightAuto {
 		// Ensure that the opmode is still active
 		if (autonomousCore.opModeIsActive()) {
 			setupForTank(true);
+			A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+			D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 			autonomousCore.telemetry.addData("A:", A.getTargetPosition());
 			autonomousCore.telemetry.addData("B:", B.getTargetPosition());
 			autonomousCore.telemetry.addData("C:", C.getTargetPosition());
@@ -239,6 +249,10 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	public void gyroTurn(double speed, double angle) {
 		setupForTank(true);
+		A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		B.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		C.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		D.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		// keep looping while we are still active, and not on heading.
 		while (autonomousCore.opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
 			// Update telemetry & Allow time for other processes to run.
@@ -358,23 +372,39 @@ public class W4StraightByColor extends W4StraightAuto {
 	 */
 	private void driveToNextColumnByRange(DcMotorSimple.Direction d) {
 		setupForTank(false);
+		A.setMode(RUN_WITHOUT_ENCODER);
+		B.setMode(RUN_WITHOUT_ENCODER);
+		C.setMode(RUN_WITHOUT_ENCODER);
+		D.setMode(RUN_WITHOUT_ENCODER);
 		if (useRange) {
 			//Drive past the last column
 			while (autonomousCore.opModeIsActive() &&
 					!(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHOLD))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
-					driveByPulses(10, -1, 1);
+					A.setPower(-1);
+					B.setPower(1);
+					C.setPower(1);
+					D.setPower(-1);
 				} else if (d == DcMotorSimple.Direction.REVERSE) {
-					driveByPulses(10, 1, -1);
+					A.setPower(1);
+					B.setPower(-1);
+					C.setPower(-1);
+					D.setPower(1);
 				}
 			}
 			//Drive to the column
 			while (autonomousCore.opModeIsActive() &&
 					!(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHOLD))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
-					driveByPulses(10, -1, 1);
+					A.setPower(-1);
+					B.setPower(1);
+					C.setPower(1);
+					D.setPower(-1);
 				} else if (d == DcMotorSimple.Direction.REVERSE) {
-					driveByPulses(10, 1, -1);
+					A.setPower(1);
+					B.setPower(-1);
+					C.setPower(-1);
+					D.setPower(1);
 				}
 			}
 		}
