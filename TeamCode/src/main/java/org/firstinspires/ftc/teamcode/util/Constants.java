@@ -50,8 +50,10 @@ public class Constants {
 	public static final String servoFrog_name = "servo_frog";
 	public static final String range_sensor_name = "sensor_range";
 
+	//maximum scan time for vuforia
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
-	public static final double RANGE_THRESHOLD = 2;
+	//lower is more sensitive
+	public static final double RANGE_THRESHOLD_CM = 7;
 
 
 }

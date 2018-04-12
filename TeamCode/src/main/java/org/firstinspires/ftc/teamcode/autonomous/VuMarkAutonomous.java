@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 
@@ -93,13 +92,10 @@ public class VuMarkAutonomous extends AutonomousCore {
 				return 1;
 			case LEFT:
 				return 1;
-
 			case CENTER:
 				return 2;
-
 			case RIGHT:
 				return 3;
-
 		}
 		return 1;
 	}

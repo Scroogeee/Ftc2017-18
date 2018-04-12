@@ -6,22 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
 
 import java.util.ArrayList;
 
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
-import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD;
-import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
-import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -379,7 +372,7 @@ public class W4StraightByColor extends W4StraightAuto {
 		if (useRange) {
 			//Drive past the last column
 			while (autonomousCore.opModeIsActive() &&
-					!(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHOLD))) {
+					(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHOLD_CM))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
 					A.setPower(-1);
 					B.setPower(1);
@@ -394,7 +387,7 @@ public class W4StraightByColor extends W4StraightAuto {
 			}
 			//Drive to the column
 			while (autonomousCore.opModeIsActive() &&
-					!(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHOLD))) {
+					(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHOLD_CM))) {
 				if (d == DcMotorSimple.Direction.FORWARD) {
 					A.setPower(-1);
 					B.setPower(1);
@@ -440,7 +433,7 @@ public class W4StraightByColor extends W4StraightAuto {
 			double average = 0;
 			for (int i = 0; i < 5; i++) {
 				autonomousCore.sleep(50);
-				list.add(rangeSensor.getDistance(DistanceUnit.INCH));
+				list.add(rangeSensor.getDistance(DistanceUnit.CM));
 			}
 			for (double d : list) {
 				average += d;
