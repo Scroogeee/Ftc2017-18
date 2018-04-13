@@ -37,7 +37,7 @@ public class Constants {
 	//Jewel
 	public static final String jewelArm_name = "servo_jewel";
 	public static final String jewelSensor_name = "sensor_jewel";
-	public static final int minimum_ConfidenceLevel = 8;
+	public static final int minimum_ConfidenceLevel = 6;
 	public static final double jewelArm_up = 1;
 	public static final double jewelArm_down = 0.37;
 	//Presentation
@@ -53,7 +53,7 @@ public class Constants {
 	//maximum scan time for vuforia
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
 	//lower is more sensitive
-	public static final double RANGE_THRESHOLD_CM = 7;
+	public static final double RANGE_THRESHOLD_CM = 8;
 
 
 }

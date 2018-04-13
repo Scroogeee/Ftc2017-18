@@ -6,15 +6,22 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
 
 import java.util.ArrayList;
 
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.*;
-import static org.firstinspires.ftc.teamcode.util.Constants.*;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
+import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
+import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD_CM;
+import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -24,8 +31,8 @@ public class W4StraightByColor extends W4StraightAuto {
 
 	// These constants define the desired driving/control characteristics
 	// The can/should be tweaked to suite the specific robot drive train.
-	public static final double DRIVE_SPEED = 1;     // Nominal speed for better accuracy.
-	public static final double TURN_SPEED = 0.7;     // Nominal half speed for better accuracy.
+	public static final double DRIVE_SPEED = 0.2;     // Nominal speed for better accuracy.
+	public static final double TURN_SPEED = 0.6;     // Nominal half speed for better accuracy.
 	static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
@@ -46,6 +53,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	private boolean useGyro = false;
 	private boolean useRange = false;
 	private double rangeBaseValue = 0;
+
 	public W4StraightByColor(AutonomousCore param_ac) {
 		super(param_ac);
 	}
@@ -371,35 +379,53 @@ public class W4StraightByColor extends W4StraightAuto {
 		D.setMode(RUN_WITHOUT_ENCODER);
 		if (useRange) {
 			//Drive past the last column
-			while (autonomousCore.opModeIsActive() &&
-					(rangeSensor.getDistance(DistanceUnit.CM) < (rangeBaseValue - RANGE_THRESHOLD_CM))) {
-				if (d == DcMotorSimple.Direction.FORWARD) {
-					A.setPower(-1);
-					B.setPower(1);
-					C.setPower(1);
-					D.setPower(-1);
-				} else if (d == DcMotorSimple.Direction.REVERSE) {
-					A.setPower(1);
-					B.setPower(-1);
-					C.setPower(-1);
-					D.setPower(1);
-				}
+			if (d == DcMotorSimple.Direction.FORWARD) {
+				A.setPower(-DRIVE_SPEED);
+				B.setPower(DRIVE_SPEED);
+				C.setPower(DRIVE_SPEED);
+				D.setPower(-DRIVE_SPEED);
+			} else if (d == DcMotorSimple.Direction.REVERSE) {
+				A.setPower(DRIVE_SPEED);
+				B.setPower(-DRIVE_SPEED);
+				C.setPower(-DRIVE_SPEED);
+				D.setPower(DRIVE_SPEED);
 			}
+			while (autonomousCore.opModeIsActive() &&
+					(rangeSensor.getDistance(DistanceUnit.CM) >
+							(rangeBaseValue - RANGE_THRESHOLD_CM))) {
+				autonomousCore.telemetry.addData("Distance:",
+						rangeSensor.getDistance(DistanceUnit.CM));
+				autonomousCore.telemetry.update();
+			}
+			//stop motors for half a second
+			A.setPower(0);
+			B.setPower(0);
+			C.setPower(0);
+			D.setPower(0);
+			//autonomousCore.sleep(1000);
 			//Drive to the column
-			while (autonomousCore.opModeIsActive() &&
-					(rangeSensor.getDistance(DistanceUnit.CM) > (rangeBaseValue - RANGE_THRESHOLD_CM))) {
-				if (d == DcMotorSimple.Direction.FORWARD) {
-					A.setPower(-1);
-					B.setPower(1);
-					C.setPower(1);
-					D.setPower(-1);
-				} else if (d == DcMotorSimple.Direction.REVERSE) {
-					A.setPower(1);
-					B.setPower(-1);
-					C.setPower(-1);
-					D.setPower(1);
-				}
+			if (d == DcMotorSimple.Direction.FORWARD) {
+				A.setPower(-DRIVE_SPEED);
+				B.setPower(DRIVE_SPEED);
+				C.setPower(DRIVE_SPEED);
+				D.setPower(-DRIVE_SPEED);
+			} else if (d == DcMotorSimple.Direction.REVERSE) {
+				A.setPower(DRIVE_SPEED);
+				B.setPower(-DRIVE_SPEED);
+				C.setPower(-DRIVE_SPEED);
+				D.setPower(DRIVE_SPEED);
 			}
+			while (autonomousCore.opModeIsActive() &&
+					(rangeSensor.getDistance(DistanceUnit.CM) <
+							(rangeBaseValue - RANGE_THRESHOLD_CM))) {
+				autonomousCore.telemetry.addData("Distance:",
+						rangeSensor.getDistance(DistanceUnit.CM));
+				autonomousCore.telemetry.update();
+			}
+			A.setPower(0);
+			B.setPower(0);
+			C.setPower(0);
+			D.setPower(0);
 		}
 	}
 
@@ -419,6 +445,7 @@ public class W4StraightByColor extends W4StraightAuto {
 				}
 				driveToNextColumnByRange(d);
 				columnCounter++;
+				//autonomousCore.sleep(1000);
 			}
 		}
 	}
@@ -440,6 +467,9 @@ public class W4StraightByColor extends W4StraightAuto {
 			}
 			average /= list.size();
 			rangeBaseValue = average;
+			//TODO remove debug
+			autonomousCore.telemetry.addData("rangeBase", rangeBaseValue);
+			autonomousCore.telemetry.update();
 		}
 	}
 

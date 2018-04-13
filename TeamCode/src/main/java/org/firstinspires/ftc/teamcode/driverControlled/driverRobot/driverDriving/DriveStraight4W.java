@@ -93,6 +93,10 @@ public class DriveStraight4W {
 		Drive_B.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 		Drive_C.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 		Drive_D.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+		Drive_A.setPower(0);
+		Drive_B.setPower(0);
+		Drive_C.setPower(0);
+		Drive_D.setPower(0);
 	}
 
 	/**

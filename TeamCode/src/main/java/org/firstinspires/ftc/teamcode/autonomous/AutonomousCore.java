@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
 
 import java.util.Locale;
 
@@ -26,9 +26,11 @@ public abstract class AutonomousCore extends LinearOpMode {
 	protected final JewelControl jewelControl = new JewelControl();
 	protected final ModeDetector modeDetector = new ModeDetector();
 	protected CRServo glyph_servo;
-	protected JewelColor currentJewelColor = JewelColor.NONE;
+	protected AllianceColor currentJewelColor = AllianceColor.NONE;
 	protected TextToSpeech textToSpeech;
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
+	protected AllianceColor alliance = AllianceColor.RED;
+	protected AllianceColor opponent = AllianceColor.BLUE;
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -40,7 +42,9 @@ public abstract class AutonomousCore extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 		initialize();
-		waitForStart();
+		if (opModeIsActive()) {
+			waitForStart();
+		}
 		if (opModeIsActive()) {
 			upRelic();
 		}
@@ -94,7 +98,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	/**
 	 * Kicks the jewel of the given Color
 	 */
-	protected void kickJewel(JewelColor toKick) {
+	protected void kickJewel(AllianceColor toKick) {
 		// Jewels herunter kicken
 		jewelControl.updateArm(Constants.jewelArm_down);
 		sleep(1000);
@@ -103,7 +107,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 		telemetry.addData("CurrentColor:", currentJewelColor.toString());
 		telemetry.update();
 		sleep(1000);
-		if (currentJewelColor != null && currentJewelColor != JewelColor.NONE) {
+		if (currentJewelColor != null && currentJewelColor != AllianceColor.NONE) {
 			if (currentJewelColor.equals(toKick)) {
 				if (drive.isGyroUsed()) {
 					drive.gyroTurn(TURN_SPEED, 10);

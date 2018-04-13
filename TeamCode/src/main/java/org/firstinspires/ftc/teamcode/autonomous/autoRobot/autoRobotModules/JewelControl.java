@@ -1,8 +1,10 @@
-package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels;
+package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
 
 import static org.firstinspires.ftc.teamcode.util.Constants.jewelArm_name;
 import static org.firstinspires.ftc.teamcode.util.Constants.jewelSensor_name;
@@ -45,13 +47,13 @@ public class JewelControl {
 	/**
 	 * Returns the current jewel color which is visible
 	 */
-	public JewelColor getColor() {
+	public AllianceColor getColor() {
 		if (jewel_sensor.blue() > minimum_ConfidenceLevel) {
-			return JewelColor.BLUE;
+			return AllianceColor.BLUE;
 		} else if (jewel_sensor.red() > minimum_ConfidenceLevel) {
-			return JewelColor.RED;
+			return AllianceColor.RED;
 		}
-		return JewelColor.NONE;
+		return AllianceColor.NONE;
 	}
 
 }

@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
 
 /**
  * Created by FTC on 21.02.2018.

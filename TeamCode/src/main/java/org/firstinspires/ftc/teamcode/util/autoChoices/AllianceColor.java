@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.util.autoChoices;
 
-public enum Alliance {
-	RED, BLUE
+public enum AllianceColor {
+	RED, BLUE, NONE
 }

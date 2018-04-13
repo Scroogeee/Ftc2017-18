@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
-import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.autoJewels.JewelColor;
+import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
 
 import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
 
@@ -17,11 +17,19 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 
 	@Override
 	protected void routine() {
+		alliance = AllianceColor.RED;
+		opponent = AllianceColor.BLUE;
 		//Jewels
-		kickJewel(JewelColor.BLUE);
+		kickJewel(opponent);
+		//reposition
+		if (drive.isGyroUsed()) {
+			drive.gyroTurn(TURN_SPEED, 0);
+			drive.gyroHold(TURN_SPEED, 0, 1);
+		}
 		//VuMark
 		if (drive.isRangeUsed()) {
-			detectedVuMark = scanWithTurn();
+			drive.driveByPulses(500, -1, 1);
+			detectedVuMark = scanVuMark();
 		}
 		//VOR,RECHTS,VOR
 
@@ -29,7 +37,8 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 		if (!drive.isRangeUsed()) {
 			drive.driveByPulses(3300, -1, 1);
 		} else {
-			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark), DcMotorSimple.Direction.FORWARD);
+			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark, alliance),
+					DcMotorSimple.Direction.FORWARD);
 		}
 		sleep(300);
 		//RECHTS
