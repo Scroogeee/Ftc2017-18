@@ -7,4 +7,4 @@ This Project is licensed under the GNU General Public License v3.0 which may be 
 You can find our game plan and strategies [here](Strategies.md).
 # Other Links
 Collaborator's GitHub pages:
-* [Scroogeee](https://www.scroogeee.github.io)
+* [Scroogeee](https://scroogeee.github.io)
