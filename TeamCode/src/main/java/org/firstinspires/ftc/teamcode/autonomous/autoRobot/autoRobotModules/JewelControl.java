@@ -3,12 +3,9 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
-import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
-
-import static org.firstinspires.ftc.teamcode.util.Constants.jewelArm_name;
-import static org.firstinspires.ftc.teamcode.util.Constants.jewelSensor_name;
-import static org.firstinspires.ftc.teamcode.util.Constants.minimum_ConfidenceLevel;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
 
 /**
  * Created by FTC on 21.02.2018.

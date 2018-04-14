@@ -32,7 +32,6 @@ package org.firstinspires.ftc.teamcode.tests_setups;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
@@ -61,11 +60,11 @@ public class SensorMRRangeSensor extends LinearOpMode {
 		waitForStart();
 
 		while (opModeIsActive()) {
+			telemetry.addData("cm", "%.2f cm", rangeSensor.getDistance(DistanceUnit.CM));
 			telemetry.addData("Status:", rangeSensor.status());
 			telemetry.addData("raw ultrasonic", rangeSensor.rawUltrasonic());
 			telemetry.addData("raw optical", rangeSensor.rawOptical());
 			telemetry.addData("cm optical", "%.2f cm", rangeSensor.cmOptical());
-			telemetry.addData("cm", "%.2f cm", rangeSensor.getDistance(DistanceUnit.CM));
 			telemetry.update();
 		}
 	}

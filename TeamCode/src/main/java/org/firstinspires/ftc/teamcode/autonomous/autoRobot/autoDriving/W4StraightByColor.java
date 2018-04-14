@@ -6,22 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration;
+import org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration;
 
 import java.util.ArrayList;
 
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.BLUE;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.GREEN;
-import static org.firstinspires.ftc.teamcode.autonomous.HardwareConfiguration.YELLOW;
-import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD_CM;
-import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
-import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
+import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.*;
 
 /**
  * Created by FTC on 25.01.2018.

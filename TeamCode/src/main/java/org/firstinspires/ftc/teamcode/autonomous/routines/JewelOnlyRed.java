@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
-import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
+import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
 /**
  * Created by FTC on 23.02.2018.

@@ -1,17 +1,16 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
-import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
+import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
 import static org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark.LEFT;
 import static org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark.RIGHT;
 import static org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.util.Constants.MAX_SCAN_TIME_SECONDS;
-import static org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor.BLUE;
-import static org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor.RED;
+import static org.firstinspires.ftc.teamcode.util.enums.AllianceColor.BLUE;
+import static org.firstinspires.ftc.teamcode.util.enums.AllianceColor.RED;
 
 /**
  * Created by FTC on 20.03.2018.

@@ -1,15 +1,14 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
 import org.firstinspires.ftc.teamcode.util.Constants;
-import org.firstinspires.ftc.teamcode.util.autoChoices.AllianceColor;
+import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
+import org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration;
 
 import java.util.Locale;
 
