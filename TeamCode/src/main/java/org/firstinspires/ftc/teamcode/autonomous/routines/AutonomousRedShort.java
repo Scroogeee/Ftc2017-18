@@ -27,8 +27,9 @@ public class AutonomousRedShort extends VuMarkAutonomous {
 		}
 		//VuMark
 		if (drive.isRangeUsed()) {
-			drive.driveByPulses(500, -1, 1);
+			drive.driveByPulses(700, -1, 1);
 			detectedVuMark = scanVuMark();
+			drive.driveByPulses(900, 1, -1);
 		}
 		//VOR,RECHTS,VOR
 

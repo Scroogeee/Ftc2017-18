@@ -384,7 +384,7 @@ public class W4StraightByColor extends W4StraightAuto {
 				D.setPower(DRIVE_SPEED);
 			}
 			while (autonomousCore.opModeIsActive() &&
-					(rangeSensor.getDistance(DistanceUnit.CM) >
+					(rangeSensor.getDistance(DistanceUnit.CM) >=
 							(rangeBaseValue - RANGE_THRESHOLD_CM))) {
 				autonomousCore.telemetry.addData("Distance:",
 						rangeSensor.getDistance(DistanceUnit.CM));
