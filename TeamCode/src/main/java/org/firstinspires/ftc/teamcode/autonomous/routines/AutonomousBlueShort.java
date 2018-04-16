@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.autonomous.VuMarkAutonomous;
 import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
@@ -23,13 +24,13 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 		//reposition
 		if (drive.isGyroUsed()) {
 			drive.gyroTurn(TURN_SPEED, 0);
-			drive.gyroHold(TURN_SPEED, 0, 1);
+			drive.gyroHold(TURN_SPEED, 0, 0.5);
 		}
 		//VuMark
 		if (drive.isRangeUsed()) {
-			drive.driveByPulses(500, -1, 1);
+			drive.driveByPulses(700, -1, 1);
 			detectedVuMark = scanVuMark();
-			drive.driveByPulses(600, 1, -1);
+			drive.driveByPulses(900, 1, -1);
 		}
 
 		//ZURÜCK,RECHTS,VOR
@@ -47,7 +48,7 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 			drive.driveByPulses(1800, -1, -1);
 		} else {
 			drive.gyroTurn(TURN_SPEED, -90);
-			drive.gyroHold(TURN_SPEED, -90, 1);
+			drive.gyroHold(TURN_SPEED, -90, 0.5);
 		}
 		sleep(300);
 		//VOR

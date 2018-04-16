@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
@@ -30,6 +32,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	protected HardwareConfiguration hardwareConfiguration = HardwareConfiguration.NONE;
 	protected AllianceColor alliance = AllianceColor.RED;
 	protected AllianceColor opponent = AllianceColor.BLUE;
+	protected ElapsedTime elapsedTime = new ElapsedTime();
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -41,9 +44,8 @@ public abstract class AutonomousCore extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 		initialize();
-		if (opModeIsActive()) {
-			waitForStart();
-		}
+		waitForStart();
+		elapsedTime.reset();
 		if (opModeIsActive()) {
 			upRelic();
 		}
@@ -67,7 +69,6 @@ public abstract class AutonomousCore extends LinearOpMode {
 		modeDetector.initialize(this.hardwareMap);
 		sleep(1000);
 		hardwareConfiguration = modeDetector.getConfiguration();
-		//TODO remove debugging
 		/*telemetry.addData("HardwareConfig: ", hardwareConfiguration.toString());
 		telemetry.addData("Hue: ", modeDetector.getHue());
 		telemetry.update();*/

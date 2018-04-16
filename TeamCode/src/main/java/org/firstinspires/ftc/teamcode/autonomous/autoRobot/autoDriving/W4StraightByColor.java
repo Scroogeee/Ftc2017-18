@@ -6,15 +6,22 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration;
 
 import java.util.ArrayList;
 
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
-import static org.firstinspires.ftc.teamcode.util.Constants.*;
-import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.*;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
+import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD_CM;
+import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
+import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.BLUE;
+import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.GREEN;
+import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.YELLOW;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -321,11 +328,10 @@ public class W4StraightByColor extends W4StraightAuto {
 		C.setPower(rightSpeed);
 
 		// Display it for the driver.
-		autonomousCore.telemetry.addLine("Adjusting Error");
+		/*autonomousCore.telemetry.addLine("Adjusting Error");
 		autonomousCore.telemetry.addData("Target", "%5.2f", angle);
 		autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-		autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
-
+		autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);*/
 		return onTarget;
 	}
 
@@ -384,7 +390,7 @@ public class W4StraightByColor extends W4StraightAuto {
 				D.setPower(DRIVE_SPEED);
 			}
 			while (autonomousCore.opModeIsActive() &&
-					(rangeSensor.getDistance(DistanceUnit.CM) >
+					(rangeSensor.getDistance(DistanceUnit.CM) >=
 							(rangeBaseValue - RANGE_THRESHOLD_CM))) {
 				autonomousCore.telemetry.addData("Distance:",
 						rangeSensor.getDistance(DistanceUnit.CM));

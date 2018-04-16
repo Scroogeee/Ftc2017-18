@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.VuMarkDetector;
 import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
@@ -19,23 +18,8 @@ import static org.firstinspires.ftc.teamcode.util.enums.AllianceColor.RED;
 public class VuMarkAutonomous extends AutonomousCore {
 
 	protected RelicRecoveryVuMark detectedVuMark = RelicRecoveryVuMark.UNKNOWN;
-	private ElapsedTime elapsedTime = new ElapsedTime();
-	private VuMarkDetector vuMarkDetector = new VuMarkDetector();
 
-	@Override
-	public void runOpMode() {
-		initialize();
-		if (opModeIsActive()) {
-			waitForStart();
-		}
-		resetTimer();
-		if (opModeIsActive()) {
-			upRelic();
-		}
-		if (opModeIsActive()) {
-			routine();
-		}
-	}
+	private VuMarkDetector vuMarkDetector = new VuMarkDetector();
 
 	@Override
 	protected void routine() {
@@ -49,18 +33,11 @@ public class VuMarkAutonomous extends AutonomousCore {
 	}
 
 	/**
-	 * Resets the timer for the scan
-	 */
-	protected void resetTimer() {
-		elapsedTime.reset();
-	}
-
-	/**
 	 * Scans until either a VuMark is visible, the OpMode is stopped or the Timer reaches 10 seconds
 	 */
 	protected RelicRecoveryVuMark scanVuMark() {
 		RelicRecoveryVuMark vuMark = scanOnce();
-		resetTimer();
+		elapsedTime.reset();
 		while (vuMark == RelicRecoveryVuMark.UNKNOWN && !isStopRequested() &&
 				elapsedTime.seconds() < MAX_SCAN_TIME_SECONDS) {
 			vuMark = scanOnce();
