@@ -23,13 +23,13 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		//reposition
 		if (drive.isGyroUsed()) {
 			drive.gyroTurn(TURN_SPEED, 0);
-			drive.gyroHold(TURN_SPEED, 0, 1);
+			drive.gyroHold(TURN_SPEED, 0, 0.5);
 		}
 		//VuMark
 		if (drive.isRangeUsed()) {
-			drive.driveByPulses(500, -1, 1);
+			drive.driveByPulses(700, -1, 1);
 			detectedVuMark = scanVuMark();
-			drive.driveByPulses(600, 1, -1);
+			drive.driveByPulses(900, 1, -1);
 		}
 
 		//ZURÜCK,LINKS,VOR,LINKS,VOR
@@ -42,7 +42,7 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 			drive.driveByPulses(1400, -1, -1);
 		} else {
 			drive.gyroTurn(TURN_SPEED, -90);
-			drive.gyroHold(TURN_SPEED, -90, 1);
+			drive.gyroHold(TURN_SPEED, -90, 0.5);
 		}
 
 		sleep(300);

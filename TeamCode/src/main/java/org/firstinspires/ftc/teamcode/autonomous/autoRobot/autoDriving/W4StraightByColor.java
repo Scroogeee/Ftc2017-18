@@ -321,11 +321,12 @@ public class W4StraightByColor extends W4StraightAuto {
 		C.setPower(rightSpeed);
 
 		// Display it for the driver.
+		/*
 		autonomousCore.telemetry.addLine("Adjusting Error");
 		autonomousCore.telemetry.addData("Target", "%5.2f", angle);
 		autonomousCore.telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
 		autonomousCore.telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
-
+*/
 		return onTarget;
 	}
 
@@ -384,7 +385,7 @@ public class W4StraightByColor extends W4StraightAuto {
 				D.setPower(DRIVE_SPEED);
 			}
 			while (autonomousCore.opModeIsActive() &&
-					(rangeSensor.getDistance(DistanceUnit.CM) >
+					(rangeSensor.getDistance(DistanceUnit.CM) >=
 							(rangeBaseValue - RANGE_THRESHOLD_CM))) {
 				autonomousCore.telemetry.addData("Distance:",
 						rangeSensor.getDistance(DistanceUnit.CM));

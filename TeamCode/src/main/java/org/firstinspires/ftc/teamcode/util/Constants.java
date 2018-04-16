@@ -53,7 +53,7 @@ public class Constants {
 	//maximum scan time for vuforia
 	public static final int MAX_SCAN_TIME_SECONDS = 5;
 	//lower is more sensitive
-	public static final double RANGE_THRESHOLD_CM = 8;
+	public static final double RANGE_THRESHOLD_CM = 7;
 
 
 }
