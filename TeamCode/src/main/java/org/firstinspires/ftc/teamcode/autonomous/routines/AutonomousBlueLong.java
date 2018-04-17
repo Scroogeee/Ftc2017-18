@@ -33,7 +33,7 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 			drive.driveByPulses(900, 1, -1);
 		}
 
-		//ZURÜCK,LINKS,VOR,LINKS,VOR
+		//ZURÜCK,RECHTS,ZURÜCK,RECHTS,VOR
 
 		//ZURÜCK
 		drive.driveByPulses(2500, 1, -1);
@@ -47,6 +47,7 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		}
 
 		sleep(300);
+		drive.calibrateRange();
 		//ZURÜCK
 		if (!drive.isRangeUsed()) {
 			drive.driveByPulses(1250, 1, -1);

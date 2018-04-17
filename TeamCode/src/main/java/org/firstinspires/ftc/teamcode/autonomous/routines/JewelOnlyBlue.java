@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous.routines;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
@@ -15,7 +16,10 @@ public class JewelOnlyBlue extends AutonomousCore {
 	protected void routine() {
 		alliance = AllianceColor.BLUE;
 		opponent = AllianceColor.RED;
-		kickJewel(opponent);
+		while (currentJewelColor == AllianceColor.NONE && opModeIsActive()) {
+			kickJewel(opponent);
+			sleep(300);
+		}
 	}
 
 }

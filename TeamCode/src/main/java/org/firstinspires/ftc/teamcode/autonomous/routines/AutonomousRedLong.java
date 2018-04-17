@@ -46,6 +46,7 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 			drive.gyroTurn(TURN_SPEED, 90);
 
 		}
+		drive.calibrateRange();
 		sleep(300);
 		//VOR
 		if (!drive.isRangeUsed()) {

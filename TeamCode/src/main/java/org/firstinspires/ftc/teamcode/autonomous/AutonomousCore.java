@@ -5,6 +5,7 @@ import android.speech.tts.TextToSpeech;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
@@ -109,11 +110,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 		sleep(1000);
 		if (currentJewelColor != null && currentJewelColor != AllianceColor.NONE) {
 			if (currentJewelColor.equals(toKick)) {
-				if (drive.isGyroUsed()) {
-					drive.gyroTurn(TURN_SPEED, 10);
-				} else {
-					drive.driveByPulses(350, 1, 1);
-				}
+				drive.driveByPulses(350, 1, 1);
 				sleep(200);
 				jewelControl.updateArm(Constants.jewelArm_up);
 				sleep(1000);
@@ -123,11 +120,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 					drive.driveByPulses(350, -1, -1);
 				}
 			} else {
-				if (drive.isGyroUsed()) {
-					drive.gyroTurn(TURN_SPEED, -10);
-				} else {
-					drive.driveByPulses(350, -1, -1);
-				}
+				drive.driveByPulses(350, -1, -1);
 				sleep(200);
 				jewelControl.updateArm(Constants.jewelArm_up);
 				sleep(1000);
