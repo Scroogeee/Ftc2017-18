@@ -1,5 +1,6 @@
 # Strategies
 On this page you'll find a detailed description of our goals and strategies.
+![robot](Robot.jpg "Herbert, our robot")
 ### Autonomous
 In the 30 second autonomous period, we can kick off the jewel from the plattform, place a glyph in one of the columns with gyroscope assistance and park in the safe zone. We are planning to scan the VuMarks and finding the right column with a range sensor.
 (see the [autonomous](https://github.com/Scroogeee/ftc_app-master/tree/master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/autonomous) package for more details)
