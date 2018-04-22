@@ -1,0 +1,12 @@
+org.firstinspires.ftc.robotcontroller.external.samples
+org.firstinspires.ftc.robotcontroller.internal
+org.firstinspires.ftc.teamcode.autonomous
+org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving
+org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules
+org.firstinspires.ftc.teamcode.autonomous.routines
+org.firstinspires.ftc.teamcode.driverControlled
+org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving
+org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverRobotModules
+org.firstinspires.ftc.teamcode.tests_setups
+org.firstinspires.ftc.teamcode.util
+org.firstinspires.ftc.teamcode.util.enums
