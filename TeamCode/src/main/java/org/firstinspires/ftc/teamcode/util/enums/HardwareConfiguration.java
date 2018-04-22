@@ -27,7 +27,7 @@ public enum HardwareConfiguration {
 	BLUE,
 	/**
 	 * What to do when none is selected <br>
-	 * Hue >300
+	 * Hue />300
 	 */
 	NONE
 }

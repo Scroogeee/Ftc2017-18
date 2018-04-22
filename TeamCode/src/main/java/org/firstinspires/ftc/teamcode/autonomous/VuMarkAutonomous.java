@@ -33,7 +33,9 @@ public class VuMarkAutonomous extends AutonomousCore {
 	}
 
 	/**
-	 * Scans until either a VuMark is visible, the OpMode is stopped or the Timer reaches 10 seconds
+	 * Scans until either a VuMark is visible,
+	 * the OpMode is stopped or the Timer reaches 10 seconds
+	 * @return the scanned VuMark or null
 	 */
 	protected RelicRecoveryVuMark scanVuMark() {
 		RelicRecoveryVuMark vuMark = scanOnce();
@@ -47,6 +49,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	/**
 	 * Scans for a VuMark once
+	 * @return the recognized VuMark (if any)
 	 */
 	protected RelicRecoveryVuMark scanOnce() {
 		RelicRecoveryVuMark vuMark = vuMarkDetector.scan();
@@ -55,6 +58,7 @@ public class VuMarkAutonomous extends AutonomousCore {
 
 	/**
 	 * Scan with turning
+	 * @return the recognized VuMark
 	 */
 	protected RelicRecoveryVuMark scanWithTurn() {
 		if (drive.isGyroUsed()) {

@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
@@ -98,6 +96,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 
 	/**
 	 * Kicks the jewel of the given Color
+	 * @param toKick the JewelColor to kick
 	 */
 	protected void kickJewel(AllianceColor toKick) {
 		// Jewels herunter kicken
@@ -137,6 +136,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 
 	/**
 	 * Says the given String via the TextToSpeech software
+	 * @param s the text to speak
 	 */
 	protected void say(String s) {
 		textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);

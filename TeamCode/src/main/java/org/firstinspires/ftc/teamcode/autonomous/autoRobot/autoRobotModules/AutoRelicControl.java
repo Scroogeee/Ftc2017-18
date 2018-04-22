@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.teamcode.util.Constants;
 
 /**
@@ -31,6 +30,8 @@ public class AutoRelicControl {
 
 	/**
 	 * Initializes the relic control class
+	 *
+	 * @param hwMap the <code>HardwareMap</code> to use
 	 */
 	public void initialize(HardwareMap hwMap) {
 		hardwareMap = hwMap;
@@ -51,6 +52,10 @@ public class AutoRelicControl {
 
 	/**
 	 * Updates the motor values for the relic arm
+	 *
+	 * @param height the value for the height of the extending arm
+	 * @param extend the value for the extending arm
+	 * @param grip   the value for the relic grip
 	 */
 	public void update(double height, double extend, double grip) {
 		updateHeight(height);
@@ -60,6 +65,7 @@ public class AutoRelicControl {
 
 	/**
 	 * Updates the rotaion of the CRServo for the relic grip
+	 * @param grip the value for the relic grip
 	 */
 	private void updateRelicGrip(double grip) {
 		grip = Math.min(grip, 1);
@@ -69,6 +75,7 @@ public class AutoRelicControl {
 
 	/**
 	 * Updates the height of the relic claw arm
+	 * @param height the value for the height of the extending arm
 	 */
 	private void updateHeight(double height) {
 		height = Math.min(height, 1);
@@ -79,6 +86,7 @@ public class AutoRelicControl {
 
 	/**
 	 * Updates the extend of the relic claw arm
+	 * @param extend the value for the extending arm
 	 */
 	private void updateExtend(double extend) {
 		extend = Math.min(extend, 1);

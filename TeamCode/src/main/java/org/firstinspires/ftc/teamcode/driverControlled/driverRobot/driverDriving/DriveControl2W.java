@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -39,7 +38,9 @@ public class DriveControl2W {
 	 * Initializes the Drive Control class with:
 	 * <ul>
 	 * <li>right and left motor names</li>
+	 * <li>zero power behaviour</li>
 	 * </ul>
+	 * @param p_mainRef the <code>DriverCore</code> to use
 	 */
 	public void init(DriverCore p_mainRef) {
 		mainRef = p_mainRef;

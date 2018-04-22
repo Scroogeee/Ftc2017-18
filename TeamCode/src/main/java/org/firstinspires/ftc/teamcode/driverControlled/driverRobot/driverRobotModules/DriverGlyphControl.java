@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -32,6 +31,10 @@ public class DriverGlyphControl {
 
 	/**
 	 * Initializes the Driver GlyphControl class
+	 *
+	 * @param p_mainRef the <code>DriverCore</code> to use
+	 * @param hwMap     the <code>HardwareMap</code> to use<br>
+	 *                  (if p_mainRef not specified)
 	 */
 	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		//initialize references

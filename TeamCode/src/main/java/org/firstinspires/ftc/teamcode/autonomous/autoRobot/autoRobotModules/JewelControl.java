@@ -22,6 +22,7 @@ public class JewelControl {
 
 	/**
 	 * Initializes the jewel control class
+	 * @param hwMap the <code>HardwareMap</code> to use
 	 */
 	public void initialize(HardwareMap hwMap) {
 		hardwareMap = hwMap;
@@ -34,6 +35,7 @@ public class JewelControl {
 
 	/**
 	 * Updates the Servo position to the given values
+	 * @param position the new position of the jewelArm
 	 */
 	public void updateArm(double position) {
 		position = Math.min(position, 1);
@@ -43,6 +45,8 @@ public class JewelControl {
 
 	/**
 	 * Returns the current jewel color which is visible
+	 * @return the current jewel color which is visible <br>
+	 * (<code>null</code> if none detected)
 	 */
 	public AllianceColor getColor() {
 		if (jewel_sensor.blue() > minimum_ConfidenceLevel) {

@@ -21,6 +21,7 @@ public class ModeDetector {
 
 	/**
 	 * Initializes the <code>ModeDetector</code> class
+	 * @param hwMap the <code>HardwareMap</code> to use
 	 */
 	public void initialize(HardwareMap hwMap) {
 		this.hardwareMap = hwMap;

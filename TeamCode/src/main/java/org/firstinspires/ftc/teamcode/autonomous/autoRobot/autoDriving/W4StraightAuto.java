@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -30,6 +29,10 @@ public class W4StraightAuto {
 
 	/**
 	 * Drives the robot by the specified number of pulses using tank drive
+	 *
+	 * @param pulseNum    the number of pulses to drive
+	 * @param leftfactor  used for the direction
+	 * @param rightfactor used for the direction
 	 */
 	public void driveByPulses(int pulseNum, int leftfactor, int rightfactor) {
 		setupForTank(false);

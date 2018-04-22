@@ -4,23 +4,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.teamcode.driverControlled.DriverCore;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.Methods;
 
 import java.util.ArrayList;
 
-import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.EAST;
-import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.NORTH;
-import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.SOUTH;
-import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.WEST;
-import static org.firstinspires.ftc.teamcode.util.Constants.A_Scale;
-import static org.firstinspires.ftc.teamcode.util.Constants.B_Scale;
-import static org.firstinspires.ftc.teamcode.util.Constants.C_Scale;
-import static org.firstinspires.ftc.teamcode.util.Constants.D_Scale;
-import static org.firstinspires.ftc.teamcode.util.Constants.FAST_SCALE;
-import static org.firstinspires.ftc.teamcode.util.Constants.SLOW_SCALE;
+import static org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.RobotDirection.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
 
 /**
  * Created by FTC on 08.01.2018.
@@ -62,6 +53,9 @@ public class DriveStraight4W {
 	/**
 	 * Initializes the Drive Control class
 	 * CAUTION: At least one parameter has to be not null.
+	 *
+	 * @param p_mainRef the <code>DriverCore</code> reference
+	 * @param hwMap     the <code>HardwareMap</code> to use (if p_mainRef not specified)
 	 */
 	public void init(HardwareMap hwMap, DriverCore p_mainRef) {
 		mainRef = p_mainRef;

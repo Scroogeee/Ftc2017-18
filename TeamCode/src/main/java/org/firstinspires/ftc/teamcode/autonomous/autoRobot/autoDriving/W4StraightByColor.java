@@ -6,22 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousCore;
 import org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration;
 
 import java.util.ArrayList;
 
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_USING_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
-import static org.firstinspires.ftc.teamcode.util.Constants.RANGE_THRESHOLD_CM;
-import static org.firstinspires.ftc.teamcode.util.Constants.gyro_name;
-import static org.firstinspires.ftc.teamcode.util.Constants.range_sensor_name;
-import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.BLUE;
-import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.GREEN;
-import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.YELLOW;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.*;
+import static org.firstinspires.ftc.teamcode.util.enums.HardwareConfiguration.*;
 
 /**
  * Created by FTC on 25.01.2018.
@@ -262,7 +255,7 @@ public class W4StraightByColor extends W4StraightAuto {
 	}
 
 	/**
-	 * Method to obtain & hold a heading for a finite amount of time
+	 * Method to obtain and hold a heading for a finite amount of time
 	 * Move will stop once the requested time has elapsed
 	 *
 	 * @param speed    Desired speed of turn.
