@@ -10,22 +10,14 @@ import org.firstinspires.ftc.teamcode.util.Constants;
  */
 @Autonomous(name = "Presentation", group = "Test")
 public class Presentation extends AutonomousCore {
+
 	@Override
-	public void runOpMode() {
-		initialize();
-		telemetry.addLine("Press Play");
-		telemetry.update();
-		waitForStart();
+	protected void routine() {
 		telemetry.addLine("speaking");
 		telemetry.update();
 		say(Constants.greetings);
 		telemetry.addLine("Stopped");
 		telemetry.update();
-		//textToSpeech.shutdown();
-	}
-
-	@Override
-	protected void routine() {
-
+		textToSpeech.shutdown();
 	}
 }

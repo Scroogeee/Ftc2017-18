@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
@@ -43,6 +45,8 @@ public abstract class AutonomousCore extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 		initialize();
+		telemetry.addLine("> Press Play");
+		telemetry.update();
 		waitForStart();
 		elapsedTime.reset();
 		if (opModeIsActive()) {
@@ -90,7 +94,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	private void initTTS() {
 		textToSpeech = new TextToSpeech(hardwareMap.appContext, null, "com.google.android.tts");
 		textToSpeech.setLanguage(Locale.US);
-		textToSpeech.setSpeechRate((float) 1.25);
+		textToSpeech.setSpeechRate((float) 1.2);
 		textToSpeech.setPitch(1);
 	}
 
