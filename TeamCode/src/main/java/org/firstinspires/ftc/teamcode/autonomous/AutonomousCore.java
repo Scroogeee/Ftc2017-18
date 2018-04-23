@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
+import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.DecorationControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
@@ -34,6 +33,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 	protected AllianceColor alliance = AllianceColor.RED;
 	protected AllianceColor opponent = AllianceColor.BLUE;
 	protected ElapsedTime elapsedTime = new ElapsedTime();
+	protected DecorationControl decorationControl = new DecorationControl();
 
 	/**
 	 * @return the current <code>HardwareConfiguration</code>
@@ -84,6 +84,8 @@ public abstract class AutonomousCore extends LinearOpMode {
 		relicControl.initialize(this.hardwareMap);
 		//Jewel
 		jewelControl.initialize(this.hardwareMap);
+		//Decoration Control
+		decorationControl.initialize(this.hardwareMap);
 		//TextToSpeech
 		initTTS();
 	}
