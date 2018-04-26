@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import android.speech.tts.TextToSpeech;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoDriving.W4StraightByColor;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.AutoRelicControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.DecorationControl;
@@ -148,7 +150,7 @@ public abstract class AutonomousCore extends LinearOpMode {
 		textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
 		sleep(1000);
 		while (textToSpeech.isSpeaking()) {
-			sleep(1);
+			sleep(1000);
 		}
 	}
 

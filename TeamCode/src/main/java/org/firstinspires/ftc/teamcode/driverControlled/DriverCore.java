@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.driverControlled;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.DecorationControl;
 import org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules.JewelControl;
 import org.firstinspires.ftc.teamcode.driverControlled.driverRobot.driverDriving.DriveStraight4W;
@@ -53,6 +54,7 @@ public class DriverCore extends OpMode {
 		driverGlyphControl.updateGlyphArm();
 		driverRelicControl.update();
 		decorationControl.update(this.gamepad1);
+		jewelControl.update(this.gamepad2);
 	}
 
 

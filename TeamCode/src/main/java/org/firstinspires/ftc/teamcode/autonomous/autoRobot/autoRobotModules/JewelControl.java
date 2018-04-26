@@ -1,11 +1,17 @@
 package org.firstinspires.ftc.teamcode.autonomous.autoRobot.autoRobotModules;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+
 import org.firstinspires.ftc.teamcode.util.enums.AllianceColor;
 
-import static org.firstinspires.ftc.teamcode.util.Constants.*;
+import static org.firstinspires.ftc.teamcode.util.Constants.jewelArm_down;
+import static org.firstinspires.ftc.teamcode.util.Constants.jewelArm_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.jewelArm_up;
+import static org.firstinspires.ftc.teamcode.util.Constants.jewelSensor_name;
+import static org.firstinspires.ftc.teamcode.util.Constants.minimum_ConfidenceLevel;
 
 /**
  * Created by FTC on 21.02.2018.
@@ -22,6 +28,7 @@ public class JewelControl {
 
 	/**
 	 * Initializes the jewel control class
+	 *
 	 * @param hwMap the <code>HardwareMap</code> to use
 	 */
 	public void initialize(HardwareMap hwMap) {
@@ -29,12 +36,13 @@ public class JewelControl {
 		jewel_arm = hardwareMap.servo.get(jewelArm_name);
 		jewel_sensor = hardwareMap.colorSensor.get(jewelSensor_name);
 		jewel_arm.setDirection(Servo.Direction.FORWARD);
-		jewel_arm.setPosition(1);
+		jewel_arm.setPosition(jewelArm_up);
 		jewel_sensor.enableLed(true);
 	}
 
 	/**
 	 * Updates the Servo position to the given values
+	 *
 	 * @param position the new position of the jewelArm
 	 */
 	public void updateArm(double position) {
@@ -45,6 +53,7 @@ public class JewelControl {
 
 	/**
 	 * Returns the current jewel color which is visible
+	 *
 	 * @return the current jewel color which is visible <br>
 	 * (<code>null</code> if none detected)
 	 */
@@ -57,4 +66,11 @@ public class JewelControl {
 		return AllianceColor.NONE;
 	}
 
+	public void update(Gamepad gamepad) {
+		if (gamepad.dpad_up) {
+			updateArm(jewelArm_up);
+		} else if (gamepad.dpad_down) {
+			updateArm(jewelArm_down);
+		}
+	}
 }

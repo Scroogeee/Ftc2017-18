@@ -60,7 +60,7 @@ public class AutonomousBlueShort extends VuMarkAutonomous {
 		drive.driveByPulses(300, 1, -1);
 		sleep(300);
 		//VOR
-		drive.driveByPulses(300, -1, 1);
+		drive.driveByPulses(500, -1, 1);
 		sleep(300);
 		//ZURÜCK
 		drive.driveByPulses(300, 1, -1);

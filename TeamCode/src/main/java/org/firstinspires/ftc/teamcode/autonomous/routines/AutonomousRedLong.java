@@ -46,11 +46,13 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 			drive.gyroTurn(TURN_SPEED, 90);
 
 		}
-		drive.calibrateRange();
+		if (drive.isRangeUsed()) {
+			drive.calibrateRange();
+		}
 		sleep(300);
 		//VOR
 		if (!drive.isRangeUsed()) {
-			drive.driveByPulses(1250, -1, 1);
+			drive.driveByPulses(1350, -1, 1);
 		} else {
 			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark, alliance),
 					DcMotorSimple.Direction.FORWARD);
@@ -73,7 +75,7 @@ public class AutonomousRedLong extends VuMarkAutonomous {
 		drive.driveByPulses(300, 1, -1);
 		sleep(300);
 		//VOR
-		drive.driveByPulses(300, -1, 1);
+		drive.driveByPulses(500, -1, 1);
 		sleep(300);
 		//ZURÜCK
 		drive.driveByPulses(300, 1, -1);

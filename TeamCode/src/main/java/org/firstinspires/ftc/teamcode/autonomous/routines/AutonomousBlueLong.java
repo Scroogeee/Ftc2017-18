@@ -47,10 +47,12 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		}
 
 		sleep(300);
-		drive.calibrateRange();
+		if (drive.isRangeUsed()) {
+			drive.calibrateRange();
+		}
 		//ZURÜCK
 		if (!drive.isRangeUsed()) {
-			drive.driveByPulses(1250, 1, -1);
+			drive.driveByPulses(1350, 1, -1);
 		} else {
 			drive.driveToColumnByRange(VuMarkToInt(detectedVuMark, alliance),
 					DcMotorSimple.Direction.REVERSE);
@@ -74,7 +76,7 @@ public class AutonomousBlueLong extends VuMarkAutonomous {
 		drive.driveByPulses(300, 1, -1);
 		sleep(300);
 		//VOR
-		drive.driveByPulses(300, -1, 1);
+		drive.driveByPulses(500, -1, 1);
 		sleep(300);
 		//ZURÜCK
 		drive.driveByPulses(300, 1, -1);

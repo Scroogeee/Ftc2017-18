@@ -39,7 +39,7 @@ public class Constants {
 	public static final String jewelSensor_name = "sensor_jewel";
 	public static final int minimum_ConfidenceLevel = 6;
 	public static final double jewelArm_up = 1;
-	public static final double jewelArm_down = 0.37;
+	public static final double jewelArm_down = 0;
 	//Presentation
 	public static final String greetings = "Hello! I am Herbert," +
 			" the robot of the FROG Team. I am  a rookie, 8 months old and I am very happy " +
