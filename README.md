@@ -7,3 +7,5 @@ As the season has passed, it is now considered archived.
 See https://www.firstinspires.org/robotics/ftc for more information about the competition.
 
 See https://scroogeee.github.io/Ftc2017-18/ for more information about this repository.
+
+More information about the teams at our school may be found at https://www.ftcroboterstuttgart.de/de
